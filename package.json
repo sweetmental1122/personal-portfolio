@@ -1,0 +1,28 @@
+{
+  "name": "personal-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Creative studio style portfolio built with Next.js and TypeScript.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:webpack": "next build --webpack",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "placeholders": "node scripts/generate-placeholders.mjs"
+  },
+  "dependencies": {
+    "next": "^16.2.12",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.3",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "eslint": "9.26.0",
+    "eslint-config-next": "^16.2.12",
+    "typescript": "5.8.3"
+  }
+}

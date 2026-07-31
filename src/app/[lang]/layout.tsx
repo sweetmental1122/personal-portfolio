@@ -1,0 +1,90 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
+import { ThemeScript } from "@/components/ThemeScript";
+import { site, siteUrl } from "@/content/site";
+import { t } from "@/content/types";
+import { LOCALES, LOCALE_HREFLANG, LOCALE_OG, isLocale, type Locale } from "@/i18n/config";
+import "../globals.css";
+
+export function generateStaticParams() {
+  return LOCALES.map((lang) => ({ lang }));
+}
+
+type LayoutProps = {
+  children: ReactNode;
+  params: Promise<{ lang: string }>;
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLocale(lang)) return {};
+
+  const title = `${site.name}｜${t(site.tagline, lang)}`;
+  const description = t(site.description, lang);
+
+  return {
+    metadataBase: new URL(siteUrl),
+    title: { default: title, template: `%s｜${site.name}` },
+    description,
+    alternates: {
+      canonical: `/${lang}`,
+      languages: Object.fromEntries([
+        ...LOCALES.map((locale) => [LOCALE_HREFLANG[locale], `/${locale}`]),
+        ["x-default", "/ja"],
+      ]),
+    },
+    openGraph: {
+      type: "website",
+      siteName: site.name,
+      title,
+      description,
+      url: `/${lang}`,
+      locale: LOCALE_OG[lang],
+      alternateLocale: LOCALES.filter((locale) => locale !== lang).map(
+        (locale) => LOCALE_OG[locale],
+      ),
+      images: [{ url: site.ogImage, width: 1200, height: 630, alt: site.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [site.ogImage],
+    },
+    robots: { index: true, follow: true },
+  };
+}
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ddd8f2" },
+    { media: "(prefers-color-scheme: dark)", color: "#11101b" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default async function LocaleLayout({ children, params }: LayoutProps) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const locale: Locale = lang;
+
+  return (
+    <html lang={LOCALE_HREFLANG[locale]} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"
+        />
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+}
