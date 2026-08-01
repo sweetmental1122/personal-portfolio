@@ -5,6 +5,7 @@ export type Dictionary = {
     home: string;
     about: string;
     works: string;
+    references: string;
     contact: string;
     openMenu: string;
     closeMenu: string;
@@ -65,6 +66,13 @@ export type Dictionary = {
     errorValidation: string;
     directEmail: string;
   };
+  references: {
+    title: string;
+    /** Must keep saying, plainly, that these are other people's sites. */
+    intro: string;
+    visit: string;
+    noShot: string;
+  };
   notFound: {
     title: string;
     message: string;
@@ -78,6 +86,7 @@ const ja: Dictionary = {
     home: "ホーム",
     about: "プロフィール",
     works: "開発実績",
+    references: "参考サイト",
     contact: "お問い合わせ",
     openMenu: "メニューを開く",
     closeMenu: "メニューを閉じる",
@@ -138,6 +147,13 @@ const ja: Dictionary = {
     errorValidation: "入力内容をご確認ください。",
     directEmail: "メールで直接ご連絡いただいても構いません。",
   },
+  references: {
+    title: "参考サイト",
+    intro:
+      "デザインとインタラクションの参考として集めているサイトです。いずれも他社・他制作者の制作物であり、私が担当した案件ではありません。ご依頼時のテイストのすり合わせにお使いください。私が実際に担当した案件は「開発実績」に掲載しています。",
+    visit: "サイトを見る",
+    noShot: "スクリーンショット準備中",
+  },
   notFound: {
     title: "ページが見つかりませんでした",
     message:
@@ -152,6 +168,7 @@ const en: Dictionary = {
     home: "HOME",
     about: "ABOUT",
     works: "WORKS",
+    references: "REFERENCES",
     contact: "CONTACT",
     openMenu: "Open menu",
     closeMenu: "Close menu",
@@ -211,6 +228,13 @@ const en: Dictionary = {
     errorGeneric: "Something went wrong. Please try again in a moment.",
     errorValidation: "Please check the highlighted fields.",
     directEmail: "You're welcome to email me directly instead.",
+  },
+  references: {
+    title: "References",
+    intro:
+      "Sites I keep as design and interaction reference. Every one of them is another studio's or company's work, not mine — use this page to agree on the look and feel of a project. Work I actually delivered is under Works.",
+    visit: "Visit site",
+    noShot: "Screenshot pending",
   },
   notFound: {
     title: "This page could not be found",

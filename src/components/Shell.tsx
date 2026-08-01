@@ -8,7 +8,15 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 
-export type PageKind = "home" | "about" | "works" | "project" | "contact" | "privacy" | "error";
+export type PageKind =
+  | "home"
+  | "about"
+  | "works"
+  | "project"
+  | "references"
+  | "contact"
+  | "privacy"
+  | "error";
 
 type Props = {
   locale: Locale;

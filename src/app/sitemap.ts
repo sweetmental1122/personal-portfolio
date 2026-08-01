@@ -3,6 +3,8 @@ import { siteUrl } from "@/content/site";
 import { projects } from "@/content/works";
 import { LOCALES } from "@/i18n/config";
 
+// /references is deliberately absent: it shows other studios' sites and is
+// marked noindex, so it has no place in the sitemap.
 const STATIC_ROUTES = ["", "/about", "/works", "/contact"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
