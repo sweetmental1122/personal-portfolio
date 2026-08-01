@@ -206,6 +206,9 @@ export function WorksRing({ items, categories, labels }: Props) {
                   height={item.thumbnail.height}
                   decoding="async"
                   loading={index < 3 ? "eager" : "lazy"}
+                  // Blocker extensions stamp attributes onto <img> before
+                  // hydration; see the note in HomeSphere.
+                  suppressHydrationWarning
                 />
                 <span className="works__copy">
                   <small>{item.categoryLabel}</small>

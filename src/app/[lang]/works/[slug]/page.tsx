@@ -72,6 +72,7 @@ export default async function ProjectPage({ params }: Props) {
                 width={project.thumbnail.width}
                 height={project.thumbnail.height}
                 decoding="async"
+                suppressHydrationWarning
               />
             </div>
 
@@ -133,6 +134,7 @@ export default async function ProjectPage({ params }: Props) {
                       height={image.height}
                       loading="lazy"
                       decoding="async"
+                      suppressHydrationWarning
                     />
                   </figure>
                 ),

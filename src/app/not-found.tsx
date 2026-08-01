@@ -31,7 +31,7 @@ export default function NotFound() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>404</title>
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <NotFoundView />
       </body>
     </html>

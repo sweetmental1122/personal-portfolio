@@ -151,7 +151,13 @@ export function HomeSphere({ images }: Props) {
               }}
             >
               {/* Plain <img>: these live inside a 3D transform chain and are
-                  driven per-frame, so next/image's wrapper adds no value. */}
+                  driven per-frame, so next/image's wrapper adds no value.
+
+                  suppressHydrationWarning: ad and image blocking extensions
+                  stamp attributes onto <img> (data-xblocker, visibility:hidden)
+                  between the server response and hydration. Every attribute
+                  set here is deterministic, so the only mismatch this can hide
+                  is one a third party introduced. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={image.src}
@@ -162,6 +168,7 @@ export function HomeSphere({ images }: Props) {
                 decoding="async"
                 fetchPriority={index === 0 ? "high" : "auto"}
                 loading={index === 0 ? "eager" : "lazy"}
+                suppressHydrationWarning
               />
             </div>
           );

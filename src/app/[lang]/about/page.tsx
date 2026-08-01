@@ -34,6 +34,7 @@ export default async function AboutPage({ params }: Props) {
         alt={dict.about.portraitAlt}
         loading={variant === "desktop" ? "eager" : "lazy"}
         decoding="async"
+        suppressHydrationWarning
       />
     </figure>
   );

@@ -92,7 +92,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"
         />
       </head>
-      <body>{children}</body>
+      {/* suppressHydrationWarning on both elements: ThemeScript writes
+          data-theme onto <html> before hydration, and extensions commonly
+          stamp their own attributes onto <body>. */}
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
