@@ -2,16 +2,15 @@ import type { Category, Project } from "./types";
 
 /**
  * ─────────────────────────────────────────────────────────────
- *  ⚠️  THESE SIX ENTRIES ARE SAMPLES, NOT REAL PROJECTS.
+ *  Projects drawn from the career history. Wording follows what was
+ *  actually delivered — no invented figures.
  *
- *  They are shaped after the industries and stack in your profile so the
- *  page has something to show, but they describe work that has not
- *  happened. Replace every one with your own before sending this link to
- *  a client — publishing invented case studies as your track record
- *  would misrepresent you.
+ *  `slug` becomes the URL, `categoryKey` must match a CATEGORIES key,
+ *  `order` sets the position in the ring (lowest first, newest first here).
  *
- *  Keep the shape, swap the content: `slug` becomes the URL, `categoryKey`
- *  must match a CATEGORIES key, `order` sets the position in the ring.
+ *  Screenshots still need adding: the images below are placeholders. Check
+ *  each client's NDA before publishing real captures — a blurred or
+ *  redacted screen is usually fine where a raw one is not.
  * ─────────────────────────────────────────────────────────────
  */
 
@@ -26,256 +25,294 @@ export const CATEGORIES: Category[] = [
   },
   {
     key: "mobile",
-    label: { ja: "モバイル・自動化", en: "Mobile & Automation" },
+    label: { ja: "モバイルアプリ", en: "Mobile Apps" },
   },
   {
-    key: "site",
-    label: { ja: "サイト・LP制作", en: "Sites & Landing Pages" },
+    key: "ai",
+    label: { ja: "AI・自動化", en: "AI & Automation" },
   },
 ];
 
 export const projects: Project[] = [
   {
-    slug: "logistics-delivery-system",
+    slug: "project-management-system",
     order: 1,
     categoryKey: "system",
     title: {
-      ja: "物流会社向け 配送管理システム",
-      en: "Delivery Management System for a Logistics Company",
+      ja: "中小企業向け 業務効率化・案件管理システム",
+      en: "Project & Sales Management System for a Small Business",
     },
     summary: {
-      ja: "配車・進捗・実績を一元管理する業務システム。Spring Boot と React による設計から運用まで。",
-      en: "A business system unifying dispatch, progress and delivery records — designed, built and maintained on Spring Boot and React.",
+      ja: "案件進捗・売上・顧客情報を一元管理するWebアプリケーションを、フルスクラッチで新規構築。",
+      en: "A from-scratch web application unifying project progress, revenue and customer data.",
     },
     description: {
       ja: [
-        "紙とExcelで分散していた配車情報を一つのシステムに集約しました。ドメインごとにパッケージを分け、業務ロジックをサービス層に閉じ込めることで、担当者が変わっても追える構造にしています。",
-        "帳票出力や締め処理といった業務のピークに耐えられるよう、重い集計は非同期ジョブに逃がし、画面側は常に軽く保つ設計としました。",
+        "PMが定義した要件をもとに、Java (Spring Boot) でユーザー認証・権限管理・案件データのCRUDを担うバックエンドREST APIを設計・実装しました。",
+        "フルスタックエンジニア2名と機能ごとに開発範囲を分担し、私はReact / TypeScript によるカレンダー形式のスケジュール確認画面と、カンバンボードUIの実装を担当しました。",
+        "Gitのブランチ運用方針を事前にメンバーとすり合わせることで、遠隔開発でのコードコンフリクトを回避。AWS (EC2 / RDS) へのDockerコンテナによるデプロイ手順も標準化しました。",
+        "完全フルリモート環境のため、Slackでの進捗の即時共有を徹底し、仕様のズレによる手戻りを未然に防止。予定されていた納期どおりに完成・ローンチしました。",
       ],
       en: [
-        "Dispatch information that had been scattered across paper and spreadsheets moved into one system. Packages are split by domain and business logic is kept inside the service layer, so the code stays followable when the team changes.",
-        "Heavy aggregation for reports and period-end closing runs as asynchronous jobs, keeping the screens responsive through the busiest part of the workflow.",
+        "Working from requirements defined by the PM, I designed and implemented the backend REST API in Java (Spring Boot) covering authentication, permissions and CRUD for project data.",
+        "Development was split by feature across three full-stack engineers; I took the calendar schedule view and the kanban board UI in React and TypeScript.",
+        "Agreeing Git branching rules with the team up front kept a remote codebase clear of conflicts, and I standardised Docker-based deployment to AWS (EC2 / RDS).",
+        "With the team fully remote, sharing progress in Slack as it happened stopped specification drift before it caused rework — the system was finished and launched on the planned date.",
       ],
     },
-    thumbnail: { src: "/images/works/logistics-delivery-system/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/project-management-system/thumb.svg", width: 1600, height: 1000 },
     images: [
       {
-        src: "/images/works/logistics-delivery-system/01.svg",
-        alt: { ja: "配車管理画面", en: "Dispatch management screen" },
+        src: "/images/works/project-management-system/01.svg",
+        alt: { ja: "カンバンボード画面", en: "Kanban board screen" },
         width: 1600,
         height: 1000,
       },
       {
-        src: "/images/works/logistics-delivery-system/02.svg",
-        alt: { ja: "実績集計ダッシュボード", en: "Delivery records dashboard" },
+        src: "/images/works/project-management-system/02.svg",
+        alt: { ja: "スケジュール確認画面", en: "Schedule view" },
         width: 1600,
         height: 1000,
       },
     ],
     meta: {
-      client: { ja: "物流企業（受託開発）", en: "Logistics company (agency project)" },
+      client: { ja: "株式会社オヤテック（業務委託）", en: "Oyatech Inc. (contract)" },
       role: {
-        ja: "要件整理 / 設計 / バックエンド・フロントエンド実装",
-        en: "Requirements / Architecture / Backend and front-end implementation",
+        ja: "バックエンドAPI設計・実装 / フロントエンド実装 / デプロイ標準化",
+        en: "Backend API design and build / Front-end / Deployment standardisation",
       },
-      year: "2024",
-      stack: ["Java", "Spring Boot", "React", "PostgreSQL", "AWS", "Docker"],
+      year: "2025–2026",
+      stack: ["Java 17", "Spring Boot", "TypeScript", "React", "PostgreSQL", "AWS", "Docker"],
     },
   },
   {
-    slug: "medical-reservation-api",
+    slug: "property-image-ai-annotation",
     order: 2,
+    categoryKey: "ai",
+    title: {
+      ja: "不動産向け 物件画像 自動アノテーションシステム",
+      en: "Automated Property Image Annotation for Real Estate",
+    },
+    summary: {
+      ja: "大量の物件写真をAIで自動分類し、特徴タグを生成する画像解析システム。",
+      en: "An image-analysis system that classifies property photos and generates feature tags automatically.",
+    },
+    description: {
+      ja: [
+        "チーム内のAIエンジニアが作成した画像解析モデルの推論スクリプトを受け取り、Webシステムから呼び出すための軽量なAPIサーバーを Python / FastAPI で構築しました。",
+        "アップロードされた画像のトリミングやノイズ除去といった前処理を OpenCV で実装し、AWS Lambda を介して画像解析を非同期実行するパイプラインを組み立てています。",
+      ],
+      en: [
+        "I took the inference scripts written by the team's AI engineer and wrapped them in a lightweight Python / FastAPI service the wider web system could call.",
+        "Pre-processing — cropping, noise removal — is handled with OpenCV, and analysis runs asynchronously through a pipeline built on AWS Lambda.",
+      ],
+    },
+    thumbnail: { src: "/images/works/property-image-ai-annotation/thumb.svg", width: 1600, height: 1000 },
+    images: [
+      {
+        src: "/images/works/property-image-ai-annotation/01.svg",
+        alt: { ja: "画像解析パイプラインの構成", en: "Image analysis pipeline" },
+        width: 1600,
+        height: 1000,
+      },
+    ],
+    meta: {
+      client: { ja: "不動産企業（株式会社Codigo）", en: "Real estate client (via Codigo)" },
+      role: { ja: "APIサーバー構築 / 前処理実装 / 非同期パイプライン構築", en: "API service / Pre-processing / Async pipeline" },
+      year: "2024",
+      stack: ["Python", "FastAPI", "OpenCV", "PyTorch", "Docker", "AWS S3", "AWS Lambda"],
+    },
+  },
+  {
+    slug: "fintech-payment-api",
+    order: 3,
     categoryKey: "system",
     title: {
-      ja: "医療機関向け 予約・連携API",
-      en: "Reservation and Integration API for Healthcare",
+      ja: "決済処理API基盤の構築（FinTech）",
+      en: "High-Volume Payment Processing API",
     },
     summary: {
-      ja: "既存の院内システムと連携する予約API。Go で構築し、責務を絞った REST 設計を徹底。",
-      en: "A reservation API that speaks to existing in-house systems, built in Go with a deliberately narrow REST surface.",
+      ja: "加盟店からの大量の決済リクエストを、遅延なく安全に処理・記録するバックエンド基盤。",
+      en: "Backend infrastructure that processes and records a high volume of merchant payment requests without lag.",
     },
     description: {
       ja: [
-        "既存システムを止めずに段階的に置き換えられるよう、エンドポイントの責務を細かく分け、後方互換を保ったままバージョンを重ねられる構成にしました。",
-        "医療情報を扱うため、アクセス制御と監査ログを設計の初期段階から組み込み、どの操作が誰によって行われたかを常に追跡できるようにしています。",
+        "バックエンド担当エンジニアとして、Go言語 (Gin) を用いた決済受付APIを実装しました。",
+        "画面側を担当するフロントエンドチームが並行して開発を進められるよう、詳細なAPI仕様書 (Swagger) を早期に作成・共有。フロントエンドとバックエンド間の連携テストも共同で主導しました。",
       ],
       en: [
-        "Endpoints are scoped narrowly so the legacy system could be replaced in stages rather than all at once, with versions layered on while staying backward compatible.",
-        "Because it handles medical data, access control and audit logging were part of the design from the start — every operation stays traceable to who performed it.",
+        "As the backend engineer I implemented the payment intake API in Go, using the Gin framework.",
+        "So the front-end team could work in parallel rather than waiting, I wrote and shared a detailed API specification (Swagger) early, and co-led the integration testing between the two sides.",
       ],
     },
-    thumbnail: { src: "/images/works/medical-reservation-api/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/fintech-payment-api/thumb.svg", width: 1600, height: 1000 },
     images: [
       {
-        src: "/images/works/medical-reservation-api/01.svg",
-        alt: { ja: "API仕様ドキュメント", en: "API specification document" },
+        src: "/images/works/fintech-payment-api/01.svg",
+        alt: { ja: "API仕様ドキュメント", en: "API specification" },
         width: 1600,
         height: 1000,
       },
     ],
     meta: {
-      client: { ja: "医療機関（受託開発）", en: "Healthcare provider (agency project)" },
-      role: { ja: "API設計 / バックエンド実装", en: "API design / Backend implementation" },
-      year: "2024",
-      stack: ["Go", "PostgreSQL", "Redis", "Docker", "AWS"],
+      client: { ja: "決済事業者（株式会社Codigo）", en: "Payments client (via Codigo)" },
+      role: { ja: "バックエンド実装 / API仕様策定 / 連携テスト主導", en: "Backend / API specification / Integration testing" },
+      year: "2023–2024",
+      stack: ["Go", "Gin", "PostgreSQL", "Redis", "Docker", "AWS", "Swagger"],
     },
   },
   {
-    slug: "ec-inventory-dashboard",
-    order: 3,
-    categoryKey: "web",
-    title: {
-      ja: "EC向け 在庫・受注管理ダッシュボード",
-      en: "Inventory and Order Dashboard for E-commerce",
-    },
-    summary: {
-      ja: "複数モールの在庫と受注を横断して扱う管理画面。NestJS と Nuxt.js で構築。",
-      en: "An admin surface that spans stock and orders across several marketplaces, built on NestJS and Nuxt.js.",
-    },
-    description: {
-      ja: [
-        "モールごとに異なる仕様を吸収するアダプタ層を設け、新しい販売チャネルが増えても既存コードに手を入れずに追加できる構成にしています。",
-        "在庫数のずれが売上に直結するため、更新は冪等に設計し、失敗したジョブを安全に再実行できる仕組みを用意しました。",
-      ],
-      en: [
-        "An adapter layer absorbs the differences between marketplaces, so a new sales channel can be added without touching existing code.",
-        "Because stock drift costs real money, updates are idempotent and failed jobs can be safely replayed.",
-      ],
-    },
-    thumbnail: { src: "/images/works/ec-inventory-dashboard/thumb.svg", width: 1600, height: 1000 },
-    images: [
-      {
-        src: "/images/works/ec-inventory-dashboard/01.svg",
-        alt: { ja: "在庫一覧画面", en: "Inventory listing screen" },
-        width: 1600,
-        height: 1000,
-      },
-      {
-        src: "/images/works/ec-inventory-dashboard/02.svg",
-        alt: { ja: "受注詳細画面", en: "Order detail screen" },
-        width: 1600,
-        height: 1000,
-      },
-    ],
-    meta: {
-      client: { ja: "EC事業者（受託開発）", en: "E-commerce operator (agency project)" },
-      role: { ja: "設計 / バックエンド・フロントエンド実装", en: "Architecture / Backend and front-end implementation" },
-      year: "2023",
-      stack: ["TypeScript", "NestJS", "Nuxt.js", "MySQL", "Redis", "AWS"],
-    },
-  },
-  {
-    slug: "realestate-mobile-app",
+    slug: "clinic-booking-app",
     order: 4,
     categoryKey: "mobile",
     title: {
-      ja: "不動産 物件検索モバイルアプリ",
-      en: "Property Search Mobile App",
+      ja: "医療機関向け 患者用ポータル・予約アプリ",
+      en: "Patient Portal and Booking App for Clinics",
     },
     summary: {
-      ja: "React Native による iOS / Android 両対応の物件検索アプリ。",
-      en: "A property search app for iOS and Android, built once in React Native.",
+      ja: "クリニック検索、リアルタイム予約、デジタル診察券に対応した iOS / Android アプリ。",
+      en: "An iOS and Android app for finding clinics, booking in real time and carrying a digital patient card.",
     },
     description: {
       ja: [
-        "検索条件の状態管理を一箇所に集約し、地図表示とリスト表示のどちらから操作しても結果が食い違わないようにしています。",
-        "通信状況が不安定な外出先での利用を想定し、直近の検索結果をローカルに保持して、オフラインでも閲覧を継続できる設計としました。",
+        "別のフルスタックエンジニア1名と協調し、React Native による端末カメラ連動のQRコード読み取り（チェックイン機能）を実装しました。",
+        "あわせて Node.js (NestJS) 側のアカウント認証 (JWT) APIも担当し、フロントからバックエンドまで垂直に一貫して開発しています。",
+        "PM兼デザイナーからのUIフィードバックをもとに、スマートフォン画面での操作性向上のための微調整を重ねました。",
       ],
       en: [
-        "Search state lives in one place, so the map view and the list view can never disagree about what the user asked for.",
-        "Designed for use on the move: recent results are cached locally so browsing survives a patchy connection.",
+        "Working alongside one other full-stack engineer, I built the camera-driven QR check-in flow in React Native.",
+        "I also owned the JWT account authentication API on the Node.js (NestJS) side, taking the feature vertically from screen to backend.",
+        "UI feedback from the PM/designer drove repeated rounds of adjustment to how the app handles on a phone.",
       ],
     },
-    thumbnail: { src: "/images/works/realestate-mobile-app/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/clinic-booking-app/thumb.svg", width: 1600, height: 1000 },
     images: [
       {
-        src: "/images/works/realestate-mobile-app/01.svg",
-        alt: { ja: "物件検索画面", en: "Property search screen" },
+        src: "/images/works/clinic-booking-app/01.svg",
+        alt: { ja: "予約・チェックイン画面", en: "Booking and check-in screens" },
         width: 1600,
         height: 1000,
       },
     ],
     meta: {
-      client: { ja: "不動産事業者（受託開発）", en: "Real estate company (agency project)" },
-      role: { ja: "モバイル実装 / API連携", en: "Mobile implementation / API integration" },
-      year: "2023",
-      stack: ["React Native", "TypeScript", "FastAPI", "PostgreSQL"],
+      client: { ja: "医療機関（株式会社Codigo）", en: "Healthcare client (via Codigo)" },
+      role: { ja: "モバイル実装 / 認証API実装", en: "Mobile implementation / Authentication API" },
+      year: "2022–2023",
+      stack: ["TypeScript", "React Native", "Node.js", "NestJS", "MySQL", "AWS"],
     },
   },
   {
-    slug: "workflow-automation-ai",
+    slug: "apparel-ec-frontend",
     order: 5,
-    categoryKey: "mobile",
+    categoryKey: "web",
     title: {
-      ja: "業務自動化・AI連携システム",
-      en: "Workflow Automation with AI Integration",
+      ja: "アパレルブランド ECサイトのフロントエンド刷新",
+      en: "Storefront Replatform for an Apparel Brand",
     },
     summary: {
-      ja: "Python によるデータ収集と、AI を用いた分類・要約を組み合わせた社内向け自動化基盤。",
-      en: "An internal automation layer pairing Python data collection with AI-driven classification and summarisation.",
+      ja: "ECサイトのフロントエンドを Nuxt.js で全面リプレイス。高速かつレスポンシブな画面へ。",
+      en: "A full front-end replatform of an e-commerce storefront onto Nuxt.js — faster, and responsive throughout.",
     },
     description: {
       ja: [
-        "手作業で行っていた収集・分類・転記を自動化しました。取得元の仕様変更で止まらないよう、パース処理を差し替え可能な形に分離しています。",
-        "AI の出力をそのまま信用せず、確信度が低い結果は人の確認に回すフローを挟むことで、自動化と正確性を両立させました。",
+        "3名のフロントエンド開発チームの一員として、Nuxt.js による商品カテゴリ一覧と、サイズ・色・価格での動的フィルタリング画面のコーディングを担当しました。",
+        "UIデザイナーが作成したモックを忠実に再現しつつ、既存のバックエンド担当エンジニアとAPIのデータ構造を細かく調整し、画面へのデータ結合をスムーズに進めました。",
       ],
       en: [
-        "Collection, classification and transcription that had been manual now run automatically. Parsing is isolated behind a swappable interface so a change upstream doesn't stop the pipeline.",
-        "AI output isn't trusted blindly — low-confidence results are routed to a human check, so automation doesn't come at the cost of accuracy.",
+        "As one of three front-end engineers, I built the category listing and the dynamic filtering screens — size, colour and price — in Nuxt.js.",
+        "I kept faithful to the designer's mocks while working through the API data shapes in detail with the existing backend engineer, so binding data to the screens stayed straightforward.",
       ],
     },
-    thumbnail: { src: "/images/works/workflow-automation-ai/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/apparel-ec-frontend/thumb.svg", width: 1600, height: 1000 },
     images: [
       {
-        src: "/images/works/workflow-automation-ai/01.svg",
-        alt: { ja: "処理フロー図", en: "Processing flow diagram" },
+        src: "/images/works/apparel-ec-frontend/01.svg",
+        alt: { ja: "商品一覧・絞り込み画面", en: "Product listing and filters" },
         width: 1600,
         height: 1000,
       },
     ],
     meta: {
-      client: { ja: "中小企業（受託開発）", en: "Small business (agency project)" },
-      role: { ja: "設計 / 実装 / 運用設計", en: "Architecture / Implementation / Operations design" },
-      year: "2023",
-      stack: ["Python", "FastAPI", "PostgreSQL", "Docker", "AWS Lambda"],
+      client: { ja: "アパレルブランド（株式会社Codigo）", en: "Apparel brand (via Codigo)" },
+      role: { ja: "フロントエンド実装", en: "Front-end implementation" },
+      year: "2021–2022",
+      stack: ["TypeScript", "Vue.js", "Nuxt.js", "HTML5", "CSS3"],
     },
   },
   {
-    slug: "corporate-site-wordpress",
+    slug: "logistics-status-api",
     order: 6,
-    categoryKey: "site",
+    categoryKey: "system",
     title: {
-      ja: "コーポレートサイト構築・LP制作",
-      en: "Corporate Site and Landing Page",
+      ja: "物流企業向け 在庫・配送ステータス管理API",
+      en: "Inventory and Delivery Status API for Logistics",
     },
     summary: {
-      ja: "WordPress による企業サイト構築。レスポンシブ対応、表示速度改善、SEOを意識した実装。",
-      en: "A company site on WordPress — responsive, tuned for load speed, and built with SEO in mind.",
+      ja: "倉庫内の荷物ステータスとトラックの配送状況を記録・抽出する社内基盤システム。",
+      en: "An internal platform recording and querying warehouse item status and truck delivery progress.",
     },
     description: {
       ja: [
-        "更新担当者が迷わないよう、編集項目を必要な範囲に絞ったカスタム管理画面を用意し、公開後の運用コストを下げています。",
-        "画像の最適化と読み込み順の見直しにより表示速度を改善し、構造化データと見出し構造を整理してSEOの土台を整えました。",
+        "もう1名のバックエンドエンジニアと分担し、Java (Spring Boot) による配送状況の変更履歴管理APIの作成と、MySQLのデータモデル設計を担当しました。",
+        "QAテスターがテストシナリオをスムーズに作成できるよう、エラーの発生条件や例外処理の挙動を事前にドキュメント化して共有し、テストフェーズの効率化に貢献しました。",
       ],
       en: [
-        "A trimmed custom admin exposes only the fields the editor actually needs, which keeps running costs down after launch.",
-        "Image optimisation and a reworked loading order improved render speed, while structured data and a cleaned-up heading hierarchy laid the SEO groundwork.",
+        "Splitting the work with one other backend engineer, I built the delivery-status change history API in Java (Spring Boot) and designed the MySQL data model.",
+        "To let QA write test scenarios without guesswork, I documented the error conditions and exception behaviour up front and shared it ahead of the test phase.",
       ],
     },
-    thumbnail: { src: "/images/works/corporate-site-wordpress/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/logistics-status-api/thumb.svg", width: 1600, height: 1000 },
     images: [
       {
-        src: "/images/works/corporate-site-wordpress/01.svg",
-        alt: { ja: "トップページ", en: "Homepage" },
+        src: "/images/works/logistics-status-api/01.svg",
+        alt: { ja: "データモデル構成", en: "Data model" },
         width: 1600,
         height: 1000,
       },
     ],
     meta: {
-      client: { ja: "事業会社（受託開発）", en: "Client company (agency project)" },
-      role: { ja: "デザイン調整 / 実装 / 運用設計", en: "Design adjustment / Implementation / Operations design" },
-      year: "2022",
-      stack: ["WordPress", "PHP", "HTML5", "CSS3", "JavaScript"],
+      client: { ja: "物流企業（株式会社Codigo）", en: "Logistics client (via Codigo)" },
+      role: { ja: "バックエンド実装 / データモデル設計 / 仕様ドキュメント", en: "Backend / Data modelling / Specification docs" },
+      year: "2020–2021",
+      stack: ["Java 11", "Spring Boot", "MySQL", "GitHub Actions"],
+    },
+  },
+  {
+    slug: "restaurant-ordering-ui",
+    order: 7,
+    categoryKey: "web",
+    title: {
+      ja: "飲食チェーン向け 社内発注管理ツールの画面開発",
+      en: "Internal Ordering Tool for a Restaurant Chain",
+    },
+    summary: {
+      ja: "各店舗の店長が食材や消耗品を本部に発注するための、Web管理画面の実装。",
+      en: "The web admin screens store managers use to order ingredients and supplies from head office.",
+    },
+    description: {
+      ja: [
+        "配属された初期プロジェクトとして、所属チームのシニアエンジニアの指導のもと、HTML / CSS および Bootstrap によるレスポンシブな発注入力フォームのコーディングを担当しました。",
+        "同期のメンバーとコードの書き方を統一し、Git の Pull Request ベースでのレビューを重ねながら、チーム開発の進め方を身につけたプロジェクトです。",
+      ],
+      en: [
+        "My first project after joining: under the guidance of a senior engineer on the team, I coded the responsive order entry forms in HTML, CSS and Bootstrap.",
+        "Aligning code style with the other new joiners and going through pull-request review is where I learned how team development actually runs.",
+      ],
+    },
+    thumbnail: { src: "/images/works/restaurant-ordering-ui/thumb.svg", width: 1600, height: 1000 },
+    images: [
+      {
+        src: "/images/works/restaurant-ordering-ui/01.svg",
+        alt: { ja: "発注入力フォーム", en: "Order entry form" },
+        width: 1600,
+        height: 1000,
+      },
+    ],
+    meta: {
+      client: { ja: "飲食チェーン（株式会社Codigo）", en: "Restaurant chain (via Codigo)" },
+      role: { ja: "フロントエンド実装", en: "Front-end implementation" },
+      year: "2019–2020",
+      stack: ["JavaScript", "HTML5", "CSS3", "Bootstrap", "Node.js"],
     },
   },
 ];

@@ -101,12 +101,11 @@ from that one array.
 
 ### ⚠️ Before you share this link
 
-Two things in `src/content/` are placeholders that must be replaced first:
-
-1. **`site.name` and `site.email`** — currently `Your Name` / `hello@example.com`.
-2. **Every entry in `works.ts`** — the six projects are *samples*, shaped after the
-   industries and stack in the profile so the page isn't empty. They describe work that
-   did not happen. Publishing them as a track record would misrepresent you.
+1. **`site.email`** in [src/content/site.ts](src/content/site.ts) is still
+   `hello@example.com`.
+2. **Project screenshots** — the images under `public/images/works/` are generated
+   placeholders. Check each client's NDA before publishing real captures; a blurred or
+   redacted screen is usually acceptable where a raw one is not.
 
 ### Adding a project
 

@@ -63,12 +63,13 @@ const HOME_SIZES = [
 
 // [slug, number of detail images] — keep in sync with src/content/works.ts
 const WORK_SLUGS = [
-  ["logistics-delivery-system", 2],
-  ["medical-reservation-api", 1],
-  ["ec-inventory-dashboard", 2],
-  ["realestate-mobile-app", 1],
-  ["workflow-automation-ai", 1],
-  ["corporate-site-wordpress", 1],
+  ["project-management-system", 2],
+  ["property-image-ai-annotation", 1],
+  ["fintech-payment-api", 1],
+  ["clinic-booking-app", 1],
+  ["apparel-ec-frontend", 1],
+  ["logistics-status-api", 1],
+  ["restaurant-ordering-ui", 1],
 ];
 
 console.log("Writing placeholder images…");
@@ -78,7 +79,7 @@ for (const [index, [width, height]] of HOME_SIZES.entries()) {
   await write(`home/${number}.svg`, svg(width, height, number, index));
 }
 
-await write("about/portrait.svg", svg(1200, 1600, "PORTRAIT", 3));
+// The about portrait is a real photograph now, so it is not regenerated here.
 await write("ogp.svg", svg(1200, 630, "PORTFOLIO", 1));
 
 for (const [index, [slug, extra]] of WORK_SLUGS.entries()) {

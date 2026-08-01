@@ -3,32 +3,32 @@ import type { SiteConfig } from "./types";
 /**
  * ─────────────────────────────────────────────────────────────
  *  Site-wide identity.
- *  TODO: replace `name` and `email` with your own before sharing
+ *  TODO: `email` is still a placeholder — set it before sharing
  *  this link on CrowdWorks / Lancers.
  * ─────────────────────────────────────────────────────────────
  */
 export const site: SiteConfig = {
   // Shown in the header wordmark, the footer and every page title.
   // A personal or trade name stays the same in both languages.
-  name: "Your Name",
+  name: "Chikara_Tech",
   jobTitle: "Software Engineer / Full-Stack Developer",
   email: "hello@example.com",
   url: "https://your-domain.com",
   ogImage: "/images/ogp.svg",
 
   tagline: {
-    ja: "Webシステム・業務システム開発 / 実務10年",
-    en: "Web & business systems — 10 years of practice",
+    ja: "フルスタックエンジニア / Webシステム・業務システム開発",
+    en: "Full-Stack Engineer — Web & Business Systems",
   },
 
   location: {
-    ja: "日本",
-    en: "Japan",
+    ja: "日本 / シンガポール",
+    en: "Japan / Singapore",
   },
 
   description: {
-    ja: "約10年間、Webシステム・業務システム開発に携わってきたソフトウェアエンジニアのポートフォリオです。Java (Spring Boot)、Go、Python (FastAPI)、Node.js によるバックエンド開発を中心に、React・Vue.js・React Native を用いたフロントエンド／モバイル開発、AWS・Docker 環境構築、既存システムの改修・保守まで一貫して対応しています。",
-    en: "Portfolio of a software engineer with around ten years building web and business systems. Backend work in Java (Spring Boot), Go, Python (FastAPI) and Node.js, through to front-end and mobile with React, Vue.js and React Native, plus AWS/Docker setup and long-term maintenance.",
+    ja: "2019年からシンガポールと日本の受託開発の現場で、Webシステム・業務システム・モバイルアプリを開発してきたフルスタックエンジニアのポートフォリオです。Java (Spring Boot)、Go、Python (FastAPI)、Node.js (NestJS) によるバックエンド開発を軸に、React・Vue.js (Nuxt.js)・React Native を用いたフロントエンド／モバイル開発、AWS・Docker 環境構築、既存システムの改修・保守まで一貫して対応しています。",
+    en: "Portfolio of a full-stack engineer building web systems, business systems and mobile apps at software agencies in Singapore and Japan since 2019. Backend in Java (Spring Boot), Go, Python (FastAPI) and Node.js (NestJS), through to front-end and mobile with React, Vue.js (Nuxt.js) and React Native, plus AWS/Docker setup and long-term maintenance.",
   },
 
   social: [{ label: "GitHub", href: "https://github.com/sweetmental1122" }],
