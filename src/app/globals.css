@@ -1550,19 +1550,14 @@ button {
   line-height: 1.95;
 }
 
-.refs__group {
-  margin-bottom: 68px;
-}
-
-.refs__group .eyebrow {
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-}
-
 .refs__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 34px 26px;
+  grid-template-columns: repeat(auto-fill, minmax(min(440px, 100%), 1fr));
+  gap: 40px 30px;
+}
+
+.ref-card {
+  margin: 0;
 }
 
 .ref-card a {
@@ -1600,28 +1595,21 @@ button {
   font-size: 11px;
 }
 
-.ref-card strong {
-  display: block;
-  margin-top: 14px;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.5;
+/* Source line — small, but the screenshots are quotations and need it. */
+.ref-card figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
 }
 
-.ref-card__url {
+.ref-card figcaption span {
   display: block;
-  margin-top: 4px;
+  margin-top: 2px;
   color: var(--subtle);
   font-size: 10px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   word-break: break-all;
-}
-
-.ref-card p {
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 11.5px;
-  line-height: 1.85;
 }
 
 /* ============================================================

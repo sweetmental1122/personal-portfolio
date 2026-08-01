@@ -70,7 +70,6 @@ export type Dictionary = {
     title: string;
     /** Must keep saying, plainly, that these are other people's sites. */
     intro: string;
-    visit: string;
     noShot: string;
   };
   notFound: {
@@ -150,8 +149,7 @@ const ja: Dictionary = {
   references: {
     title: "参考サイト",
     intro:
-      "デザインとインタラクションの参考として集めているサイトです。いずれも他社・他制作者の制作物であり、私が担当した案件ではありません。ご依頼時のテイストのすり合わせにお使いください。私が実際に担当した案件は「開発実績」に掲載しています。",
-    visit: "サイトを見る",
+      "デザインの参考として集めているサイトです。いずれも他社・他制作者の制作物であり、私が担当した案件ではありません。ご依頼時のテイストのすり合わせにお使いください。私が実際に担当した案件は「開発実績」に掲載しています。",
     noShot: "スクリーンショット準備中",
   },
   notFound: {
@@ -232,8 +230,7 @@ const en: Dictionary = {
   references: {
     title: "References",
     intro:
-      "Sites I keep as design and interaction reference. Every one of them is another studio's or company's work, not mine — use this page to agree on the look and feel of a project. Work I actually delivered is under Works.",
-    visit: "Visit site",
+      "Sites I keep as design reference. Every one of them is another studio's or company's work, not mine — use this page to agree on the look and feel of a project. Work I actually delivered is under Works.",
     noShot: "Screenshot pending",
   },
   notFound: {
