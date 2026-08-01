@@ -36,18 +36,38 @@ npm run dev            # http://localhost:3000
 Other scripts:
 
 ```bash
-npm run build          # production build (Turbopack)
-npm run build:webpack  # same build via webpack — see note below
-npm start              # serve the production build
-npm run typecheck      # tsc --noEmit
-npm run lint           # eslint
+npm run build      # production build
+npm start          # serve the production build
+npm run typecheck  # tsc --noEmit
+npm run lint       # eslint
+
+npm run dev:turbo    # dev via Turbopack   — see "Turbopack on Windows" below
+npm run build:turbo  # build via Turbopack
 ```
 
-> **Windows note.** If `npm run build` fails with `EBUSY: resource busy or locked`
-> while writing `.next/server/*.json`, an on-access scanner (typically Windows
-> Defender) is holding the file open while Turbopack renames it. Either exclude
-> the project folder from real-time scanning, or use `npm run build:webpack`.
-> This is environmental — the Turbopack build is fine on Linux and on Vercel.
+### Turbopack on Windows
+
+`dev` and `build` deliberately use the **webpack** builder. Turbopack writes its
+manifests by renaming a temp file over the target, and on Windows an on-access
+virus scanner can still hold that file open — which surfaces as:
+
+```
+Error: EBUSY: resource busy or locked, rename
+'.next\dev\server\server-reference-manifest.json.tmp.xxxx' -> '...json'
+```
+
+Turbopack is meaningfully faster, so it is worth re-enabling. Add a Defender
+exclusion for the project folder — **in an Administrator PowerShell**:
+
+```powershell
+Add-MpPreference -ExclusionPath "E:\Working\Github\personal-portfolio"
+```
+
+Then use `npm run dev:turbo` / `npm run build:turbo`. If those run clean, you can
+swap the `dev` and `build` scripts back to `next dev` / `next build`.
+
+This is purely a local-machine issue — Turbopack is fine on Linux and on Vercel,
+so nothing here affects deployment.
 
 ---
 

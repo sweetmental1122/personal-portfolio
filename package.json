@@ -4,9 +4,10 @@
   "private": true,
   "description": "Creative studio style portfolio built with Next.js and TypeScript.",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "build:webpack": "next build --webpack",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "dev:turbo": "next dev",
+    "build:turbo": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
