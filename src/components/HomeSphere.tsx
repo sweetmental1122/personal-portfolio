@@ -26,8 +26,28 @@ export function HomeSphere({ images }: Props) {
     const sphere = sphereRef.current;
     if (!sphere) return;
 
+    const cells = [...sphere.querySelectorAll<HTMLElement>(".sphere__item")];
     const items = [...sphere.querySelectorAll<HTMLImageElement>("img")];
     const motionAllowed = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Deal the projects into different ring slots on each visit. The server
+    // renders a fixed arrangement so the markup stays static (and prerendered);
+    // this only re-points existing elements, so no image is re-fetched.
+    const slots = cells.map((_, index) => index);
+    for (let i = slots.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [slots[i], slots[j]] = [slots[j]!, slots[i]!];
+    }
+    cells.forEach((cell, index) => {
+      const slot = slots[index] ?? index;
+      const theta = (360 / cells.length) * slot;
+      const phi = ((slot * 37) % 10) - 5;
+      cell.style.transform = `translate(-50%,-50%) rotateY(${theta}deg) rotateX(${phi}deg) translateZ(-${RADIUS}px)`;
+      const image = items[index];
+      if (image) {
+        image.dataset.depth = String(Math.sin((slot / cells.length) * Math.PI * 2));
+      }
+    });
 
     if (!motionAllowed) {
       sphere.style.transform = `translate3d(0, 0, ${CAMERA_Z}px)`;
@@ -53,6 +73,7 @@ export function HomeSphere({ images }: Props) {
       targetTiltY = x * 10;
       targetMoveX = x * 28;
       targetMoveY = y * 18;
+      schedule();
     };
 
     const onMouseLeave = () => {
@@ -60,12 +81,14 @@ export function HomeSphere({ images }: Props) {
       targetTiltY = 0;
       targetMoveX = 0;
       targetMoveY = 0;
+      schedule();
     };
 
     const onWheel = (event: WheelEvent) => {
       const delta =
         Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
       targetRotation += delta * WHEEL_SENSITIVITY;
+      schedule();
     };
 
     let touchX = 0;
@@ -85,6 +108,7 @@ export function HomeSphere({ images }: Props) {
         (Math.abs(deltaX) > Math.abs(deltaY) ? -deltaX : deltaY) * TOUCH_SENSITIVITY;
       touchX = touch.clientX;
       touchY = touch.clientY;
+      schedule();
     };
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
@@ -95,7 +119,23 @@ export function HomeSphere({ images }: Props) {
 
     const root = document.documentElement;
 
+    /**
+     * The loop used to run forever, repainting nine elements every frame even
+     * when nothing had moved for minutes. It now stops once every value has
+     * settled and restarts on the next input, so an idle home page costs
+     * nothing.
+     */
+    const SETTLED = 0.01;
+    const isSettled = () =>
+      Math.abs(targetRotation - currentRotation) < SETTLED &&
+      Math.abs(targetTiltX - currentTiltX) < SETTLED &&
+      Math.abs(targetTiltY - currentTiltY) < SETTLED &&
+      Math.abs(targetMoveX - currentMoveX) < SETTLED &&
+      Math.abs(targetMoveY - currentMoveY) < SETTLED;
+
     const render = () => {
+      frame = 0;
+
       currentRotation += (targetRotation - currentRotation) * 0.08;
       currentTiltX += (targetTiltX - currentTiltX) * 0.055;
       currentTiltY += (targetTiltY - currentTiltY) * 0.055;
@@ -116,9 +156,24 @@ export function HomeSphere({ images }: Props) {
       root.style.setProperty("--logo-x", `${currentMoveX * -0.24}px`);
       root.style.setProperty("--logo-y", `${currentMoveY * -0.24}px`);
 
-      frame = requestAnimationFrame(render);
+      if (!isSettled()) schedule();
     };
-    frame = requestAnimationFrame(render);
+
+    function schedule() {
+      if (!frame && !document.hidden) frame = requestAnimationFrame(render);
+    }
+
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      } else {
+        schedule();
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    schedule();
 
     return () => {
       cancelAnimationFrame(frame);
@@ -127,6 +182,7 @@ export function HomeSphere({ images }: Props) {
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
+      document.removeEventListener("visibilitychange", onVisibility);
       root.style.removeProperty("--logo-x");
       root.style.removeProperty("--logo-y");
     };

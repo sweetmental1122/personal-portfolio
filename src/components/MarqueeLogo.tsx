@@ -75,9 +75,19 @@ export function MarqueeLogo({ name, locale, marquee = false }: Props) {
     };
     frame = requestAnimationFrame(tick);
 
+    // A background tab kept scrolling the marquee for nothing.
+    const onVisibility = () => {
+      cancelAnimationFrame(frame);
+      if (document.hidden) return;
+      previousTime = 0; // avoid a jump from the time spent hidden
+      frame = requestAnimationFrame(tick);
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [marquee]);
 

@@ -6,7 +6,7 @@ type OrbPosition = { x: string; y: string; scale: string; duration: string };
 
 const STORAGE_KEY = "portfolio-ambient-orbs";
 const DRIFT_INTERVAL = 13_000;
-const MOTE_COUNT = 26;
+const MOTE_COUNT = 12;
 
 const random = (min: number, max: number) => min + Math.random() * (max - min);
 

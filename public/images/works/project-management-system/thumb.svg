@@ -4,11 +4,18 @@
       <stop offset="0%" stop-color="#ffaed2"/>
       <stop offset="100%" stop-color="#bdaeff"/>
     </linearGradient>
-    <filter id="blur"><feGaussianBlur stdDeviation="96"/></filter>
+    <radialGradient id="h1" cx="28%" cy="30%" r="42%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="h2" cx="76%" cy="72%" r="36%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
   </defs>
   <rect width="1600" height="1000" fill="url(#g)"/>
-  <circle cx="448.00000000000006" cy="300" r="300" fill="#ffffff" opacity="0.35" filter="url(#blur)"/>
-  <circle cx="1216" cy="720" r="260" fill="#ffffff" opacity="0.22" filter="url(#blur)"/>
+  <rect width="1600" height="1000" fill="url(#h1)"/>
+  <rect width="1600" height="1000" fill="url(#h2)"/>
   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
         font-family="Georgia, 'Times New Roman', serif" font-size="90"
         fill="#1a1526" opacity="0.62" letter-spacing="7">PROJECT MANAGEMENT SYSTEM</text>

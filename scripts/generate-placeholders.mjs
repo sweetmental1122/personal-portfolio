@@ -21,6 +21,12 @@ const PALETTES = [
   ["#9fd4ff", "#e0c8ff"],
 ];
 
+/**
+ * The soft highlights are radial gradients, not circles behind a
+ * `feGaussianBlur`. A blur filter has to be rasterised by the browser on every
+ * decode — at stdDeviation 96 on a 1600px canvas that was slow enough to be
+ * felt when eight of them load at once on the home page.
+ */
 const svg = (width, height, label, index) => {
   const [from, to] = PALETTES[index % PALETTES.length];
   const fontSize = Math.round(Math.min(width, height) * 0.09);
@@ -31,11 +37,18 @@ const svg = (width, height, label, index) => {
       <stop offset="0%" stop-color="${from}"/>
       <stop offset="100%" stop-color="${to}"/>
     </linearGradient>
-    <filter id="blur"><feGaussianBlur stdDeviation="${Math.round(width * 0.06)}"/></filter>
+    <radialGradient id="h1" cx="28%" cy="30%" r="42%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="h2" cx="76%" cy="72%" r="36%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
   </defs>
   <rect width="${width}" height="${height}" fill="url(#g)"/>
-  <circle cx="${width * 0.28}" cy="${height * 0.3}" r="${Math.min(width, height) * 0.3}" fill="#ffffff" opacity="0.35" filter="url(#blur)"/>
-  <circle cx="${width * 0.76}" cy="${height * 0.72}" r="${Math.min(width, height) * 0.26}" fill="#ffffff" opacity="0.22" filter="url(#blur)"/>
+  <rect width="${width}" height="${height}" fill="url(#h1)"/>
+  <rect width="${width}" height="${height}" fill="url(#h2)"/>
   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
         font-family="Georgia, 'Times New Roman', serif" font-size="${fontSize}"
         fill="#1a1526" opacity="0.62" letter-spacing="${Math.round(fontSize * 0.08)}">${label}</text>
@@ -50,17 +63,6 @@ async function write(relativePath, contents) {
   console.log(`  ${relativePath}`);
 }
 
-const HOME_SIZES = [
-  [1080, 1080],
-  [1000, 1413],
-  [1080, 1080],
-  [1080, 1080],
-  [1080, 1080],
-  [1080, 1080],
-  [1080, 1080],
-  [1080, 1920],
-];
-
 // [slug, number of detail images] — keep in sync with src/content/works.ts
 const WORK_SLUGS = [
   ["project-management-system", 2],
@@ -74,12 +76,8 @@ const WORK_SLUGS = [
 
 console.log("Writing placeholder images…");
 
-for (const [index, [width, height]] of HOME_SIZES.entries()) {
-  const number = String(index + 1).padStart(2, "0");
-  await write(`home/${number}.svg`, svg(width, height, number, index));
-}
-
-// The about portrait is a real photograph now, so it is not regenerated here.
+// The home sphere reuses the project thumbnails, so there is no separate
+// home/ set. The about portrait is a real photograph and is left alone.
 await write("ogp.svg", svg(1200, 630, "PORTFOLIO", 1));
 
 for (const [index, [slug, extra]] of WORK_SLUGS.entries()) {

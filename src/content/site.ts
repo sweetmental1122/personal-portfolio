@@ -1,4 +1,5 @@
 import type { SiteConfig } from "./types";
+import { sortedProjects } from "./works";
 
 /**
  * ─────────────────────────────────────────────────────────────
@@ -10,7 +11,7 @@ import type { SiteConfig } from "./types";
 export const site: SiteConfig = {
   // Shown in the header wordmark, the footer and every page title.
   // A personal or trade name stays the same in both languages.
-  name: "Chikara_Tech",
+  name: "Dream_Catcher",
   jobTitle: "Software Engineer / Full-Stack Developer",
   email: "hello@example.com",
   url: "https://your-domain.com",
@@ -34,20 +35,15 @@ export const site: SiteConfig = {
   social: [{ label: "GitHub", href: "https://github.com/sweetmental1122" }],
 
   /**
-   * The eight images that orbit the home page sphere. Screenshots of your own
-   * work read best here — dashboards, API docs, app screens. Square or
-   * portrait crops fit the ring most cleanly.
+   * The images that orbit the home page sphere are the project thumbnails, so
+   * the home page always shows the current WORKS entries — nothing to keep in
+   * sync by hand. HomeSphere shuffles their ring positions on each visit.
    */
-  homeImages: [
-    { src: "/images/home/01.svg", width: 1080, height: 1080 },
-    { src: "/images/home/02.svg", width: 1000, height: 1413 },
-    { src: "/images/home/03.svg", width: 1080, height: 1080 },
-    { src: "/images/home/04.svg", width: 1080, height: 1080 },
-    { src: "/images/home/05.svg", width: 1080, height: 1080 },
-    { src: "/images/home/06.svg", width: 1080, height: 1080 },
-    { src: "/images/home/07.svg", width: 1080, height: 1080 },
-    { src: "/images/home/08.svg", width: 1080, height: 1920 },
-  ],
+  homeImages: sortedProjects.map((project) => ({
+    src: project.thumbnail.src,
+    width: project.thumbnail.width,
+    height: project.thumbnail.height,
+  })),
 };
 
 /** Absolute site origin — env var wins so preview deploys resolve correctly. */
