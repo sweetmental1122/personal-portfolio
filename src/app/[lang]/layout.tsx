@@ -85,7 +85,6 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   return (
     <html lang={LOCALE_HREFLANG[locale]} suppressHydrationWarning>
       <head>
-        <ThemeScript />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
         <link
           rel="stylesheet"
@@ -95,7 +94,11 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
       {/* suppressHydrationWarning on both elements: ThemeScript writes
           data-theme onto <html> before hydration, and extensions commonly
           stamp their own attributes onto <body>. */}
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        {/* Renders nothing — it injects its tag into the streamed <head>. */}
+        <ThemeScript />
+        {children}
+      </body>
     </html>
   );
 }

@@ -62,9 +62,11 @@ export function NotFoundView() {
       {/* Static equivalent of the animated chrome — the 404 renders outside
           the [lang] segment, so it cannot reuse <Shell>. */}
       <div className="ambient" aria-hidden="true">
+        <span className="ambient__aurora" />
         <span className="ambient__orb ambient__orb--a" />
         <span className="ambient__orb ambient__orb--b" />
         <span className="ambient__orb ambient__orb--c" />
+        <span className="ambient__grain" />
         <div className="ambient__orbit-wrap">
           <div className="orbit">
             <span />

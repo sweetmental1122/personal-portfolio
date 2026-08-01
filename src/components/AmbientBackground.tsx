@@ -6,6 +6,7 @@ type OrbPosition = { x: string; y: string; scale: string; duration: string };
 
 const STORAGE_KEY = "portfolio-ambient-orbs";
 const DRIFT_INTERVAL = 13_000;
+const MOTE_COUNT = 26;
 
 const random = (min: number, max: number) => min + Math.random() * (max - min);
 
@@ -64,6 +65,24 @@ export function AmbientBackground({ showOrbit = false }: Props) {
     const kickoff = requestAnimationFrame(() => requestAnimationFrame(drift));
     const interval = window.setInterval(drift, DRIFT_INTERVAL);
 
+    // Dust motes. Built here rather than in JSX so their randomised paths
+    // can never differ between the server and client render.
+    const motes = document.createElement("div");
+    motes.setAttribute("aria-hidden", "true");
+    for (let index = 0; index < MOTE_COUNT; index += 1) {
+      const mote = document.createElement("span");
+      mote.className = "ambient__mote";
+      mote.style.setProperty("--mote-x", `${random(0, 100).toFixed(2)}vw`);
+      mote.style.setProperty("--mote-size", `${random(1.5, 4).toFixed(2)}px`);
+      mote.style.setProperty("--mote-duration", `${random(22, 48).toFixed(1)}s`);
+      // Negative delays start the field mid-flight instead of all at the bottom.
+      mote.style.setProperty("--mote-delay", `${random(-40, 0).toFixed(1)}s`);
+      mote.style.setProperty("--mote-drift", `${random(-90, 90).toFixed(0)}px`);
+      mote.style.setProperty("--mote-opacity", random(0.25, 0.75).toFixed(2));
+      motes.appendChild(mote);
+    }
+    root.appendChild(motes);
+
     // Shooting stars, launched in loose pairs.
     const timers = new Set<number>();
     const createStar = () => {
@@ -86,14 +105,17 @@ export function AmbientBackground({ showOrbit = false }: Props) {
       window.clearInterval(interval);
       timers.forEach((id) => window.clearTimeout(id));
       root.querySelectorAll(".ambient__star").forEach((star) => star.remove());
+      motes.remove();
     };
   }, []);
 
   return (
     <div className="ambient" ref={rootRef} aria-hidden="true">
+      <span className="ambient__aurora" />
       <span className="ambient__orb ambient__orb--a" />
       <span className="ambient__orb ambient__orb--b" />
       <span className="ambient__orb ambient__orb--c" />
+      <span className="ambient__grain" />
       {showOrbit && (
         <div className="ambient__orbit-wrap">
           <div className="orbit">
