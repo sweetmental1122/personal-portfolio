@@ -342,10 +342,15 @@ export const projects: Project[] = [
  *  is a one-line edit per project whenever you have the details to hand.
  * ─────────────────────────────────────────────────────────────
  */
+/**
+ * 1900px wide: these are the home sphere's artwork as well as the ring
+ * thumbnails, and the sphere magnifies them, so the source needs headroom
+ * above its layout size on a high-DPI screen.
+ */
 const shot = (slug: string) => ({
   src: `/images/works/${slug}/thumb.jpg`,
-  width: 1440,
-  height: 688,
+  width: 1900,
+  height: 908,
 });
 
 projects.push(
@@ -632,7 +637,7 @@ projects.push(
       ja: ["診療時間と最寄駅からの所要時間を画面内に固定し、初診の来院判断に必要な情報を探させない設計としています。"],
       en: ["Hours and walking time from the station stay on screen, so a first-time patient never has to hunt for what decides their visit."],
     },
-    thumbnail: { src: "/images/works/art-asada/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: shot("art-asada"),
     images: [],
     liveUrl: "https://art-asada.jp/",
     meta: { client: { ja: "医療法人 浅田レディースクリニック", en: "ART Clinic ASADA" } },
@@ -692,6 +697,23 @@ projects.push(
     meta: { client: { ja: "医療法人社団 港成会 みらい歯科", en: "Kousei-kai Mirai Dental Clinic" } },
   },
 );
+
+/**
+ * Where a project's only capture is its thumbnail, show that in the detail
+ * column too — otherwise the page renders "images coming soon" next to copy
+ * that plainly has a screenshot beside it in the listing.
+ */
+projects.forEach((project) => {
+  if (project.images.length > 0) return;
+  project.images = [
+    {
+      src: project.thumbnail.src,
+      alt: project.title,
+      width: project.thumbnail.width,
+      height: project.thumbnail.height,
+    },
+  ];
+});
 
 /** Projects sorted for display, lowest `order` first. */
 export const sortedProjects: Project[] = [...projects].sort((a, b) => a.order - b.order);

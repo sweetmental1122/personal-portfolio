@@ -64,27 +64,26 @@ export function WorksRing({ items, categories, labels }: Props) {
       if (!cards.length) return;
 
       const mobile = window.matchMedia("(max-width: 760px)").matches;
+      const tablet = !mobile && window.matchMedia("(max-width: 1024px)").matches;
       const vw = window.innerWidth;
 
       rotation.current.current +=
         (rotation.current.target - rotation.current.current) * (mobile ? 0.09 : 0.055);
 
-      // Radius grows with the card count so neighbours never overlap.
-      const cardWidth = vw * (mobile ? 0.48 : 0.25);
-      const gap = vw * (mobile ? 0.045 : 0.025);
+      // Radius grows with the card count so neighbours never overlap. These
+      // widths must track the max-width the stylesheet gives .works__card at
+      // each breakpoint, or the ring spaces cards for the wrong size.
+      const cardWidth = vw * (mobile ? 0.48 : tablet ? 0.38 : 0.25);
+      const gap = vw * (mobile ? 0.045 : tablet ? 0.035 : 0.025);
       const spacingRadius = ((cardWidth + gap) * cards.length) / (Math.PI * 2);
-      const minRadius =
-        cards.length <= 2
-          ? mobile
-            ? 300
-            : 440
-          : cards.length <= 5
-            ? mobile
-              ? 480
-              : 650
-            : mobile
-              ? 720
-              : 900;
+      // Floor so a short filtered list still reads as a ring rather than a
+      // flat row. Tablets sit between the two, closer to mobile.
+      const tier = cards.length <= 2 ? 0 : cards.length <= 5 ? 1 : 2;
+      const minRadius = mobile
+        ? [300, 480, 720][tier]!
+        : tablet
+          ? [360, 560, 800][tier]!
+          : [440, 650, 900][tier]!;
       const radius = Math.max(minRadius, spacingRadius);
       const step = 360 / cards.length;
 

@@ -62,20 +62,6 @@ export default async function ProjectPage({ params }: Props) {
               ))}
             </div>
 
-            {/* Thumbnail moves here on narrow screens, where the image column
-                sits below the copy instead of beside it. */}
-            <div className="project__mobile-thumb">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={project.thumbnail.src}
-                alt={t(project.title, lang)}
-                width={project.thumbnail.width}
-                height={project.thumbnail.height}
-                decoding="async"
-                suppressHydrationWarning
-              />
-            </div>
-
             <div className="project__info">
               <h2 className="sr-only">{dict.works.information}</h2>
               {/* Only the fields that are filled in are printed — an entry

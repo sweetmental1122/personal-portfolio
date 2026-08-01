@@ -64,11 +64,11 @@ async function write(relativePath, contents) {
 }
 
 /**
- * Projects still waiting on a real capture. Everything else in works.ts
- * already has a screenshot or a diagram, so this list is only the gap.
- * [slug, number of detail images]
+ * Projects still waiting on a real capture. Every entry in works.ts now has
+ * either a screenshot or a diagram, so this list is empty — add a
+ * [slug, detailImageCount] pair here if a new project needs a stand-in.
  */
-const WORK_SLUGS = [["art-asada", 0]];
+const WORK_SLUGS = [];
 
 console.log("Writing placeholder images…");
 
