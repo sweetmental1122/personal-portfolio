@@ -700,7 +700,9 @@ button {
 
    --sphere-card is the size the card actually appears at. */
 .sphere {
-  --sphere-card: clamp(230px, 23vw, 390px);
+  /* Big enough to read a screenshot, small enough that the ring stays behind
+     the wordmark and clear of the call to action at the bottom. */
+  --sphere-card: clamp(170px, 16vw, 280px);
 }
 
 .sphere__item img {

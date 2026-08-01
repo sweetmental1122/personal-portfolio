@@ -8,7 +8,17 @@ type Props = {
   images: SphereImage[];
 };
 
-const RADIUS = 400;
+/**
+ * A wider ring than the 400 this started at. Two reasons, both visible:
+ * cards no longer pile up over the wordmark and the call to action, and a
+ * card at the front now sits at z=300 rather than z=600, which drops its
+ * magnification from 2x to 1200/(1200-300) = 1.33x — less enlargement of the
+ * raster, so a sharper card for free.
+ *
+ * The back of the ring still lands at 1700, past the 1200px perspective
+ * plane, so back-facing cards stay culled.
+ */
+const RADIUS = 700;
 const CAMERA_Z = 1000;
 /** How strongly wheel/touch input feeds the ring's target rotation. */
 const WHEEL_SENSITIVITY = 0.05;
