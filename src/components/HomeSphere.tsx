@@ -15,6 +15,29 @@ const WHEEL_SENSITIVITY = 0.05;
 const TOUCH_SENSITIVITY = 0.2;
 
 /**
+ * The camera sits at z=1000 with a 1200px perspective, so a card at the front
+ * of the ring lands at z=600 and is magnified 1200/(1200-600) = 2x. A browser
+ * rasterises a 3D-transformed layer at its layout size and then scales that
+ * bitmap, so the card was always a 2x enlargement of a small raster — which is
+ * why it looked soft however large the source image was.
+ *
+ * Laying the card out at twice its intended size and scaling it back down here
+ * cancels that: the raster is made at the size it is actually drawn.
+ *
+ * The geometry cannot simply be flattened instead. Back-facing cards are culled
+ * by sitting past the perspective plane (z=1400 > 1200), and reducing the
+ * magnification would pull them in front of it, where they blow up instead.
+ */
+const OVERSAMPLE = 2;
+
+/**
+ * `translate` percentages resolve against the un-scaled border box, so
+ * centring a card that will be halved needs -25%, not -50%.
+ */
+const cellTransform = (theta: number, phi: number) =>
+  `translate(${-50 / OVERSAMPLE}%, ${-50 / OVERSAMPLE}%) rotateY(${theta}deg) rotateX(${phi}deg) translateZ(-${RADIUS}px) scale(${1 / OVERSAMPLE})`;
+
+/**
  * Images arranged around a vertical ring in CSS 3D space. The whole ring
  * eases toward a target rotation driven by wheel and touch, while pointer
  * position adds a parallax tilt and a per-image depth offset.
@@ -42,7 +65,7 @@ export function HomeSphere({ images }: Props) {
       const slot = slots[index] ?? index;
       const theta = (360 / cells.length) * slot;
       const phi = ((slot * 37) % 10) - 5;
-      cell.style.transform = `translate(-50%,-50%) rotateY(${theta}deg) rotateX(${phi}deg) translateZ(-${RADIUS}px)`;
+      cell.style.transform = cellTransform(theta, phi);
       const image = items[index];
       if (image) {
         image.dataset.depth = String(Math.sin((slot / cells.length) * Math.PI * 2));
@@ -146,9 +169,12 @@ export function HomeSphere({ images }: Props) {
 
       items.forEach((image) => {
         const depth = Number(image.dataset.depth ?? 0);
-        const x = currentMoveX * depth * 0.42;
-        const y = currentMoveY * depth * 0.34;
-        const z = Math.abs(depth) * 24;
+        // Multiplied by OVERSAMPLE because these offsets are in the cell's
+        // local space, which the transform above halves — without it the
+        // parallax would read at half its former strength.
+        const x = currentMoveX * depth * 0.42 * OVERSAMPLE;
+        const y = currentMoveY * depth * 0.34 * OVERSAMPLE;
+        const z = Math.abs(depth) * 24 * OVERSAMPLE;
         image.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
       });
 
@@ -202,9 +228,7 @@ export function HomeSphere({ images }: Props) {
             <div
               className="sphere__item"
               key={image.src}
-              style={{
-                transform: `translate(-50%,-50%) rotateY(${theta}deg) rotateX(${phi}deg) translateZ(-${RADIUS}px)`,
-              }}
+              style={{ transform: cellTransform(theta, phi) }}
             >
               {/* Plain <img>: these live inside a 3D transform chain and are
                   driven per-frame, so next/image's wrapper adds no value.

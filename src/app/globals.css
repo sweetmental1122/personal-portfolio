@@ -692,18 +692,24 @@ button {
   transform-style: preserve-3d;
 }
 
-/* A fixed card rather than `max-width: 180px` on a 1900x908 source.
-   The perspective magnifies these roughly 2x, so a 180px-wide box was being
-   rasterised small and then blown up — which is what made them look soft.
-   A larger box with object-fit: cover gives the rasteriser more to work with
-   and turns wide screenshots into a consistent card shape. */
+/* Laid out at twice the size it is drawn, then halved by the `scale()` in
+   HomeSphere's transform. The perspective magnifies each card 2x, and a
+   browser rasterises a 3D layer at its layout size before scaling that
+   bitmap — so without this the card was always a 2x enlargement of a small
+   raster, however large the source file was. See the note in HomeSphere.tsx.
+
+   --sphere-card is the size the card actually appears at. */
+.sphere {
+  --sphere-card: clamp(230px, 23vw, 390px);
+}
+
 .sphere__item img {
-  width: clamp(210px, 20vw, 330px);
+  width: calc(var(--sphere-card) * 2);
   height: auto;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   object-position: top center;
-  border-radius: 4px;
+  border-radius: 8px;
   box-shadow: 0 18px 45px rgba(85, 69, 96, 0.22);
   will-change: transform;
 }
