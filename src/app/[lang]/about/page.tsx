@@ -59,22 +59,16 @@ export default async function AboutPage({ params }: Props) {
             </div>
 
             <div className="about__credentials">
-              <section>
-                <h2 className="eyebrow">{dict.about.eyebrowQualifications}</h2>
-                <ul>
-                  {profile.qualifications.map((item) => (
-                    <li key={t(item.label, lang)}>{t(item.label, lang)}</li>
-                  ))}
-                </ul>
-              </section>
-              <section>
-                <h2 className="eyebrow">{dict.about.eyebrowAwards}</h2>
-                <ul>
-                  {profile.awards.map((item) => (
-                    <li key={t(item.label, lang)}>{t(item.label, lang)}</li>
-                  ))}
-                </ul>
-              </section>
+              {profile.credentials.map((group) => (
+                <section key={t(group.title, lang)}>
+                  <h2 className="eyebrow">{t(group.title, lang)}</h2>
+                  <ul>
+                    {group.items.map((item) => (
+                      <li key={t(item, lang)}>{t(item, lang)}</li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
             </div>
 
             {portrait("mobile")}
@@ -97,14 +91,19 @@ export default async function AboutPage({ params }: Props) {
 
           <Reveal as="section" className="about__section">
             <h2 className="eyebrow">{dict.about.eyebrowSkills}</h2>
-            <div className="skill-grid">
-              {profile.skills.map((skill) => (
-                <div className="skill-item" key={skill.name}>
-                  <span aria-hidden="true">{skill.code}</span>
-                  <small>{skill.name}</small>
+            {profile.skillGroups.map((group) => (
+              <div className="skill-group" key={t(group.title, lang)}>
+                <h3 className="skill-group__title">{t(group.title, lang)}</h3>
+                <div className="skill-grid">
+                  {group.skills.map((skill) => (
+                    <div className="skill-item" key={skill.name}>
+                      <span aria-hidden="true">{skill.code}</span>
+                      <small>{skill.name}</small>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </Reveal>
 
           <Reveal as="section" className="about__section">

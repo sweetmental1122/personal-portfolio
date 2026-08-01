@@ -61,13 +61,14 @@ const HOME_SIZES = [
   [1080, 1920],
 ];
 
+// [slug, number of detail images] — keep in sync with src/content/works.ts
 const WORK_SLUGS = [
-  ["aurora-cosmetics", 2],
-  ["monogram-studio", 1],
-  ["neon-festival", 2],
-  ["type-specimen", 1],
-  ["sound-visualizer", 1],
-  ["atelier-journal", 1],
+  ["logistics-delivery-system", 2],
+  ["medical-reservation-api", 1],
+  ["ec-inventory-dashboard", 2],
+  ["realestate-mobile-app", 1],
+  ["workflow-automation-ai", 1],
+  ["corporate-site-wordpress", 1],
 ];
 
 console.log("Writing placeholder images…");

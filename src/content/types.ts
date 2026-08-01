@@ -42,8 +42,10 @@ export type ExperienceEntry = {
   body: Localized;
 };
 
-export type Credential = {
-  label: Localized;
+/** A titled list rendered in the two columns under the intro. */
+export type CredentialGroup = {
+  title: Localized;
+  items: Localized[];
 };
 
 export type Skill = {
@@ -52,15 +54,20 @@ export type Skill = {
   name: string;
 };
 
+/** Skills are grouped so a client can scan by layer rather than one long grid. */
+export type SkillGroup = {
+  title: Localized;
+  skills: Skill[];
+};
+
 export type Profile = {
   portrait: string;
   headline: { lead: Localized; main: Localized };
   catchphrase: Localized;
   intro: LocalizedParagraphs;
-  qualifications: Credential[];
-  awards: Credential[];
+  credentials: CredentialGroup[];
   experience: ExperienceEntry[];
-  skills: Skill[];
+  skillGroups: SkillGroup[];
   process: Localized[];
   cta: { heading: Localized; body: Localized };
 };

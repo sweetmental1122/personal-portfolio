@@ -99,6 +99,15 @@ object that is missing the new translation, so nothing can silently fall back to
 language. Routing, the language switcher, `sitemap.xml` and the `hreflang` tags all derive
 from that one array.
 
+### ⚠️ Before you share this link
+
+Two things in `src/content/` are placeholders that must be replaced first:
+
+1. **`site.name` and `site.email`** — currently `Your Name` / `hello@example.com`.
+2. **Every entry in `works.ts`** — the six projects are *samples*, shaped after the
+   industries and stack in the profile so the page isn't empty. They describe work that
+   did not happen. Publishing them as a track record would misrepresent you.
+
 ### Adding a project
 
 Append an entry to `projects` in [src/content/works.ts](src/content/works.ts). The `slug`

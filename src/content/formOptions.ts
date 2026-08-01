@@ -3,13 +3,16 @@ import type { Localized } from "./types";
 /** Select options for the contact form. Values are sent verbatim in the email. */
 export const PROJECT_TYPES: { value: string; label: Localized }[] = [
   {
-    value: "landing-page",
-    label: { ja: "ランディングページ・キャンペーンサイト", en: "Landing page / campaign" },
+    value: "business-system",
+    label: { ja: "Webシステム・業務システム開発", en: "Web / business system development" },
   },
-  { value: "brand-site", label: { ja: "ブランドサイト", en: "Brand site" } },
-  { value: "corporate-site", label: { ja: "コーポレートサイト", en: "Corporate site" } },
-  { value: "ui-design", label: { ja: "UIデザインのみ", en: "UI design only" } },
-  { value: "front-end", label: { ja: "実装のみ", en: "Front-end only" } },
+  { value: "api", label: { ja: "REST API設計・バックエンド開発", en: "REST API design / backend" } },
+  { value: "frontend", label: { ja: "フロントエンド開発 (React / Vue.js)", en: "Front-end (React / Vue.js)" } },
+  { value: "mobile", label: { ja: "モバイルアプリ開発 (React Native)", en: "Mobile app (React Native)" } },
+  { value: "site", label: { ja: "サイト・LP制作、WordPress", en: "Website / landing page / WordPress" } },
+  { value: "automation", label: { ja: "業務自動化・スクレイピング・AI連携", en: "Automation / scraping / AI integration" } },
+  { value: "infra", label: { ja: "AWS・Docker 環境構築", en: "AWS / Docker environment setup" } },
+  { value: "maintenance", label: { ja: "既存システムの改修・保守", en: "Refactoring / maintenance" } },
   { value: "other", label: { ja: "その他・まずは相談したい", en: "Something else" } },
 ];
 

@@ -2,267 +2,280 @@ import type { Category, Project } from "./types";
 
 /**
  * ─────────────────────────────────────────────────────────────
- *  EDIT ME — the WORKS ring and every project detail page are
- *  generated from the arrays below. Add or remove entries freely.
+ *  ⚠️  THESE SIX ENTRIES ARE SAMPLES, NOT REAL PROJECTS.
+ *
+ *  They are shaped after the industries and stack in your profile so the
+ *  page has something to show, but they describe work that has not
+ *  happened. Replace every one with your own before sending this link to
+ *  a client — publishing invented case studies as your track record
+ *  would misrepresent you.
+ *
+ *  Keep the shape, swap the content: `slug` becomes the URL, `categoryKey`
+ *  must match a CATEGORIES key, `order` sets the position in the ring.
  * ─────────────────────────────────────────────────────────────
  */
 
 export const CATEGORIES: Category[] = [
   {
-    key: "client",
-    label: { ja: "クライアントワーク", en: "Client Work" },
+    key: "system",
+    label: { ja: "業務システム・API", en: "Business Systems & API" },
   },
   {
-    key: "personal",
-    label: { ja: "自主制作", en: "Personal Projects" },
+    key: "web",
+    label: { ja: "Webアプリ・フロントエンド", en: "Web Apps & Frontend" },
+  },
+  {
+    key: "mobile",
+    label: { ja: "モバイル・自動化", en: "Mobile & Automation" },
+  },
+  {
+    key: "site",
+    label: { ja: "サイト・LP制作", en: "Sites & Landing Pages" },
   },
 ];
 
 export const projects: Project[] = [
   {
-    slug: "aurora-cosmetics",
+    slug: "logistics-delivery-system",
     order: 1,
-    categoryKey: "client",
+    categoryKey: "system",
     title: {
-      ja: "Aurora Cosmetics ブランドサイト",
-      en: "Aurora Cosmetics — Brand Site",
+      ja: "物流会社向け 配送管理システム",
+      en: "Delivery Management System for a Logistics Company",
     },
     summary: {
-      ja: "スキンケアブランドのリブランディングに合わせて制作した、透明感を軸とするブランドサイト。",
-      en: "A brand site built around translucency, launched alongside a skincare rebrand.",
+      ja: "配車・進捗・実績を一元管理する業務システム。Spring Boot と React による設計から運用まで。",
+      en: "A business system unifying dispatch, progress and delivery records — designed, built and maintained on Spring Boot and React.",
     },
     description: {
       ja: [
-        "商品の「軽さ」と「透明感」を画面上でどう再現するかが最大の課題でした。ガラス質のレイヤーとゆっくりとした視差スクロールを組み合わせ、余白を大きく取ることで質感を表現しています。",
-        "撮影ディレクションからUI設計、実装までを担当。モバイルでのLighthouseスコアは96を維持しています。",
+        "紙とExcelで分散していた配車情報を一つのシステムに集約しました。ドメインごとにパッケージを分け、業務ロジックをサービス層に閉じ込めることで、担当者が変わっても追える構造にしています。",
+        "帳票出力や締め処理といった業務のピークに耐えられるよう、重い集計は非同期ジョブに逃がし、画面側は常に軽く保つ設計としました。",
       ],
       en: [
-        "The core challenge was translating the product's lightness and translucency onto a screen. Glassy layers, slow parallax and generous whitespace carry that texture.",
-        "I directed the shoot, designed the UI and built the front end. Mobile Lighthouse performance holds at 96.",
+        "Dispatch information that had been scattered across paper and spreadsheets moved into one system. Packages are split by domain and business logic is kept inside the service layer, so the code stays followable when the team changes.",
+        "Heavy aggregation for reports and period-end closing runs as asynchronous jobs, keeping the screens responsive through the busiest part of the workflow.",
       ],
     },
-    thumbnail: { src: "/images/works/aurora-cosmetics/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/logistics-delivery-system/thumb.svg", width: 1600, height: 1000 },
     images: [
       {
-        src: "/images/works/aurora-cosmetics/01.svg",
-        alt: { ja: "トップページのファーストビュー", en: "Homepage hero" },
+        src: "/images/works/logistics-delivery-system/01.svg",
+        alt: { ja: "配車管理画面", en: "Dispatch management screen" },
         width: 1600,
         height: 1000,
       },
       {
-        src: "/images/works/aurora-cosmetics/02.svg",
-        alt: { ja: "商品一覧ページ", en: "Product listing" },
+        src: "/images/works/logistics-delivery-system/02.svg",
+        alt: { ja: "実績集計ダッシュボード", en: "Delivery records dashboard" },
         width: 1600,
         height: 1000,
       },
     ],
     meta: {
-      client: { ja: "Aurora Cosmetics", en: "Aurora Cosmetics" },
+      client: { ja: "物流企業（受託開発）", en: "Logistics company (agency project)" },
       role: {
-        ja: "アートディレクション / UIデザイン / 実装",
-        en: "Art Direction / UI Design / Development",
+        ja: "要件整理 / 設計 / バックエンド・フロントエンド実装",
+        en: "Requirements / Architecture / Backend and front-end implementation",
       },
-      year: "2025",
-      stack: ["Next.js", "TypeScript", "GSAP"],
+      year: "2024",
+      stack: ["Java", "Spring Boot", "React", "PostgreSQL", "AWS", "Docker"],
     },
   },
   {
-    slug: "monogram-studio",
+    slug: "medical-reservation-api",
     order: 2,
-    categoryKey: "client",
+    categoryKey: "system",
     title: {
-      ja: "Monogram Studio コーポレートサイト",
-      en: "Monogram Studio — Corporate Site",
+      ja: "医療機関向け 予約・連携API",
+      en: "Reservation and Integration API for Healthcare",
     },
     summary: {
-      ja: "建築設計事務所のコーポレートサイト。作品写真を主役に据えたタイポグラフィ設計。",
-      en: "Corporate site for an architecture practice, with typography built to serve the photography.",
+      ja: "既存の院内システムと連携する予約API。Go で構築し、責務を絞った REST 設計を徹底。",
+      en: "A reservation API that speaks to existing in-house systems, built in Go with a deliberately narrow REST surface.",
     },
     description: {
       ja: [
-        "写真の力を邪魔しないよう、テキストは最小限のウェイトと広い行間で構成しました。グリッドは12カラムを意図的に崩し、非対称なリズムを与えています。",
-        "CMSはヘッドレス構成とし、担当者が写真を差し替えるだけで更新できる運用に落とし込みました。",
+        "既存システムを止めずに段階的に置き換えられるよう、エンドポイントの責務を細かく分け、後方互換を保ったままバージョンを重ねられる構成にしました。",
+        "医療情報を扱うため、アクセス制御と監査ログを設計の初期段階から組み込み、どの操作が誰によって行われたかを常に追跡できるようにしています。",
       ],
       en: [
-        "Text keeps a light weight and open leading so it never competes with the photography. The 12-column grid is deliberately broken to stay asymmetric.",
-        "A headless CMS means the team updates the site by swapping photos — nothing else required.",
+        "Endpoints are scoped narrowly so the legacy system could be replaced in stages rather than all at once, with versions layered on while staying backward compatible.",
+        "Because it handles medical data, access control and audit logging were part of the design from the start — every operation stays traceable to who performed it.",
       ],
     },
-    thumbnail: { src: "/images/works/monogram-studio/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/medical-reservation-api/thumb.svg", width: 1600, height: 1000 },
     images: [
       {
-        src: "/images/works/monogram-studio/01.svg",
-        alt: { ja: "プロジェクト詳細ページ", en: "Project detail page" },
+        src: "/images/works/medical-reservation-api/01.svg",
+        alt: { ja: "API仕様ドキュメント", en: "API specification document" },
         width: 1600,
         height: 1000,
       },
     ],
     meta: {
-      client: { ja: "Monogram Studio", en: "Monogram Studio" },
-      role: { ja: "Webデザイン / 実装", en: "Web Design / Development" },
-      year: "2025",
-      stack: ["Next.js", "TypeScript", "microCMS"],
+      client: { ja: "医療機関（受託開発）", en: "Healthcare provider (agency project)" },
+      role: { ja: "API設計 / バックエンド実装", en: "API design / Backend implementation" },
+      year: "2024",
+      stack: ["Go", "PostgreSQL", "Redis", "Docker", "AWS"],
     },
   },
   {
-    slug: "neon-festival",
+    slug: "ec-inventory-dashboard",
     order: 3,
-    categoryKey: "client",
+    categoryKey: "web",
     title: {
-      ja: "NEON FESTIVAL キャンペーンLP",
-      en: "NEON FESTIVAL — Campaign Landing Page",
+      ja: "EC向け 在庫・受注管理ダッシュボード",
+      en: "Inventory and Order Dashboard for E-commerce",
     },
     summary: {
-      ja: "音楽フェスの告知ランディングページ。チケット販売開始に合わせた短期集中の制作。",
-      en: "A launch landing page for a music festival, produced on a tight run-up to ticket release.",
+      ja: "複数モールの在庫と受注を横断して扱う管理画面。NestJS と Nuxt.js で構築。",
+      en: "An admin surface that spans stock and orders across several marketplaces, built on NestJS and Nuxt.js.",
     },
     description: {
       ja: [
-        "公開から3日でチケットが完売。スクロール位置に応じてCTAを追従させることで、離脱率を前年比34%改善しました。",
-        "ネオンの発光表現はCSSのみで実装し、動画を使わずに初回表示を1.2秒に抑えています。",
+        "モールごとに異なる仕様を吸収するアダプタ層を設け、新しい販売チャネルが増えても既存コードに手を入れずに追加できる構成にしています。",
+        "在庫数のずれが売上に直結するため、更新は冪等に設計し、失敗したジョブを安全に再実行できる仕組みを用意しました。",
       ],
       en: [
-        "Tickets sold out within three days of launch. A scroll-aware sticky CTA cut the bounce rate 34% year on year.",
-        "The neon glow is pure CSS — no video — which keeps first paint at 1.2 seconds.",
+        "An adapter layer absorbs the differences between marketplaces, so a new sales channel can be added without touching existing code.",
+        "Because stock drift costs real money, updates are idempotent and failed jobs can be safely replayed.",
       ],
     },
-    thumbnail: { src: "/images/works/neon-festival/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/ec-inventory-dashboard/thumb.svg", width: 1600, height: 1000 },
     images: [
       {
-        src: "/images/works/neon-festival/01.svg",
-        alt: { ja: "ランディングページのファーストビュー", en: "Landing page hero" },
+        src: "/images/works/ec-inventory-dashboard/01.svg",
+        alt: { ja: "在庫一覧画面", en: "Inventory listing screen" },
         width: 1600,
         height: 1000,
       },
       {
-        src: "/images/works/neon-festival/02.svg",
-        alt: { ja: "タイムテーブルのセクション", en: "Timetable section" },
+        src: "/images/works/ec-inventory-dashboard/02.svg",
+        alt: { ja: "受注詳細画面", en: "Order detail screen" },
         width: 1600,
         height: 1000,
       },
     ],
     meta: {
-      client: { ja: "NEON FESTIVAL 実行委員会", en: "NEON FESTIVAL Committee" },
-      role: {
-        ja: "Webデザイン / 実装 / アニメーション",
-        en: "Web Design / Development / Motion",
-      },
-      year: "2024",
-      stack: ["Astro", "TypeScript", "CSS"],
+      client: { ja: "EC事業者（受託開発）", en: "E-commerce operator (agency project)" },
+      role: { ja: "設計 / バックエンド・フロントエンド実装", en: "Architecture / Backend and front-end implementation" },
+      year: "2023",
+      stack: ["TypeScript", "NestJS", "Nuxt.js", "MySQL", "Redis", "AWS"],
     },
   },
   {
-    slug: "type-specimen",
+    slug: "realestate-mobile-app",
     order: 4,
-    categoryKey: "personal",
+    categoryKey: "mobile",
     title: {
-      ja: "Type Specimen — 書体見本サイト",
-      en: "Type Specimen — Typeface Explorer",
+      ja: "不動産 物件検索モバイルアプリ",
+      en: "Property Search Mobile App",
     },
     summary: {
-      ja: "可変フォントの軸をリアルタイムに操作できる、自主制作の書体見本サイト。",
-      en: "A personal tool for exploring variable font axes in real time.",
+      ja: "React Native による iOS / Android 両対応の物件検索アプリ。",
+      en: "A property search app for iOS and Android, built once in React Native.",
     },
     description: {
       ja: [
-        "ウェイトと光学サイズをスライダーで動かしながら、実際の組版でどう見えるかを確認できます。",
-        "フォントはサブセット化して読み込み、`font-display: swap` を徹底することで初回描画をブロックしないようにしています。",
+        "検索条件の状態管理を一箇所に集約し、地図表示とリスト表示のどちらから操作しても結果が食い違わないようにしています。",
+        "通信状況が不安定な外出先での利用を想定し、直近の検索結果をローカルに保持して、オフラインでも閲覧を継続できる設計としました。",
       ],
       en: [
-        "Sliders drive weight and optical size so you can judge a face in real setting rather than in isolation.",
-        "Fonts are subset and loaded with `font-display: swap` so nothing blocks first paint.",
+        "Search state lives in one place, so the map view and the list view can never disagree about what the user asked for.",
+        "Designed for use on the move: recent results are cached locally so browsing survives a patchy connection.",
       ],
     },
-    thumbnail: { src: "/images/works/type-specimen/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/realestate-mobile-app/thumb.svg", width: 1600, height: 1000 },
     images: [
       {
-        src: "/images/works/type-specimen/01.svg",
-        alt: { ja: "書体一覧の画面", en: "Typeface overview" },
+        src: "/images/works/realestate-mobile-app/01.svg",
+        alt: { ja: "物件検索画面", en: "Property search screen" },
         width: 1600,
         height: 1000,
       },
     ],
     meta: {
-      client: { ja: "自主制作", en: "Personal project" },
-      role: { ja: "企画 / デザイン / 実装", en: "Concept / Design / Development" },
-      year: "2024",
-      stack: ["React", "TypeScript", "Vite"],
+      client: { ja: "不動産事業者（受託開発）", en: "Real estate company (agency project)" },
+      role: { ja: "モバイル実装 / API連携", en: "Mobile implementation / API integration" },
+      year: "2023",
+      stack: ["React Native", "TypeScript", "FastAPI", "PostgreSQL"],
     },
   },
   {
-    slug: "sound-visualizer",
+    slug: "workflow-automation-ai",
     order: 5,
-    categoryKey: "personal",
+    categoryKey: "mobile",
     title: {
-      ja: "Sound Visualizer — 音の可視化",
-      en: "Sound Visualizer",
+      ja: "業務自動化・AI連携システム",
+      en: "Workflow Automation with AI Integration",
     },
     summary: {
-      ja: "Web Audio APIとWebGLで音を可視化する、実験的なインスタレーション。",
-      en: "An experimental installation visualising audio with the Web Audio API and WebGL.",
+      ja: "Python によるデータ収集と、AI を用いた分類・要約を組み合わせた社内向け自動化基盤。",
+      en: "An internal automation layer pairing Python data collection with AI-driven classification and summarisation.",
     },
     description: {
       ja: [
-        "FFTで取得した周波数帯を粒子の速度と色相にマッピングし、低音域ほど画面の奥へ沈み込むよう設計しました。",
-        "60fpsを維持するため、10万個の粒子をインスタンシングで一度に描画しています。",
+        "手作業で行っていた収集・分類・転記を自動化しました。取得元の仕様変更で止まらないよう、パース処理を差し替え可能な形に分離しています。",
+        "AI の出力をそのまま信用せず、確信度が低い結果は人の確認に回すフローを挟むことで、自動化と正確性を両立させました。",
       ],
       en: [
-        "FFT bands map onto particle velocity and hue; lower frequencies sink further back in the scene.",
-        "100,000 particles draw in a single instanced call to hold 60fps.",
+        "Collection, classification and transcription that had been manual now run automatically. Parsing is isolated behind a swappable interface so a change upstream doesn't stop the pipeline.",
+        "AI output isn't trusted blindly — low-confidence results are routed to a human check, so automation doesn't come at the cost of accuracy.",
       ],
     },
-    thumbnail: { src: "/images/works/sound-visualizer/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/workflow-automation-ai/thumb.svg", width: 1600, height: 1000 },
     images: [
       {
-        src: "/images/works/sound-visualizer/01.svg",
-        alt: { ja: "可視化のスクリーンショット", en: "Visualiser screenshot" },
+        src: "/images/works/workflow-automation-ai/01.svg",
+        alt: { ja: "処理フロー図", en: "Processing flow diagram" },
         width: 1600,
         height: 1000,
       },
     ],
     meta: {
-      client: { ja: "自主制作", en: "Personal project" },
-      role: { ja: "企画 / 実装", en: "Concept / Development" },
+      client: { ja: "中小企業（受託開発）", en: "Small business (agency project)" },
+      role: { ja: "設計 / 実装 / 運用設計", en: "Architecture / Implementation / Operations design" },
       year: "2023",
-      stack: ["TypeScript", "WebGL", "Web Audio API"],
+      stack: ["Python", "FastAPI", "PostgreSQL", "Docker", "AWS Lambda"],
     },
   },
   {
-    slug: "atelier-journal",
+    slug: "corporate-site-wordpress",
     order: 6,
-    categoryKey: "personal",
+    categoryKey: "site",
     title: {
-      ja: "Atelier Journal — 日記のためのエディタ",
-      en: "Atelier Journal — A Writing Tool",
+      ja: "コーポレートサイト構築・LP制作",
+      en: "Corporate Site and Landing Page",
     },
     summary: {
-      ja: "書くことに集中するため、装飾を削ぎ落としたローカルファーストのエディタ。",
-      en: "A local-first editor stripped back to the act of writing.",
+      ja: "WordPress による企業サイト構築。レスポンシブ対応、表示速度改善、SEOを意識した実装。",
+      en: "A company site on WordPress — responsive, tuned for load speed, and built with SEO in mind.",
     },
     description: {
       ja: [
-        "ツールバーを持たず、キーボードショートカットとMarkdownだけで完結するUIにしました。データはすべて端末内に保存されます。",
-        "縦書きモードを備え、日本語での執筆体験を優先して設計しています。",
+        "更新担当者が迷わないよう、編集項目を必要な範囲に絞ったカスタム管理画面を用意し、公開後の運用コストを下げています。",
+        "画像の最適化と読み込み順の見直しにより表示速度を改善し、構造化データと見出し構造を整理してSEOの土台を整えました。",
       ],
       en: [
-        "No toolbar — everything runs on keyboard shortcuts and Markdown, and all data stays on the device.",
-        "A vertical writing mode puts the Japanese writing experience first.",
+        "A trimmed custom admin exposes only the fields the editor actually needs, which keeps running costs down after launch.",
+        "Image optimisation and a reworked loading order improved render speed, while structured data and a cleaned-up heading hierarchy laid the SEO groundwork.",
       ],
     },
-    thumbnail: { src: "/images/works/atelier-journal/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/corporate-site-wordpress/thumb.svg", width: 1600, height: 1000 },
     images: [
       {
-        src: "/images/works/atelier-journal/01.svg",
-        alt: { ja: "エディタの画面", en: "Editor view" },
+        src: "/images/works/corporate-site-wordpress/01.svg",
+        alt: { ja: "トップページ", en: "Homepage" },
         width: 1600,
         height: 1000,
       },
     ],
     meta: {
-      client: { ja: "自主制作", en: "Personal project" },
-      role: { ja: "企画 / デザイン / 実装", en: "Concept / Design / Development" },
-      year: "2023",
-      stack: ["React", "TypeScript", "IndexedDB"],
+      client: { ja: "事業会社（受託開発）", en: "Client company (agency project)" },
+      role: { ja: "デザイン調整 / 実装 / 運用設計", en: "Design adjustment / Implementation / Operations design" },
+      year: "2022",
+      stack: ["WordPress", "PHP", "HTML5", "CSS3", "JavaScript"],
     },
   },
 ];

@@ -22,8 +22,6 @@ export type Dictionary = {
   about: {
     /** Used for the <title> tag, so it is prose rather than a nav label. */
     pageTitle: string;
-    eyebrowQualifications: string;
-    eyebrowAwards: string;
     eyebrowSkills: string;
     eyebrowProcess: string;
     eyebrowExperience: string;
@@ -79,7 +77,7 @@ const ja: Dictionary = {
   nav: {
     home: "ホーム",
     about: "プロフィール",
-    works: "制作実績",
+    works: "開発実績",
     contact: "お問い合わせ",
     openMenu: "メニューを開く",
     closeMenu: "メニューを閉じる",
@@ -90,22 +88,20 @@ const ja: Dictionary = {
     toDark: "ダークモードに切り替える",
   },
   home: {
-    role: "Webデザイナー / フロントエンドエンジニア",
-    viewWorks: "制作実績を見る",
+    role: "ソフトウェアエンジニア / フルスタック開発",
+    viewWorks: "開発実績を見る",
     scrollHint: "スクロールまたはドラッグで回転します",
   },
   about: {
     pageTitle: "プロフィール",
-    eyebrowQualifications: "保有資格",
-    eyebrowAwards: "受賞歴",
-    eyebrowSkills: "スキル",
-    eyebrowProcess: "制作の流れ",
+    eyebrowSkills: "技術スタック",
+    eyebrowProcess: "開発の進め方",
     eyebrowExperience: "経歴",
     portraitAlt: "ポートレート写真",
     ctaButton: "お問い合わせ",
   },
   works: {
-    title: "制作実績",
+    title: "開発実績",
     all: "すべて",
     filterLabel: "カテゴリーで絞り込む",
     empty: "このカテゴリーの実績はまだありません。",
@@ -113,7 +109,7 @@ const ja: Dictionary = {
     information: "プロジェクト情報",
     client: "クライアント",
     role: "担当範囲",
-    year: "制作年",
+    year: "実施年",
     stack: "使用技術",
     liveSite: "サイトを見る",
     noImages: "画像は準備中です。",
@@ -121,9 +117,9 @@ const ja: Dictionary = {
   contact: {
     title: "お問い合わせ",
     intro:
-      "制作のご依頼、お見積もり、ご相談など、お気軽にお問い合わせください。内容を確認のうえ、通常2〜3営業日以内にご返信いたします。",
+      "開発のご依頼、お見積もり、技術的なご相談など、お気軽にお問い合わせください。要件が固まっていない段階のご相談も歓迎です。内容を確認のうえ、通常2〜3営業日以内にご返信いたします。",
     name: "お名前",
-    company: "会社名・ブランド名",
+    company: "会社名・団体名",
     email: "メールアドレス",
     budget: "ご予算",
     projectType: "ご依頼内容",
@@ -147,7 +143,7 @@ const ja: Dictionary = {
     message:
       "お探しのページは移動または削除された可能性があります。URLをご確認いただくか、下のリンクからお戻りください。",
     goHome: "ホームへ戻る",
-    goWorks: "制作実績を見る",
+    goWorks: "開発実績を見る",
   },
 };
 
@@ -166,15 +162,13 @@ const en: Dictionary = {
     toDark: "Switch to dark mode",
   },
   home: {
-    role: "Web Designer / Front-End Developer",
+    role: "Software Engineer / Full-Stack Developer",
     viewWorks: "View Works",
     scrollHint: "Scroll or drag to rotate",
   },
   about: {
     pageTitle: "About",
-    eyebrowQualifications: "Qualifications",
-    eyebrowAwards: "Awards",
-    eyebrowSkills: "Skills",
+    eyebrowSkills: "Tech Stack",
     eyebrowProcess: "Process",
     eyebrowExperience: "Experience",
     portraitAlt: "Portrait photograph",

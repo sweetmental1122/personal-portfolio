@@ -35,7 +35,9 @@ export default async function HomePage({ params }: Props) {
         name: site.name,
         jobTitle: site.jobTitle,
         url: `${siteUrl}${localePath(lang, "/about")}`,
-        knowsAbout: profile.skills.map((skill) => skill.name),
+        knowsAbout: profile.skillGroups.flatMap((group) =>
+          group.skills.map((skill) => skill.name),
+        ),
         worksFor: { "@id": `${siteUrl}/#organization` },
       },
       {
