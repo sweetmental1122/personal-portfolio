@@ -78,23 +78,33 @@ export default async function ProjectPage({ params }: Props) {
 
             <div className="project__info">
               <h2 className="sr-only">{dict.works.information}</h2>
+              {/* Only the fields that are filled in are printed — an entry
+                  without a stated period or stack simply omits those rows. */}
               <dl>
-                <div>
-                  <dt>{dict.works.client}</dt>
-                  <dd>{t(project.meta.client, lang)}</dd>
-                </div>
-                <div>
-                  <dt>{dict.works.year}</dt>
-                  <dd>{project.meta.year}</dd>
-                </div>
-                <div>
-                  <dt>{dict.works.role}</dt>
-                  <dd>{t(project.meta.role, lang)}</dd>
-                </div>
-                <div>
-                  <dt>{dict.works.stack}</dt>
-                  <dd>{project.meta.stack.join(" / ")}</dd>
-                </div>
+                {project.meta.client && (
+                  <div>
+                    <dt>{dict.works.client}</dt>
+                    <dd>{t(project.meta.client, lang)}</dd>
+                  </div>
+                )}
+                {project.meta.year && (
+                  <div>
+                    <dt>{dict.works.year}</dt>
+                    <dd>{project.meta.year}</dd>
+                  </div>
+                )}
+                {project.meta.role && (
+                  <div>
+                    <dt>{dict.works.role}</dt>
+                    <dd>{t(project.meta.role, lang)}</dd>
+                  </div>
+                )}
+                {project.meta.stack?.length ? (
+                  <div>
+                    <dt>{dict.works.stack}</dt>
+                    <dd>{project.meta.stack.join(" / ")}</dd>
+                  </div>
+                ) : null}
               </dl>
 
               {project.liveUrl && (

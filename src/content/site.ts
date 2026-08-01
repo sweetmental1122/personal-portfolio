@@ -35,15 +35,25 @@ export const site: SiteConfig = {
   social: [{ label: "GitHub", href: "https://github.com/sweetmental1122" }],
 
   /**
-   * The images that orbit the home page sphere are the project thumbnails, so
-   * the home page always shows the current WORKS entries — nothing to keep in
-   * sync by hand. HomeSphere shuffles their ring positions on each visit.
+   * The home sphere draws from the project thumbnails, so it always reflects
+   * the current WORKS entries. Only a slice of them: every image here loads on
+   * first paint, and the full list would put several megabytes on the landing
+   * page. Taken at an even stride so the selection spans the whole list rather
+   * than showing only the newest few. HomeSphere shuffles their ring positions
+   * on each visit.
    */
-  homeImages: sortedProjects.map((project) => ({
-    src: project.thumbnail.src,
-    width: project.thumbnail.width,
-    height: project.thumbnail.height,
-  })),
+  homeImages: (() => {
+    const WANTED = 8;
+    const stride = Math.max(1, Math.floor(sortedProjects.length / WANTED));
+    return sortedProjects
+      .filter((_, index) => index % stride === 0)
+      .slice(0, WANTED)
+      .map((project) => ({
+        src: project.thumbnail.src,
+        width: project.thumbnail.width,
+        height: project.thumbnail.height,
+      }));
+  })(),
 };
 
 /** Absolute site origin — env var wins so preview deploys resolve correctly. */

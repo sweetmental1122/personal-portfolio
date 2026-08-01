@@ -90,11 +90,16 @@ export type Project = {
   description: LocalizedParagraphs;
   thumbnail: { src: string; width: number; height: number };
   images: ProjectImage[];
+  /**
+   * Optional on purpose. The detail page omits any field left out rather than
+   * printing a placeholder, so an entry can go live with only what is known
+   * and gain its period, scope and stack once you fill them in.
+   */
   meta: {
-    client: Localized;
-    role: Localized;
-    year: string;
-    stack: string[];
+    client?: Localized;
+    role?: Localized;
+    year?: string;
+    stack?: string[];
   };
   liveUrl?: string;
   /** Lower numbers appear first in the ring. */

@@ -63,16 +63,12 @@ async function write(relativePath, contents) {
   console.log(`  ${relativePath}`);
 }
 
-// [slug, number of detail images] — keep in sync with src/content/works.ts
-const WORK_SLUGS = [
-  ["project-management-system", 2],
-  ["property-image-ai-annotation", 1],
-  ["fintech-payment-api", 1],
-  ["clinic-booking-app", 1],
-  ["apparel-ec-frontend", 1],
-  ["logistics-status-api", 1],
-  ["restaurant-ordering-ui", 1],
-];
+/**
+ * Projects still waiting on a real capture. Everything else in works.ts
+ * already has a screenshot or a diagram, so this list is only the gap.
+ * [slug, number of detail images]
+ */
+const WORK_SLUGS = [["art-asada", 0]];
 
 console.log("Writing placeholder images…");
 

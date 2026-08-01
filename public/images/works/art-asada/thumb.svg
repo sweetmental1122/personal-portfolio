@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="ART ASADA">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffaed2"/>
+      <stop offset="100%" stop-color="#bdaeff"/>
+    </linearGradient>
+    <radialGradient id="h1" cx="28%" cy="30%" r="42%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="h2" cx="76%" cy="72%" r="36%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#g)"/>
+  <rect width="1600" height="1000" fill="url(#h1)"/>
+  <rect width="1600" height="1000" fill="url(#h2)"/>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="90"
+        fill="#1a1526" opacity="0.62" letter-spacing="7">ART ASADA</text>
+</svg>

@@ -31,6 +31,22 @@ export const CATEGORIES: Category[] = [
     key: "ai",
     label: { ja: "AI・自動化", en: "AI & Automation" },
   },
+  {
+    key: "site",
+    label: { ja: "コーポレート・採用サイト", en: "Corporate & Recruiting" },
+  },
+  {
+    key: "commerce",
+    label: { ja: "EC・ブランドサイト", en: "Commerce & Brand" },
+  },
+  {
+    key: "education",
+    label: { ja: "教育・スクールサイト", en: "Education" },
+  },
+  {
+    key: "medical",
+    label: { ja: "医療・クリニックサイト", en: "Medical" },
+  },
 ];
 
 export const projects: Project[] = [
@@ -316,6 +332,366 @@ export const projects: Project[] = [
     },
   },
 ];
+
+/**
+ * ─────────────────────────────────────────────────────────────
+ *  Sites below carry a screenshot and a description of what the
+ *  interface does. Their `meta` is intentionally partial: period,
+ *  scope and stack are yours to fill in — the detail page omits any
+ *  field left blank rather than showing a placeholder, so adding them
+ *  is a one-line edit per project whenever you have the details to hand.
+ * ─────────────────────────────────────────────────────────────
+ */
+const shot = (slug: string) => ({
+  src: `/images/works/${slug}/thumb.jpg`,
+  width: 1440,
+  height: 688,
+});
+
+projects.push(
+  {
+    slug: "bizreach-careers",
+    order: 10,
+    categoryKey: "site",
+    title: { ja: "BIZREACH Careers 採用サイト", en: "BIZREACH Careers" },
+    summary: {
+      ja: "大判の写真に極太の明朝を重ね、スクロールでビジュアルを差し替える採用サイト。",
+      en: "A recruiting site pairing heavy mincho type with full-bleed photography that swaps as you scroll.",
+    },
+    description: {
+      ja: ["文字組みだけで強度を出す構成とし、写真とタイポグラフィの重なりでブランドの姿勢を伝えています。"],
+      en: ["Built to carry its force through typesetting alone, letting the overlap of image and type state the brand's stance."],
+    },
+    thumbnail: shot("bizreach-careers"),
+    images: [],
+    liveUrl: "https://careers.bizreach.co.jp/",
+    meta: { client: { ja: "株式会社ビズリーチ", en: "BizReach, Inc." } },
+  },
+  {
+    slug: "mi6-recruit",
+    order: 11,
+    categoryKey: "site",
+    title: { ja: "MI-6 採用サイト", en: "MI-6 Recruit" },
+    summary: {
+      ja: "円形マスクで写真を切り抜き、見出しの一部だけをキーカラーの青に落とした採用サイト。",
+      en: "Photography cropped into circular masks, with only part of each heading dropped into the brand blue.",
+    },
+    description: {
+      ja: ["見出しの強調箇所を限定することで、情報量を増やさずに視線の順序を作っています。"],
+      en: ["Restricting which words take the accent creates a reading order without adding any more information to the page."],
+    },
+    thumbnail: shot("mi6-recruit"),
+    images: [],
+    liveUrl: "https://recruit.mi-6.co.jp/",
+    meta: { client: { ja: "MI-6株式会社", en: "MI-6 Ltd." } },
+  },
+  {
+    slug: "camcom-recruit",
+    order: 12,
+    categoryKey: "site",
+    title: { ja: "CAM-COM 採用サイト", en: "CAM-COM Recruit" },
+    summary: {
+      ja: "菱形のクリップパスで写真を組み、幾何形状だけでリズムを作った採用サイト。",
+      en: "Diamond clip-paths assemble the photography, building rhythm purely from geometry.",
+    },
+    description: {
+      ja: ["画像の切り抜きをCSSのclip-pathで処理し、写真差し替え時にレイアウトが崩れない構造にしています。"],
+      en: ["Cropping is handled with CSS clip-path, so the layout holds when the photography is swapped out."],
+    },
+    thumbnail: shot("camcom-recruit"),
+    images: [],
+    liveUrl: "https://cam-com.inc/recruit/",
+    meta: { client: { ja: "株式会社キャムコム", en: "CAM-COM Inc." } },
+  },
+  {
+    slug: "redesigner-freelance",
+    order: 13,
+    categoryKey: "site",
+    title: { ja: "ReDesigner for Freelance", en: "ReDesigner for Freelance" },
+    summary: {
+      ja: "図形とドットパターンを余白に散らし、赤一色のアクセントでCTAを際立たせたサービスサイト。",
+      en: "Shapes and dot patterns scattered through the whitespace, with a single red accent carrying the call to action.",
+    },
+    description: {
+      ja: ["装飾要素を増やしつつも、彩度を持つ色をCTAだけに絞ることで登録導線の視認性を保っています。"],
+      en: ["Ornament is generous, but saturated colour is reserved for the sign-up path so it never loses visibility."],
+    },
+    thumbnail: shot("redesigner-freelance"),
+    images: [],
+    liveUrl: "https://redesigner.jp/freelance/",
+    meta: { client: { ja: "株式会社グッドパッチ", en: "Goodpatch Inc." } },
+  },
+  {
+    slug: "gran-turismo",
+    order: 14,
+    categoryKey: "site",
+    title: { ja: "グランツーリスモ公式サイト", en: "Gran Turismo Official Site" },
+    summary: {
+      ja: "暗色UIのカードグリッドで、大量のニュースをカテゴリと日付だけで整理した公式サイト。",
+      en: "A dark-UI card grid organising a high volume of news with nothing but category and date.",
+    },
+    description: {
+      ja: ["更新頻度の高いニュースを扱うため、一覧の密度を保ったまま読み取れるカード設計としています。"],
+      en: ["Built for a high update rate: the card design keeps the listing dense yet still readable at a glance."],
+    },
+    thumbnail: shot("gran-turismo"),
+    images: [],
+    liveUrl: "https://www.gran-turismo.com/jp/",
+    meta: {},
+  },
+  {
+    slug: "orange-garden",
+    order: 20,
+    categoryKey: "commerce",
+    title: { ja: "ミヤモトオレンジガーデン EC", en: "Miyamoto Orange Garden" },
+    summary: {
+      ja: "ランキング順位と規格バッジを商品画像に重ね、一覧の情報密度を上げた農産物EC。",
+      en: "A produce storefront stacking rank numbers and grade badges onto product images.",
+    },
+    description: {
+      ja: ["秀品・訳ありといった規格差と内容量を一覧上で判別できるようにし、商品詳細へ入る前の絞り込みを助けています。"],
+      en: ["Grade and weight are readable from the listing itself, so shoppers can narrow down before opening a product page."],
+    },
+    thumbnail: shot("orange-garden"),
+    images: [],
+    liveUrl: "https://shop.orange-garden-inc.jp/",
+    meta: { client: { ja: "農業生産法人 ミヤモトオレンジガーデン", en: "Miyamoto Orange Garden Inc." } },
+  },
+  {
+    slug: "uv0",
+    order: 21,
+    categoryKey: "commerce",
+    title: { ja: "UVO produced by Wpc.", en: "UVO produced by Wpc." },
+    summary: {
+      ja: "淡いグラデーションの背景に商品を大きく置き、ロゴまで含めて一枚のキービジュアルにしたブランドサイト。",
+      en: "Product placed large on a pale gradient, with the logo treated as part of a single key visual.",
+    },
+    description: {
+      ja: ["シーズンごとの差し替えを前提に、写真とロゴの位置関係を崩さないキービジュアル構成としています。"],
+      en: ["Designed for seasonal replacement: the relationship between product shot and logo holds when the imagery changes."],
+    },
+    thumbnail: shot("uv0"),
+    images: [],
+    liveUrl: "https://www.uv0.jp/",
+    meta: { client: { ja: "株式会社ワールドパーティー", en: "World Party Co., Ltd." } },
+  },
+  {
+    slug: "welleg",
+    order: 22,
+    categoryKey: "commerce",
+    title: { ja: "Welleg コーポレートサイト", en: "Welleg" },
+    summary: {
+      ja: "全画面写真と円形のスクロールインジケータ。余白を大きく取り、要素を足さない引き算の設計。",
+      en: "Full-screen photography with a circular scroll indicator — generous whitespace and a refusal to add elements.",
+    },
+    description: {
+      ja: ["ファーストビューを一枚の写真に絞り、スクロールを促す表示だけを配置することで、ブランドの静けさを保っています。"],
+      en: ["The first view is one photograph and a scroll cue, and nothing else — which is what keeps the brand quiet."],
+    },
+    thumbnail: shot("welleg"),
+    images: [],
+    liveUrl: "https://www.welleg.co.jp/",
+    meta: { client: { ja: "Welleg Inc.", en: "Welleg Inc." } },
+  },
+  {
+    slug: "pudgy-penguins",
+    order: 23,
+    categoryKey: "commerce",
+    title: { ja: "Pudgy Penguins ストア", en: "Pudgy Penguins Store" },
+    summary: {
+      ja: "彩度の高い配色とカルーセルで構成した、キャラクターIPのEC。",
+      en: "Character-IP commerce built on saturated colour and a carousel.",
+    },
+    description: {
+      ja: ["質感より勢いを優先する方針のもと、キャラクターの切り抜きとポップな見出しでシリーズ展開を訴求しています。"],
+      en: ["Momentum over texture: cut-out characters and pop headings carry each new series release."],
+    },
+    thumbnail: shot("pudgy-penguins"),
+    images: [],
+    liveUrl: "https://www.pudgypenguins.com/",
+    meta: {},
+  },
+  {
+    slug: "tokyu-harvest-club",
+    order: 24,
+    categoryKey: "commerce",
+    title: { ja: "東急ハーヴェストクラブ", en: "Tokyu Harvest Club" },
+    summary: {
+      ja: "暗い夜景写真に細い明朝と広い字間を合わせた、会員制リゾートホテルのサイト。",
+      en: "Thin mincho and wide tracking over a dark night shot, for a membership resort brand.",
+    },
+    description: {
+      ja: ["装飾ではなく余白と字間で価格帯を伝える方針とし、写真の暗部を活かして文字を配置しています。"],
+      en: ["The price bracket is communicated through whitespace and tracking rather than ornament, with type set into the shadows of the photograph."],
+    },
+    thumbnail: shot("tokyu-harvest-club"),
+    images: [],
+    liveUrl: "https://www.harvestclub.com/",
+    meta: { client: { ja: "東急リゾーツ&ステイ株式会社", en: "Tokyu Resorts & Stays Co., Ltd." } },
+  },
+  {
+    slug: "kawasui-school",
+    order: 30,
+    categoryKey: "education",
+    title: { ja: "カワスイ アクア＆アニマルスクール", en: "Kawasui Aqua & Animal School" },
+    summary: {
+      ja: "被写体を切り抜いて背景に浮遊させる合成で、奥行きを作ったスクールサイト。",
+      en: "Cut-out subjects floating over the background, building depth into a school site.",
+    },
+    description: {
+      ja: ["水族館直営という特色を、魚の切り抜きと人物を同一空間に配置することで一目で伝わる形にしています。"],
+      en: ["That the school is run by an aquarium reads instantly, because the fish cut-outs and the student share one space."],
+    },
+    thumbnail: shot("kawasui-school"),
+    images: [],
+    liveUrl: "https://school.kawa-sui.com/",
+    meta: { client: { ja: "カワスイ 川崎水族館", en: "Kawasui Kawasaki Aquarium" } },
+  },
+  {
+    slug: "isi-education",
+    order: 31,
+    categoryKey: "education",
+    title: { ja: "ISI 日本語学校", en: "ISI Japanese Language School" },
+    summary: {
+      ja: "群衆写真の上に大きなセリフ体を重ね、手書き風の一語だけを原色で抜いた多言語サイト。",
+      en: "Large serif type over a crowd shot, with one script word knocked out in a primary colour.",
+    },
+    description: {
+      ja: ["多国籍の学生層を写真そのもので示しつつ、言語切替を前提とした見出しの組み方にしています。"],
+      en: ["The photography itself carries the multinational student body, and the headings are set to survive a language switch."],
+    },
+    thumbnail: shot("isi-education"),
+    images: [],
+    liveUrl: "https://www.isi-education.com/ja/",
+    meta: { client: { ja: "ISI 語学院", en: "ISI Language School" } },
+  },
+  {
+    slug: "kla",
+    order: 32,
+    categoryKey: "education",
+    title: { ja: "京進ランゲージアカデミー", en: "Kyoshin Language Academy" },
+    summary: {
+      ja: "和柄の雲と縦組みのルビを組み合わせた、日本語学校のタイポグラフィ設計。",
+      en: "Japanese typography pairing stylised clouds with vertical ruby text.",
+    },
+    description: {
+      ja: ["日本語学習者向けにルビを前提とした組版とし、writing-mode を用いた縦組みで和のモチーフと整合させています。"],
+      en: ["Typeset around ruby for language learners, with writing-mode vertical text tying the layout to its Japanese motifs."],
+    },
+    thumbnail: shot("kla"),
+    images: [],
+    liveUrl: "https://www.kla.ac/ja/",
+    meta: { client: { ja: "株式会社京進", en: "Kyoshin Corporation" } },
+  },
+  {
+    slug: "hannan-university",
+    order: 33,
+    categoryKey: "education",
+    title: { ja: "阪南大学 入試サイト", en: "Hannan University Admissions" },
+    summary: {
+      ja: "原色の斜め帯と実施済みスケジュールのグレーアウトで、情報の鮮度を色だけで伝える入試サイト。",
+      en: "Diagonal bands in primary colours, with past dates greyed out so freshness reads from colour alone.",
+    },
+    description: {
+      ja: ["オープンキャンパスの開催状況を日付ごとに出し分け、終了分を無効表示にすることで受験生の判断を早めています。"],
+      en: ["Open campus dates render per session with finished ones disabled, so prospective students can decide at a glance."],
+    },
+    thumbnail: shot("hannan-university"),
+    images: [],
+    liveUrl: "https://www.hannan-u.ac.jp/entrance/",
+    meta: { client: { ja: "阪南大学", en: "Hannan University" } },
+  },
+  {
+    slug: "hara-hospital",
+    order: 40,
+    categoryKey: "medical",
+    title: { ja: "原病院", en: "Hara Hospital" },
+    summary: {
+      ja: "写真スライダーの下に外来・入院のカードを固定配置し、来院者の導線を最上部に置いた病院サイト。",
+      en: "Outpatient and inpatient cards pinned under the photo slider, putting the visitor's path at the very top.",
+    },
+    description: {
+      ja: ["来院者が最初に探す情報を優先し、診療案内へのカードをファーストビュー直下に固定しています。"],
+      en: ["What visitors look for first takes priority: the care-guide cards sit fixed directly below the first view."],
+    },
+    thumbnail: shot("hara-hospital"),
+    images: [],
+    liveUrl: "https://hara-hospital.jp/",
+    meta: { client: { ja: "医療法人 原会 原病院", en: "Hara Hospital" } },
+  },
+  {
+    slug: "art-asada",
+    order: 41,
+    categoryKey: "medical",
+    title: { ja: "浅田レディースクリニック", en: "ART Clinic ASADA" },
+    summary: {
+      ja: "斜めの帯を写真に横切らせ、診療時間表を常時表示する構成のクリニックサイト。",
+      en: "A diagonal band crossing the photography, with the consultation hours table always visible.",
+    },
+    description: {
+      ja: ["診療時間と最寄駅からの所要時間を画面内に固定し、初診の来院判断に必要な情報を探させない設計としています。"],
+      en: ["Hours and walking time from the station stay on screen, so a first-time patient never has to hunt for what decides their visit."],
+    },
+    thumbnail: { src: "/images/works/art-asada/thumb.svg", width: 1600, height: 1000 },
+    images: [],
+    liveUrl: "https://art-asada.jp/",
+    meta: { client: { ja: "医療法人 浅田レディースクリニック", en: "ART Clinic ASADA" } },
+  },
+  {
+    slug: "fukase-clinic",
+    order: 42,
+    categoryKey: "medical",
+    title: { ja: "深瀬医院", en: "Fukase Clinic" },
+    summary: {
+      ja: "明るい家族写真と「Cure & Care」の欧文見出しで、地域医療の親しみやすさを作った医院サイト。",
+      en: "A bright family photograph under a Latin \"Cure & Care\" heading, building approachability for community care.",
+    },
+    description: {
+      ja: ["高齢者から子どもまでを一枚に収めた写真を軸に、診療時間と介護施設情報への導線を並置しています。"],
+      en: ["One photograph spanning children to elderly anchors the page, with hours and care-facility links set alongside it."],
+    },
+    thumbnail: shot("fukase-clinic"),
+    images: [],
+    liveUrl: "https://www.fukase.or.jp/",
+    meta: { client: { ja: "医療法人 鴻仁会 深瀬医院", en: "Fukase Clinic" } },
+  },
+  {
+    slug: "r-reha",
+    order: 43,
+    categoryKey: "medical",
+    title: { ja: "アールリハビリステーション", en: "R Reha Station" },
+    summary: {
+      ja: "円形マスクの写真を並べたグリッドと、追従する問い合わせボタンを備えたリハビリ施設サイト。",
+      en: "Circle-masked photographs in a row plus a sticky enquiry button, for a rehabilitation facility.",
+    },
+    description: {
+      ja: ["自費リハビリという性質上、料金と利用の流れへの導線を常時表示し、問い合わせまでの距離を短くしています。"],
+      en: ["Because the service is self-funded, pricing and the usage flow stay permanently reachable, shortening the path to an enquiry."],
+    },
+    thumbnail: shot("r-reha"),
+    images: [],
+    liveUrl: "https://r-reha.jp/",
+    meta: { client: { ja: "社会医療法人 愛仁会", en: "Aijinkai Healthcare Corporation" } },
+  },
+  {
+    slug: "mirai-shika",
+    order: 44,
+    categoryKey: "medical",
+    title: { ja: "みらい歯科", en: "Mirai Dental Clinic" },
+    summary: {
+      ja: "スタッフ集合写真に縦組みのキャッチを重ね、診療時間とアクセスを画面下に固定した歯科サイト。",
+      en: "Vertical Japanese copy over a full staff photograph, with hours and directions pinned along the bottom.",
+    },
+    description: {
+      ja: ["医院の雰囲気をスタッフ写真で伝えつつ、駅からの距離と土日診療という選択理由を常時視界に置いています。"],
+      en: ["The staff photograph conveys the practice, while the two reasons patients choose it — station distance and weekend hours — stay in view."],
+    },
+    thumbnail: shot("mirai-shika"),
+    images: [],
+    liveUrl: "https://www.mirai-shika.com/",
+    meta: { client: { ja: "医療法人社団 港成会 みらい歯科", en: "Kousei-kai Mirai Dental Clinic" } },
+  },
+);
 
 /** Projects sorted for display, lowest `order` first. */
 export const sortedProjects: Project[] = [...projects].sort((a, b) => a.order - b.order);

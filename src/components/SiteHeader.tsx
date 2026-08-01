@@ -26,7 +26,6 @@ export function SiteHeader({ locale, dict, siteName, marqueeLogo = false }: Prop
     { href: "/", label: dict.nav.home },
     { href: "/about", label: dict.nav.about },
     { href: "/works", label: dict.nav.works },
-    { href: "/references", label: dict.nav.references },
     { href: "/contact", label: dict.nav.contact },
   ];
 

@@ -13,7 +13,6 @@ export type PageKind =
   | "about"
   | "works"
   | "project"
-  | "references"
   | "contact"
   | "privacy"
   | "error";
