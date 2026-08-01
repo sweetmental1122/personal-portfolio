@@ -11,7 +11,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "placeholders": "node scripts/generate-placeholders.mjs"
+    "placeholders": "node scripts/generate-placeholders.mjs",
+    "diagrams": "node scripts/generate-diagrams.mjs"
   },
   "dependencies": {
     "next": "^16.2.12",

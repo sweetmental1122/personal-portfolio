@@ -1,22 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="FINTECH PAYMENT API">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="決済処理API / Go (Gin)">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#97d7ff"/>
-      <stop offset="100%" stop-color="#ffd6ec"/>
-    </linearGradient>
-    <radialGradient id="h1" cx="28%" cy="30%" r="42%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="h2" cx="76%" cy="72%" r="36%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
+    <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b84a3"/>
+    </marker>
   </defs>
-  <rect width="1600" height="1000" fill="url(#g)"/>
-  <rect width="1600" height="1000" fill="url(#h1)"/>
-  <rect width="1600" height="1000" fill="url(#h2)"/>
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-        font-family="Georgia, 'Times New Roman', serif" font-size="90"
-        fill="#1a1526" opacity="0.62" letter-spacing="7">FINTECH PAYMENT API</text>
+  <rect width="1600" height="1000" fill="#f2eefb"/>
+  <text x="64" y="84" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="30" font-weight="600" text-anchor="start" letter-spacing="0">決済処理API / Go (Gin)</text>
+  <line x1="64" y1="112" x2="1536" y2="112" stroke="#c9c2df" stroke-width="2"/>
+  <rect x="64" y="240" width="320" height="140" rx="14" fill="#ffffff" stroke="#c9c2df" stroke-width="2"/><text x="224" y="300" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="22" font-weight="600" text-anchor="middle" letter-spacing="0">加盟店 Merchant</text><text x="224" y="334" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="16" font-weight="400" text-anchor="middle" letter-spacing="0">client</text><line x1="396" y1="310" x2="560" y2="310" stroke="#8b84a3" stroke-width="2.5" marker-end="url(#tip)"/><rect x="572" y="200" width="400" height="220" rx="16" fill="#ffffff" stroke="#c9c2df" stroke-width="2"/><rect x="572" y="200" width="400" height="7" rx="3.5" fill="#8f7fe0"/><text x="772" y="274" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="26" font-weight="600" text-anchor="middle" letter-spacing="0">Payment API</text><text x="772" y="312" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="18" font-weight="400" text-anchor="middle" letter-spacing="0">Go / Gin</text><rect x="632" y="344" width="280" height="8" rx="4" fill="#c9c2df"/><rect x="632" y="368" width="200" height="8" rx="4" fill="#c9c2df"/><line x1="984" y1="310" x2="1140" y2="250" stroke="#8b84a3" stroke-width="2.5" marker-end="url(#tip)"/><rect x="1152" y="200" width="384" height="100" rx="14" fill="#ffffff" stroke="#c9c2df" stroke-width="2"/><circle cx="1202" cy="250" r="18" fill="#e492bf" opacity="0.35"/><text x="1236" y="244" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="21" font-weight="600" text-anchor="start" letter-spacing="0">PostgreSQL</text><text x="1236" y="274" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="16" font-weight="400" text-anchor="start" letter-spacing="0">決済記録 / ledger</text><line x1="984" y1="310" x2="1140" y2="370" stroke="#8b84a3" stroke-width="2.5" marker-end="url(#tip)"/><rect x="1152" y="320" width="384" height="100" rx="14" fill="#ffffff" stroke="#c9c2df" stroke-width="2"/><circle cx="1202" cy="370" r="18" fill="#6fb3e4" opacity="0.35"/><text x="1236" y="364" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="21" font-weight="600" text-anchor="start" letter-spacing="0">Redis</text><text x="1236" y="394" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="16" font-weight="400" text-anchor="start" letter-spacing="0">冪等キー / idempotency</text><rect x="64" y="560" width="908" height="200" rx="14" fill="rgba(255,255,255,.6)" stroke="#c9c2df" stroke-width="2"/><text x="96" y="610" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="1">API SPEC — Swagger</text><text x="96" y="656" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="19" font-weight="400" text-anchor="start" letter-spacing="0">フロントエンドが待たずに着手できるよう、仕様書を先に公開。</text><text x="96" y="690" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="19" font-weight="400" text-anchor="start" letter-spacing="0">連携テストはフロント・バックエンド合同で主導。</text>
 </svg>

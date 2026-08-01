@@ -1,22 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="PROPERTY IMAGE AI ANNOTATION 1">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="推論スクリプトの API 化 / Wrapping the model">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#97d7ff"/>
-      <stop offset="100%" stop-color="#ffd6ec"/>
-    </linearGradient>
-    <radialGradient id="h1" cx="28%" cy="30%" r="42%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="h2" cx="76%" cy="72%" r="36%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
+    <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b84a3"/>
+    </marker>
   </defs>
-  <rect width="1600" height="1000" fill="url(#g)"/>
-  <rect width="1600" height="1000" fill="url(#h1)"/>
-  <rect width="1600" height="1000" fill="url(#h2)"/>
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-        font-family="Georgia, 'Times New Roman', serif" font-size="90"
-        fill="#1a1526" opacity="0.62" letter-spacing="7">PROPERTY IMAGE AI ANNOTATION 1</text>
+  <rect width="1600" height="1000" fill="#f2eefb"/>
+  <text x="64" y="84" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="30" font-weight="600" text-anchor="start" letter-spacing="0">推論スクリプトの API 化 / Wrapping the model</text>
+  <line x1="64" y1="112" x2="1536" y2="112" stroke="#c9c2df" stroke-width="2"/>
+  <rect x="64" y="330" width="250" height="150" rx="14" fill="#ffffff" stroke="#c9c2df" stroke-width="2"/><rect x="64" y="330" width="250" height="6" rx="3" fill="#8f7fe0"/><text x="189" y="396" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="22" font-weight="600" text-anchor="middle" letter-spacing="0">Web system</text><text x="189" y="430" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="17" font-weight="400" text-anchor="middle" letter-spacing="0">caller</text><line x1="326" y1="405" x2="663" y2="405" stroke="#8b84a3" stroke-width="2.5" marker-end="url(#tip)"/><rect x="675" y="330" width="250" height="150" rx="14" fill="#ffffff" stroke="#c9c2df" stroke-width="2"/><rect x="675" y="330" width="250" height="6" rx="3" fill="#e492bf"/><text x="800" y="396" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="22" font-weight="600" text-anchor="middle" letter-spacing="0">FastAPI</text><text x="800" y="430" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="17" font-weight="400" text-anchor="middle" letter-spacing="0">thin service</text><line x1="937" y1="405" x2="1274" y2="405" stroke="#8b84a3" stroke-width="2.5" marker-end="url(#tip)"/><rect x="1286" y="330" width="250" height="150" rx="14" fill="#ffffff" stroke="#c9c2df" stroke-width="2"/><rect x="1286" y="330" width="250" height="6" rx="3" fill="#6fb3e4"/><text x="1411" y="396" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="22" font-weight="600" text-anchor="middle" letter-spacing="0">Model</text><text x="1411" y="430" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="17" font-weight="400" text-anchor="middle" letter-spacing="0">inference script</text><text x="64" y="600" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="20" font-weight="400" text-anchor="start" letter-spacing="0">AIエンジニアの推論スクリプトを、Webから呼べる軽量サービスとして切り出した構成。</text>
 </svg>

@@ -1,22 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="RESTAURANT ORDERING UI 1">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="レスポンシブ発注フォーム / Order form">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#9fd4ff"/>
-      <stop offset="100%" stop-color="#e0c8ff"/>
-    </linearGradient>
-    <radialGradient id="h1" cx="28%" cy="30%" r="42%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="h2" cx="76%" cy="72%" r="36%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.26"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
+    <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b84a3"/>
+    </marker>
   </defs>
-  <rect width="1600" height="1000" fill="url(#g)"/>
-  <rect width="1600" height="1000" fill="url(#h1)"/>
-  <rect width="1600" height="1000" fill="url(#h2)"/>
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-        font-family="Georgia, 'Times New Roman', serif" font-size="90"
-        fill="#1a1526" opacity="0.62" letter-spacing="7">RESTAURANT ORDERING UI 1</text>
+  <rect width="1600" height="1000" fill="#f2eefb"/>
+  <text x="64" y="84" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="30" font-weight="600" text-anchor="start" letter-spacing="0">レスポンシブ発注フォーム / Order form</text>
+  <line x1="64" y1="112" x2="1536" y2="112" stroke="#c9c2df" stroke-width="2"/>
+  <rect x="64" y="168" width="1472" height="740" rx="14" fill="#ffffff" stroke="#c9c2df" stroke-width="2"/><text x="112" y="232" fill="#2f2941" font-family="'Segoe UI',system-ui,sans-serif" font-size="24" font-weight="600" text-anchor="start" letter-spacing="0">発注入力 / Order entry</text><text x="112" y="290" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="17" font-weight="400" text-anchor="start" letter-spacing="0">label</text><rect x="112" y="308" width="660" height="62" rx="10" fill="#f2eefb" stroke="#c9c2df" stroke-width="2"/><rect x="134" y="334" width="200" height="10" rx="5" fill="#c9c2df"/><text x="824" y="290" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="17" font-weight="400" text-anchor="start" letter-spacing="0">label</text><rect x="824" y="308" width="660" height="62" rx="10" fill="#f2eefb" stroke="#c9c2df" stroke-width="2"/><rect x="846" y="334" width="200" height="10" rx="5" fill="#c9c2df"/><text x="112" y="422" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="17" font-weight="400" text-anchor="start" letter-spacing="0">label</text><rect x="112" y="440" width="660" height="62" rx="10" fill="#f2eefb" stroke="#c9c2df" stroke-width="2"/><rect x="134" y="466" width="200" height="10" rx="5" fill="#c9c2df"/><text x="824" y="422" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="17" font-weight="400" text-anchor="start" letter-spacing="0">label</text><rect x="824" y="440" width="660" height="62" rx="10" fill="#f2eefb" stroke="#c9c2df" stroke-width="2"/><rect x="846" y="466" width="200" height="10" rx="5" fill="#c9c2df"/><text x="112" y="554" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="17" font-weight="400" text-anchor="start" letter-spacing="0">label</text><rect x="112" y="572" width="660" height="62" rx="10" fill="#f2eefb" stroke="#c9c2df" stroke-width="2"/><rect x="134" y="598" width="200" height="10" rx="5" fill="#c9c2df"/><text x="824" y="554" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="17" font-weight="400" text-anchor="start" letter-spacing="0">label</text><rect x="824" y="572" width="660" height="62" rx="10" fill="#f2eefb" stroke="#c9c2df" stroke-width="2"/><rect x="846" y="598" width="200" height="10" rx="5" fill="#c9c2df"/><text x="112" y="714" fill="#8b84a3" font-family="'Segoe UI',system-ui,sans-serif" font-size="17" font-weight="400" text-anchor="start" letter-spacing="0">備考</text><rect x="112" y="732" width="1260" height="96" rx="10" fill="#f2eefb" stroke="#c9c2df" stroke-width="2"/><rect x="1160" y="848" width="212" height="60" rx="30" fill="#8f7fe0" stroke="none" stroke-width="0"/><text x="1266" y="886" fill="#fff" font-family="'Segoe UI',system-ui,sans-serif" font-size="20" font-weight="600" text-anchor="middle" letter-spacing="0">発注する</text>
 </svg>
