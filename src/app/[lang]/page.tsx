@@ -5,7 +5,7 @@ import { Shell } from "@/components/Shell";
 import { profile } from "@/content/profile";
 import { site, siteUrl } from "@/content/site";
 import { t } from "@/content/types";
-import { isLocale, localePath } from "@/i18n/config";
+import { LOCALES, isLocale, localePath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
 type Props = { params: Promise<{ lang: string }> };
@@ -26,7 +26,7 @@ export default async function HomePage({ params }: Props) {
         email: site.email,
         description: t(site.description, lang),
         areaServed: t(site.location, lang),
-        knowsLanguage: ["ja", "en", "ko"],
+        knowsLanguage: [...LOCALES],
         sameAs: site.social.map((item) => item.href),
       },
       {

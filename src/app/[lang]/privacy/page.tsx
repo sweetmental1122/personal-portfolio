@@ -32,12 +32,9 @@ export default async function PrivacyPage({ params }: Props) {
             <p>{t(section.body, lang)}</p>
           </section>
         ))}
-        <section>
-          <h2>Contact</h2>
-          <p>
-            <a href={`mailto:${site.email}`}>{site.email}</a>
-          </p>
-        </section>
+        <p style={{ marginTop: 14 }}>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
       </div>
     </Shell>
   );

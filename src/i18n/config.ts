@@ -1,4 +1,4 @@
-export const LOCALES = ["ja", "en", "ko"] as const;
+export const LOCALES = ["ja", "en"] as const;
 
 export type Locale = (typeof LOCALES)[number];
 
@@ -8,20 +8,17 @@ export const DEFAULT_LOCALE: Locale = "ja";
 export const LOCALE_LABELS: Record<Locale, string> = {
   ja: "JP",
   en: "EN",
-  ko: "KR",
 };
 
 /** `hreflang` / `og:locale` values. */
 export const LOCALE_HREFLANG: Record<Locale, string> = {
   ja: "ja",
   en: "en",
-  ko: "ko",
 };
 
 export const LOCALE_OG: Record<Locale, string> = {
   ja: "ja_JP",
   en: "en_US",
-  ko: "ko_KR",
 };
 
 export function isLocale(value: string): value is Locale {

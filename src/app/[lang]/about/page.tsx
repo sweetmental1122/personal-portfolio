@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params;
   if (!isLocale(lang)) return {};
   return {
-    title: "About",
+    title: getDictionary(lang).about.pageTitle,
     description: t(profile.catchphrase, lang),
     alternates: { canonical: localePath(lang, "/about") },
   };

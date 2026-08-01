@@ -26,25 +26,19 @@ export default async function WorksPage({ params }: Props) {
 
   // Localised strings are resolved on the server so the client ring stays
   // language-agnostic.
+  const categories = CATEGORIES.map((category) => ({
+    key: category.key,
+    label: t(category.label, lang),
+  }));
+  const categoryLabels = new Map(categories.map((category) => [category.key, category.label]));
+
   const items: RingItem[] = sortedProjects.map((project) => ({
     slug: project.slug,
     href: localePath(lang, `/works/${project.slug}`),
     title: t(project.title, lang),
     categoryKey: project.categoryKey,
-    categoryLabel: t(
-      CATEGORIES.find((category) => category.key === project.categoryKey)?.label ?? {
-        ja: "",
-        en: "",
-        ko: "",
-      },
-      lang,
-    ),
+    categoryLabel: categoryLabels.get(project.categoryKey) ?? "",
     thumbnail: project.thumbnail,
-  }));
-
-  const categories = CATEGORIES.map((category) => ({
-    key: category.key,
-    label: t(category.label, lang),
   }));
 
   return (

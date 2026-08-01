@@ -19,7 +19,7 @@ repository are placeholders: **replace them with your own before publishing.**
 | **About** | Full-height portrait beside a scrolling column — bio, credentials, experience, skills grid, numbered process, CTA. Scroll-reveal via `IntersectionObserver`. |
 | **Contact** | Validated form → `/api/contact` with honeypot, rate limiting and optional Resend delivery. |
 | **Chrome** | Drifting ambient orbs + shooting stars, custom glass cursor, glass menu, animated light/dark toggle with no flash on load. |
-| **i18n** | Japanese / English / Korean under `/[lang]`, with `Accept-Language` detection and `hreflang` alternates. |
+| **i18n** | Japanese / English under `/[lang]`, with `Accept-Language` detection and `hreflang` alternates. Every visible string is translated, so switching language changes the whole page. |
 | **SEO** | Per-locale metadata, Open Graph, Twitter cards, JSON-LD, `sitemap.xml`, `robots.txt`. |
 | **A11y** | Skip link, focus management on the menu, `prefers-reduced-motion` handling throughout, `inert` on the closed nav panel. |
 
@@ -82,10 +82,22 @@ Everything you need to edit lives in `src/content/` — no component changes req
 | [src/content/works.ts](src/content/works.ts) | Categories and projects. Each project generates a ring card **and** its detail page. |
 | [src/content/formOptions.ts](src/content/formOptions.ts) | Contact form select options. |
 | [src/content/privacy.ts](src/content/privacy.ts) | Privacy policy sections. |
-| [src/i18n/dictionaries.ts](src/i18n/dictionaries.ts) | Every piece of UI chrome text, in all three languages. |
+| [src/i18n/dictionaries.ts](src/i18n/dictionaries.ts) | Every piece of UI chrome text, in both languages. |
 
-Content strings are typed as `Localized` (`{ ja, en, ko }`), so TypeScript tells you when a
-translation is missing.
+Content strings are typed as `Localized` (`{ ja, en }`), so TypeScript tells you when a
+translation is missing — including the navigation labels, section headings and the display
+headline, which are all genuinely translated rather than left in English.
+
+Product and brand names (`Figma`, `React`, the studio name itself) are deliberately identical
+in both languages, since they are proper nouns.
+
+### Adding or removing a language
+
+Add the code to `LOCALES` in [src/i18n/config.ts](src/i18n/config.ts) along with its entry in
+`LOCALE_LABELS` / `LOCALE_HREFLANG` / `LOCALE_OG`. TypeScript will then flag every content
+object that is missing the new translation, so nothing can silently fall back to the wrong
+language. Routing, the language switcher, `sitemap.xml` and the `hreflang` tags all derive
+from that one array.
 
 ### Adding a project
 
@@ -153,19 +165,41 @@ fully static export is not supported as-is. To host statically, remove
 ```
 src/
   app/
-    [lang]/            # root layout + all pages, one segment per locale
-      works/[slug]/    # generated project detail pages
-      not-found.tsx    # 404 (client — recovers the locale from the path)
-    api/contact/       # form endpoint
-    globals.css        # design tokens + every component style
+    [lang]/              # root layout + all pages, one segment per locale
+      layout.tsx         #   renders <html lang> — see note below
+      works/[slug]/      #   generated project detail pages
+      [...unmatched]/    #   claims unknown URLs so the localised 404 renders
+      not-found.tsx      #   404 inside the locale layout
+    not-found.tsx        # 404 for URLs matching no route (own document)
+    api/contact/         # form endpoint
+    globals.css          # design tokens + every component style
     sitemap.ts robots.ts
-  components/          # Shell, header/footer, sphere, ring, cursor, ambient bg
-  content/             # ← all editable content lives here
-  i18n/                # locale config + dictionaries
-  middleware.ts        # redirects un-prefixed paths to a locale
+  components/            # Shell, header/footer, sphere, ring, cursor, ambient bg
+  content/               # ← all editable content lives here
+  i18n/                  # locale config + dictionaries
+  proxy.ts               # redirects un-prefixed paths to a locale
 scripts/
   generate-placeholders.mjs
 ```
+
+### Why the root layout lives under `[lang]`
+
+Putting it there is what lets `<html lang="ja">` / `<html lang="en">` be
+**server-rendered** per locale. A static layout above the segment could not read
+the locale without either `headers()` — which opts every page out of static
+generation — or a script that patches `lang` after load.
+
+The cost is that `app/not-found.tsx` has no layout above it, so it emits its own
+`<html>`/`<body>`. Little reaches it: the proxy prefixes every request with a
+locale, so unknown paths land on `[lang]/[...unmatched]` and are answered by
+`[lang]/not-found.tsx` inside the normal layout.
+
+One Next.js 16 behaviour worth knowing: **not-found boundaries are not
+server-rendered.** The response carries the correct `404` status and the markup
+in its streamed payload, but the HTML body is empty until React hydrates. This is
+framework behaviour, not something this repo's structure causes — it was verified
+across every arrangement. It does not affect SEO (404s are `noindex`) and is
+invisible to anyone with JavaScript enabled.
 
 ---
 

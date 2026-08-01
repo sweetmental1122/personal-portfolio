@@ -35,7 +35,7 @@ export async function generateMetadata({
       canonical: `/${lang}`,
       languages: Object.fromEntries([
         ...LOCALES.map((locale) => [LOCALE_HREFLANG[locale], `/${locale}`]),
-        ["x-default", "/ja"],
+        ["x-default", `/${LOCALES[0]}`],
       ]),
     },
     openGraph: {
@@ -69,6 +69,14 @@ export const viewport = {
   initialScale: 1,
 };
 
+/**
+ * This is the root layout. Putting it behind `[lang]` is what lets `<html lang>`
+ * be server-rendered per locale — the alternative, a static layout above the
+ * segment, would have to correct `lang` from a script after load.
+ *
+ * The trade-off is that `app/not-found.tsx` then has no layout above it and
+ * has to emit its own document; see the comment there.
+ */
 export default async function LocaleLayout({ children, params }: LayoutProps) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();

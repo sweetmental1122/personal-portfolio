@@ -13,6 +13,12 @@ export function generateStaticParams() {
   return LOCALES.flatMap((lang) => projects.map((project) => ({ lang, slug: project.slug })));
 }
 
+/**
+ * Every project is known at build time, so an unknown slug is answered
+ * straight from the not-found boundary rather than rendering this page.
+ */
+export const dynamicParams = false;
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, slug } = await params;
   if (!isLocale(lang)) return {};
