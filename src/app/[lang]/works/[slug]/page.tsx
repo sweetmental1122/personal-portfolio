@@ -14,10 +14,12 @@ export function generateStaticParams() {
 }
 
 /**
- * Every project is known at build time, so an unknown slug is answered
- * straight from the not-found boundary rather than rendering this page.
+ * `dynamicParams` is left at its default. Setting it to false made every
+ * detail page 404 on the Cloudflare adapter, which resolves these routes
+ * through the server function rather than as static assets. Unknown slugs
+ * are still answered correctly: `getProject` returns undefined below and
+ * the page calls `notFound()`.
  */
-export const dynamicParams = false;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, slug } = await params;

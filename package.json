@@ -13,7 +13,10 @@
     "typecheck": "tsc --noEmit",
     "placeholders": "node scripts/generate-placeholders.mjs",
     "diagrams": "node scripts/generate-diagrams.mjs",
-    "qr": "node scripts/generate-qr.mjs"
+    "qr": "node scripts/generate-qr.mjs",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "next": "^16.2.12",
@@ -21,12 +24,14 @@
     "react-dom": "19.1.1"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.2",
     "@types/node": "22.15.3",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
     "eslint": "9.26.0",
     "eslint-config-next": "^16.2.12",
     "qrcode": "^1.5.4",
-    "typescript": "5.8.3"
+    "typescript": "5.8.3",
+    "wrangler": "^4.86.0"
   }
 }

@@ -21,6 +21,10 @@ Thumbs.db
 *.pem
 
 .vercel
+
+# Cloudflare (@opennextjs/cloudflare)
+.open-next/
+.wrangler/
 next-env.d.ts
 *.tsbuildinfo
 .eslintcache
