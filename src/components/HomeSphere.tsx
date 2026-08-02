@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { shuffledSlots } from "@/lib/shuffle";
 
 type SphereImage = { src: string; width: number; height: number };
 
@@ -66,11 +67,7 @@ export function HomeSphere({ images }: Props) {
     // Deal the projects into different ring slots on each visit. The server
     // renders a fixed arrangement so the markup stays static (and prerendered);
     // this only re-points existing elements, so no image is re-fetched.
-    const slots = cells.map((_, index) => index);
-    for (let i = slots.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [slots[i], slots[j]] = [slots[j]!, slots[i]!];
-    }
+    const slots = shuffledSlots(cells.length);
     cells.forEach((cell, index) => {
       const slot = slots[index] ?? index;
       const theta = (360 / cells.length) * slot;

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { shuffledSlots } from "@/lib/shuffle";
 
 export type RingItem = {
   slug: string;
@@ -58,6 +59,12 @@ export function WorksRing({ items, categories, labels }: Props) {
 
     rotation.current = { target: 0, current: 0 };
 
+    // Deal the cards into ring positions at random. Left in project order they
+    // came out grouped by category, since the entries are ordered that way —
+    // every hospital together, every recruiting site together. Reshuffled on
+    // each visit and whenever the filter changes the set.
+    const slots = shuffledSlots(count);
+
     const render = () => {
       frame.current = 0;
       const cards = cardRefs.current.slice(0, count);
@@ -89,7 +96,7 @@ export function WorksRing({ items, categories, labels }: Props) {
 
       cards.forEach((card, index) => {
         if (!card) return;
-        const angle = normalizeAngle(index * step + rotation.current.current);
+        const angle = normalizeAngle((slots[index] ?? index) * step + rotation.current.current);
         const radians = (angle * Math.PI) / 180;
         const x = Math.sin(radians) * radius;
         const z = Math.cos(radians) * radius - radius;
