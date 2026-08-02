@@ -28,3 +28,6 @@ Thumbs.db
 next-env.d.ts
 *.tsbuildinfo
 .eslintcache
+
+# Editor/tooling scratch files
+*.tmp.*
