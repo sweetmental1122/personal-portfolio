@@ -101,8 +101,7 @@ from that one array.
 
 ### ⚠️ Before you share this link
 
-1. **`site.email`** in [src/content/site.ts](src/content/site.ts) is still
-   `hello@example.com`.
+1. **Lock the EmailJS origin** — see the contact section below.
 2. **Project screenshots** — the images under `public/images/works/` are generated
    placeholders. Check each client's NDA before publishing real captures; a blurred or
    redacted screen is usually acceptable where a raw one is not.

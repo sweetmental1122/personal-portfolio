@@ -14,7 +14,7 @@ export const site: SiteConfig = {
   name: "Dream_Catcher",
   logo: { src: "/images/logo.jpg", width: 200, height: 200 },
   jobTitle: "Software Engineer / Full-Stack Developer",
-  email: "hello@example.com",
+  email: "zibojurotoj98@gmail.com",
   url: "https://your-domain.com",
   ogImage: "/images/ogp.svg",
 
