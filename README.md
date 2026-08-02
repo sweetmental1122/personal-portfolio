@@ -19,7 +19,7 @@ repository are placeholders: **replace them with your own before publishing.**
 | **About** | Full-height portrait beside a scrolling column — bio, credentials, experience, skills grid, numbered process, CTA. Scroll-reveal via `IntersectionObserver`. |
 | **Contact** | Validated form → `/api/contact` with honeypot, rate limiting and optional Resend delivery. |
 | **Chrome** | Drifting ambient orbs + shooting stars, custom glass cursor, glass menu, animated light/dark toggle with no flash on load. |
-| **i18n** | Japanese / English under `/[lang]`, with `Accept-Language` detection and `hreflang` alternates. Every visible string is translated, so switching language changes the whole page. |
+| **i18n** | Japanese / English under `/[lang]`, with `hreflang` alternates. Every visible string is translated, so switching language changes the whole page. Un-prefixed paths always land on Japanese — change `DEFAULT_LOCALE` to move the front door. |
 | **SEO** | Per-locale metadata, Open Graph, Twitter cards, JSON-LD, `sitemap.xml`, `robots.txt`. |
 | **A11y** | Skip link, focus management on the menu, `prefers-reduced-motion` handling throughout, `inert` on the closed nav panel. |
 
@@ -136,23 +136,35 @@ face, add an `@font-face` rule and put it first in `--display-font`.
 
 ## Contact form delivery
 
-Out of the box `/api/contact` validates the submission and logs it — the form works
-immediately in development without any configuration.
+The form posts straight to [EmailJS](https://www.emailjs.com/) from the browser — there is
+no API route and no server-side mail key. IDs live in
+[src/content/emailjs.ts](src/content/emailjs.ts), overridable via `NEXT_PUBLIC_EMAILJS_*`.
 
-To deliver real email, copy `.env.example` to `.env.local` and set:
+**Your EmailJS template must use these variable names**, or the mail arrives with blanks:
 
 ```
-CONTACT_TO=you@example.com
-RESEND_API_KEY=re_...
-RESEND_FROM=Portfolio <hello@your-domain.com>
+{{name}}  {{email}}  {{reply_to}}  {{company}}
+{{project_type}}  {{budget}}  {{deadline}}  {{message}}  {{locale}}
 ```
 
-Both `CONTACT_TO` and `RESEND_API_KEY` must be present before the route attempts delivery.
-Swapping [Resend](https://resend.com) for another provider is a single `fetch` call in
-[src/app/api/contact/route.ts](src/app/api/contact/route.ts).
+The select fields send their **label**, not their value — `1か月以内` rather than
+`1-month` — so the email reads the way the sender filled it in.
 
-The built-in rate limiter is per-instance and in-memory. On serverless hosting, put a
-shared limiter (Upstash, Vercel KV) in front of the route for real protection.
+> **Lock the origin.** The service ID, template ID and public key ship in the client
+> bundle; that is how EmailJS is designed to work, and no amount of env-var shuffling
+> hides them. What stops someone reusing your quota is the allow-list under
+> **Account → Security → Allowed Origins** in the EmailJS dashboard. Set it to your
+> domain before going live.
+
+The hidden honeypot field is checked before sending, and a bot that fills it gets a
+success message without an email being sent.
+
+### Other ways to reach you
+
+`site.channels` in [src/content/site.ts](src/content/site.ts) drives the LINE and Chatwork
+cards under the form. The LINE QR is generated from its URL by `npm run qr` and committed,
+so `qrcode` stays a build dependency and never reaches the browser. Re-run it if the URL
+changes.
 
 ---
 

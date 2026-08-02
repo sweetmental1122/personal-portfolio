@@ -62,8 +62,9 @@ export type Dictionary = {
     successTitle: string;
     successBody: string;
     errorGeneric: string;
-    errorValidation: string;
     directEmail: string;
+    channelsTitle: string;
+    channelsNote: string;
   };
   notFound: {
     title: string;
@@ -135,8 +136,9 @@ const ja: Dictionary = {
     successTitle: "ありがとうございます",
     successBody: "お問い合わせを受け付けました。2〜3営業日以内にご返信いたします。",
     errorGeneric: "送信に失敗しました。時間をおいて再度お試しください。",
-    errorValidation: "入力内容をご確認ください。",
     directEmail: "メールで直接ご連絡いただいても構いません。",
+    channelsTitle: "チャットでのご連絡",
+    channelsNote: "フォームよりも、普段お使いのツールのほうが早い場合はこちらから。",
   },
   notFound: {
     title: "ページが見つかりませんでした",
@@ -209,8 +211,9 @@ const en: Dictionary = {
     successTitle: "Thank you.",
     successBody: "Your message has been received. I'll get back to you within 2–3 business days.",
     errorGeneric: "Something went wrong. Please try again in a moment.",
-    errorValidation: "Please check the highlighted fields.",
     directEmail: "You're welcome to email me directly instead.",
+    channelsTitle: "Chat instead",
+    channelsNote: "If a tool you already use is quicker than a form, reach me here.",
   },
   notFound: {
     title: "This page could not be found",

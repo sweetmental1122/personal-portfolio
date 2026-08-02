@@ -18,9 +18,25 @@ export function paragraphs(value: LocalizedParagraphs, locale: Locale): string[]
   return value[locale] ?? value.ja ?? [];
 }
 
+/** An alternative way to reach you, offered beside the contact form. */
+export type ContactChannel = {
+  key: string;
+  label: Localized;
+  /** Shown under the label — the handle or a short instruction. */
+  detail: string;
+  url: string;
+  /** Path to a QR SVG. Rendered instead of the arrow when present. */
+  qr?: string;
+  /** Brand tint for the card's accent, any CSS colour. */
+  accent: string;
+};
+
 export type SiteConfig = {
   /** Shown in the marquee logo, the header and metadata. */
   name: string;
+  /** Optional wordmark image. Falls back to `name` as text when unset. */
+  logo?: { src: string; width: number; height: number };
+  channels: ContactChannel[];
   /** Short tagline appended to the page title. */
   tagline: Localized;
   description: Localized;

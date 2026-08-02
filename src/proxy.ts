@@ -1,28 +1,14 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { DEFAULT_LOCALE, LOCALES, type Locale } from "@/i18n/config";
+import { DEFAULT_LOCALE, LOCALES } from "@/i18n/config";
 
-/** Picks the best supported locale from the Accept-Language header. */
-function detectLocale(request: NextRequest): Locale {
-  const header = request.headers.get("accept-language");
-  if (!header) return DEFAULT_LOCALE;
-
-  const ranked = header
-    .split(",")
-    .map((part) => {
-      const [tag = "", q = "q=1"] = part.trim().split(";");
-      return { tag: tag.toLowerCase(), q: Number.parseFloat(q.replace("q=", "")) || 0 };
-    })
-    .sort((a, b) => b.q - a.q);
-
-  for (const { tag } of ranked) {
-    const base = tag.split("-")[0];
-    const match = LOCALES.find((locale) => locale === base);
-    if (match) return match;
-  }
-  return DEFAULT_LOCALE;
-}
-
-/** Redirects un-prefixed paths to the reader's best-matching locale. */
+/**
+ * Sends un-prefixed paths to the default locale.
+ *
+ * It used to negotiate `Accept-Language`, which meant a visitor with an
+ * English browser landed on the English site even though the work, the
+ * clients and the platforms this links from are all Japanese. Japanese is
+ * now the front door for everyone; the switcher is one tap away.
+ */
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -32,7 +18,7 @@ export function proxy(request: NextRequest) {
   if (hasLocale) return NextResponse.next();
 
   const url = request.nextUrl.clone();
-  url.pathname = `/${detectLocale(request)}${pathname === "/" ? "" : pathname}`;
+  url.pathname = `/${DEFAULT_LOCALE}${pathname === "/" ? "" : pathname}`;
   return NextResponse.redirect(url);
 }
 

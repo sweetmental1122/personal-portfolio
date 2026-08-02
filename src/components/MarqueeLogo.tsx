@@ -12,11 +12,13 @@ const SPEED = 0.055;
 type Props = {
   name: string;
   locale: Locale;
+  /** Optional wordmark image shown before the name. */
+  logo?: { src: string; width: number; height: number };
   /** Home page turns the logo into a full-width scrolling marquee. */
   marquee?: boolean;
 };
 
-export function MarqueeLogo({ name, locale, marquee = false }: Props) {
+export function MarqueeLogo({ name, locale, logo, marquee = false }: Props) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLSpanElement | null>(null);
 
@@ -60,6 +62,13 @@ export function MarqueeLogo({ name, locale, marquee = false }: Props) {
       root.classList.add("is-ready");
     }
 
+    // A logo image widens the unit too, and decodes on its own schedule.
+    const marks = [...root.querySelectorAll("img")];
+    const pending = marks.filter((mark) => !mark.complete);
+    pending.forEach((mark) =>
+      mark.addEventListener("load", () => measure(true), { once: true }),
+    );
+
     const onResize = () => measure();
     window.addEventListener("resize", onResize, { passive: true });
 
@@ -91,13 +100,34 @@ export function MarqueeLogo({ name, locale, marquee = false }: Props) {
     };
   }, [marquee]);
 
+  // The wordmark is the logo image beside the name, or just the name when no
+  // logo is configured. Both copies are identical so the marquee's measured
+  // unit width stays correct.
+  const mark = (
+    <>
+      {logo && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          className="logo__mark"
+          src={logo.src}
+          alt=""
+          width={logo.width}
+          height={logo.height}
+          decoding="async"
+          suppressHydrationWarning
+        />
+      )}
+      <span className="logo__name">{name}</span>
+    </>
+  );
+
   const content = (
     <span className="logo__track" ref={trackRef}>
-      <span className="logo__primary">{name}</span>
+      <span className="logo__primary">{mark}</span>
       {marquee &&
         Array.from({ length: CLONE_COUNT }, (_, index) => (
           <span className="logo__clone" key={index} aria-hidden="true">
-            {name}
+            {mark}
           </span>
         ))}
     </span>

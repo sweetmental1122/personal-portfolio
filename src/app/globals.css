@@ -411,8 +411,24 @@ button {
   display: block;
 }
 
+.logo__primary,
+.logo__clone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42em;
+}
+
 .logo__clone {
   display: none;
+}
+
+/* Sized in em so the mark scales with the wordmark, including the marquee. */
+.logo__mark {
+  width: 1.15em;
+  height: 1.15em;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* On the home page the logo becomes a full-width horizontal marquee
@@ -439,7 +455,7 @@ button {
 
 .logo--marquee .logo__primary,
 .logo--marquee .logo__clone {
-  display: block;
+  display: inline-flex;
   flex: 0 0 auto;
   margin-right: 8vw;
   white-space: nowrap;
@@ -1450,6 +1466,132 @@ button {
 .contact__honeypot {
   position: absolute;
   left: -10000px;
+}
+
+/* Alternative contact channels — LINE and Chatwork. */
+.channels {
+  margin-top: 92px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+
+.channels__note {
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.channels__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 16px;
+}
+
+.channel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 148px;
+  padding: 24px 26px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  background: linear-gradient(135deg, var(--glass-mid), var(--glass-soft));
+  box-shadow: inset 0 1px 0 var(--glass-highlight), var(--glass-shadow);
+  color: var(--ink);
+  text-decoration: none;
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  transition: transform 0.35s var(--ease), border-color 0.35s ease;
+}
+
+/* The brand colour arrives as a hairline and a wash on hover, rather than
+   filling the card — two saturated logo colours would fight the page. */
+.channel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--channel-accent, var(--ink));
+}
+
+.channel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 140% at 0% 50%, var(--channel-accent), transparent 62%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.channel:hover {
+  border-color: var(--channel-accent, var(--glass-border));
+  transform: translateY(-3px);
+}
+
+.channel:hover::after {
+  opacity: 0.16;
+}
+
+.channel__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.channel__body strong {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.channel__detail {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  word-break: break-all;
+}
+
+.channel__qr {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  padding: 8px;
+  border-radius: 12px;
+  background: #fff;
+  line-height: 0;
+}
+
+.channel__qr img {
+  width: 100px;
+  height: 100px;
+}
+
+.channel__arrow {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 15px;
+  transition: transform 0.35s var(--ease), border-color 0.35s ease;
+}
+
+.channel:hover .channel__arrow {
+  border-color: var(--channel-accent);
+  transform: translate(3px, -3px);
 }
 
 .contact__direct {

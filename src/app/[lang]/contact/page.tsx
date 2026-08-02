@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ContactChannels } from "@/components/ContactChannels";
 import { ContactForm } from "@/components/ContactForm";
 import { Shell } from "@/components/Shell";
 import { BUDGETS, DEADLINES, PROJECT_TYPES } from "@/content/formOptions";
@@ -47,6 +48,8 @@ export default async function ContactPage({ params }: Props) {
             deadlines: localize(DEADLINES, lang),
           }}
         />
+
+        <ContactChannels locale={lang} dict={dict} />
       </div>
     </Shell>
   );

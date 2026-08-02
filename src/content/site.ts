@@ -12,10 +12,34 @@ export const site: SiteConfig = {
   // Shown in the header wordmark, the footer and every page title.
   // A personal or trade name stays the same in both languages.
   name: "Dream_Catcher",
+  logo: { src: "/images/logo.jpg", width: 200, height: 200 },
   jobTitle: "Software Engineer / Full-Stack Developer",
   email: "hello@example.com",
   url: "https://your-domain.com",
   ogImage: "/images/ogp.svg",
+
+  /**
+   * Offered beside the contact form. Japanese clients often prefer LINE or
+   * Chatwork to email, so these are given equal weight rather than being
+   * tucked into a footer.
+   */
+  channels: [
+    {
+      key: "line",
+      label: { ja: "LINEをご希望の方はこちら", en: "Prefer LINE? Scan here" },
+      detail: "@dream_catcher",
+      url: "https://line.me/ti/p/cbQnJCvQb4",
+      qr: "/images/contact/line-qr.svg",
+      accent: "#06C755",
+    },
+    {
+      key: "chatwork",
+      label: { ja: "Chatworkをご希望の方はこちら", en: "Prefer Chatwork? Message me" },
+      detail: "chatwork.com/dream_catcher",
+      url: "https://www.chatwork.com/dream_catcher",
+      accent: "#F5A623",
+    },
+  ],
 
   tagline: {
     ja: "フルスタックエンジニア / Webシステム・業務システム開発",

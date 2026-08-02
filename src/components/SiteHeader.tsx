@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { site } from "@/content/site";
 import type { Locale } from "@/i18n/config";
 import { localePath } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -68,7 +69,7 @@ export function SiteHeader({ locale, dict, siteName, marqueeLogo = false }: Prop
 
   return (
     <header className="header">
-      <MarqueeLogo name={siteName} locale={locale} marquee={marqueeLogo} />
+      <MarqueeLogo name={siteName} logo={site.logo} locale={locale} marquee={marqueeLogo} />
 
       <button
         ref={buttonRef}

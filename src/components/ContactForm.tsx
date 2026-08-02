@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { emailjs, type ContactPayload } from "@/content/emailjs";
 import type { Locale } from "@/i18n/config";
 import { localePath } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -37,29 +38,64 @@ export function ContactForm({ locale, dict, email, options }: Props) {
     event.preventDefault();
     if (status === "sending") return;
 
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const text = (key: string) => String(data.get(key) ?? "").trim();
+
+    // Only bots fill the hidden field. Report success so they learn nothing.
+    if (text("website")) {
+      setStatus("sent");
+      form.reset();
+      return;
+    }
+
     setStatus("sending");
     setError(null);
 
-    const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
+    // Labels rather than values, so the email reads "1か月以内" and not
+    // "1-month". The <select> option text is what the recipient wants.
+    const chosen = (key: string, list: SelectOption[]) =>
+      list.find((option) => option.value === text(key))?.label ?? "";
+
+    const payload: ContactPayload = {
+      name: text("name"),
+      email: text("email"),
+      reply_to: text("email"),
+      company: text("company") || "—",
+      project_type: chosen("projectType", options.projectTypes) || "—",
+      budget: chosen("budget", options.budgets) || "—",
+      deadline: chosen("deadline", options.deadlines) || "—",
+      message: text("message"),
+      locale,
+    };
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, locale }),
+        body: JSON.stringify({
+          service_id: emailjs.serviceId,
+          template_id: emailjs.templateId,
+          user_id: emailjs.publicKey,
+          template_params: payload,
+        }),
       });
 
       if (!response.ok) {
-        const body = (await response.json().catch(() => null)) as { error?: string } | null;
+        // EmailJS answers with a plain-text reason, worth surfacing to the
+        // console: a mistyped template ID and a blocked origin look identical
+        // from the outside otherwise.
+        console.error("[contact] EmailJS rejected the message:", await response.text());
         setStatus("error");
-        setError(body?.error === "validation" ? dict.contact.errorValidation : dict.contact.errorGeneric);
+        setError(dict.contact.errorGeneric);
         return;
       }
 
       setStatus("sent");
-      formRef.current?.reset();
+      form.reset();
       toastTimer.current = window.setTimeout(() => setStatus("idle"), 7000);
-    } catch {
+    } catch (cause) {
+      console.error("[contact] could not reach EmailJS:", cause);
       setStatus("error");
       setError(dict.contact.errorGeneric);
     }
