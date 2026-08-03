@@ -1,0 +1,14 @@
+# Netlify auto-detects Next.js and installs its OpenNext-based runtime, so
+# very little belongs here. What is worth pinning is the Node version —
+# Next 16 needs 20.9+, and a Netlify default that drifts below that would
+# fail the build for a reason that reads as unrelated.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# The site is deployed from a Worker as well. Whichever host is canonical is
+# decided by site.url in src/content/site.ts, not here.
