@@ -408,11 +408,12 @@ button {
   grid-row: 1 / -1;
   color: var(--ink);
   font-family: var(--display-font);
-  font-size: clamp(20px, 2vw, 30px);
-  font-weight: 400;
+  /* Cormorant has a small x-height and sets visually smaller than a Didone
+     at the same pixel size, so these run larger than the Bodoni values did. */
+  font-size: clamp(23px, 2.3vw, 35px);
+  font-weight: 500;
   line-height: 1.18;
-  /* A Didone wants air around it; set tight it reads as a printing error. */
-  letter-spacing: 0.03em;
+  letter-spacing: 0.045em;
   text-decoration: none;
 }
 
@@ -450,10 +451,12 @@ button {
   width: 100vw;
   padding: 0.2em 0 0.16em;
   overflow: hidden;
-  font-size: clamp(42px, 7vw, 108px);
-  /* Far larger than the header copy, where the same tracking would read as
-     slack — at this size the thin strokes carry the character on their own. */
-  letter-spacing: 0.005em;
+  font-size: clamp(50px, 8.2vw, 128px);
+  /* Light at display size is the whole point of this face — the strokes
+     taper almost to nothing and the letters read as drawn rather than set.
+     It would be far too fragile at the 23px the header uses. */
+  font-weight: 300;
+  letter-spacing: 0.02em;
   transform: translate3d(var(--logo-x, 0), calc(-50% + var(--logo-y, 0)), 0);
   pointer-events: none;
 }
@@ -579,48 +582,61 @@ button {
   background: rgba(255, 255, 255, 0.16);
 }
 
+/* Sized in em so the control scales with the menu it sits in. */
 .theme-toggle {
   position: relative;
-  width: 36px;
-  min-width: 36px;
-  height: 36px;
-  margin: 4px auto 0;
+  width: 2.9em;
+  min-width: 2.9em;
+  height: 2.9em;
+  margin: 8px auto 2px;
   padding: 0;
+  display: grid;
+  place-items: center;
   border: 1px solid var(--line);
   border-radius: 50%;
   color: var(--ink);
   background: var(--glass-soft);
-  opacity: 0.76;
-  transition: opacity 0.2s ease, background 0.2s ease, transform 0.3s ease;
-}
-
-/* Crescent moon (light mode) → sun with rays (dark mode). */
-.theme-toggle::before {
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: 15px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  box-shadow: -4px 4px 0 0 currentColor;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.theme-toggle[aria-pressed="true"]::before {
-  top: 9.5px;
-  left: 9.5px;
-  width: 12px;
-  height: 12px;
-  border: 1.5px solid currentColor;
-  box-shadow: 0 -8px 0 -5px currentColor, 0 8px 0 -5px currentColor, 8px 0 0 -5px currentColor,
-    -8px 0 0 -5px currentColor, 6px 6px 0 -5px currentColor, -6px -6px 0 -5px currentColor,
-    6px -6px 0 -5px currentColor, -6px 6px 0 -5px currentColor;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 .theme-toggle:hover {
   opacity: 1;
-  transform: rotate(8deg);
+  border-color: var(--ink);
+  background: var(--glass-mid);
+}
+
+/* Both icons occupy the same cell and cross-fade, so the swap can animate.
+   Stroked rather than filled: at this size a filled sun loses its rays. */
+.theme-toggle__icon {
+  grid-area: 1 / 1;
+  width: 1.35em;
+  height: 1.35em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  transition: opacity 0.35s ease, transform 0.45s var(--ease);
+}
+
+.theme-toggle__icon--moon {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Light mode offers the moon; dark mode offers the sun. */
+.theme-toggle__icon--sun {
+  opacity: 0;
+  transform: rotate(-70deg) scale(0.55);
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle__icon--moon {
+  opacity: 0;
+  transform: rotate(70deg) scale(0.55);
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle__icon--sun {
+  opacity: 1;
+  transform: none;
 }
 
 .lang {
@@ -1711,7 +1727,8 @@ button {
 
 .error-hero__code {
   margin: 0;
-  font: 400 clamp(130px, 27vw, 420px) / 0.68 var(--display-font);
+  /* Latin, so it follows the same size bump as the wordmark. */
+  font: 300 clamp(150px, 30vw, 460px) / 0.68 var(--display-font);
   opacity: 0.94;
 }
 
@@ -1930,7 +1947,7 @@ button {
   }
 
   .logo--marquee {
-    font-size: clamp(34px, 10vw, 64px);
+    font-size: clamp(40px, 11.5vw, 74px);
   }
 
   .works__scene {

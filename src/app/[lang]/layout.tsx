@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda } from "next/font/google";
+import { Cormorant_Garamond } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { ThemeScript } from "@/components/ThemeScript";
@@ -11,17 +11,21 @@ import "../globals.css";
 /**
  * The wordmark font.
  *
- * `--display-font` used to open with Didot and Bodoni 72, which only exist on
- * macOS — everyone else fell through to Georgia, so the wordmark that was
- * meant to be a high-contrast Didone rendered as a plain book serif. Bodoni
- * Moda is that same Didone as a real web font: hairline thins against heavy
- * stems, which is what gives it its edge at the size the home page sets it.
+ * Bodoni Moda was the first fix here — `--display-font` had opened with Didot
+ * and Bodoni 72, which exist only on macOS, so everyone else fell through to
+ * Georgia. Bodoni solved that but reads as engineered: rigid verticals, flat
+ * serifs, the same rhythm every letter.
  *
- * Self-hosted by next/font, so there is no third-party request and no
- * layout shift while it loads.
+ * Cormorant Garamond keeps the fine hairlines and adds the thing Bodoni does
+ * not have — a hand behind it. Strokes swell and taper, terminals curve, and
+ * the shapes carry over a gradient far better than Bodoni's straight edges.
+ * Light 300 is what makes it look drawn rather than set.
+ *
+ * Self-hosted by next/font, so no third-party request and no layout shift.
  */
-const display = Bodoni_Moda({
+const display = Cormorant_Garamond({
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
   display: "swap",
   variable: "--font-display",
 });
