@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Bodoni_Moda } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { ThemeScript } from "@/components/ThemeScript";
@@ -6,6 +7,24 @@ import { site, siteUrl } from "@/content/site";
 import { t } from "@/content/types";
 import { LOCALES, LOCALE_HREFLANG, LOCALE_OG, isLocale, type Locale } from "@/i18n/config";
 import "../globals.css";
+
+/**
+ * The wordmark font.
+ *
+ * `--display-font` used to open with Didot and Bodoni 72, which only exist on
+ * macOS — everyone else fell through to Georgia, so the wordmark that was
+ * meant to be a high-contrast Didone rendered as a plain book serif. Bodoni
+ * Moda is that same Didone as a real web font: hairline thins against heavy
+ * stems, which is what gives it its edge at the size the home page sets it.
+ *
+ * Self-hosted by next/font, so there is no third-party request and no
+ * layout shift while it loads.
+ */
+const display = Bodoni_Moda({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display",
+});
 
 export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }));
@@ -83,7 +102,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   const locale: Locale = lang;
 
   return (
-    <html lang={LOCALE_HREFLANG[locale]} suppressHydrationWarning>
+    <html lang={LOCALE_HREFLANG[locale]} className={display.variable} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
         <link

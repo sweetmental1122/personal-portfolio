@@ -22,7 +22,11 @@
   --orb-b: rgba(189, 174, 255, 0.74);
   --orb-c: rgba(151, 215, 255, 0.72);
 
-  --display-font: Didot, "Bodoni 72", "Bodoni MT", Bodoni, "Playfair Display", Georgia, serif;
+  /* Bodoni Moda arrives from next/font. The fallbacks after it are for the
+     characters it does not carry — the ABOUT headline is Japanese, and a
+     mincho is the right companion to a Didone there, not Georgia. */
+  --display-font: var(--font-display), Didot, "Bodoni 72", "Bodoni MT",
+    "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", Georgia, serif;
   --body-font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Hiragino Sans", "Noto Sans JP", sans-serif;
 
@@ -70,6 +74,10 @@ html {
 }
 
 body {
+  /* Bodoni Moda carries an optical-size axis. Letting the browser drive it
+     from font-size is what thins the hairlines on the big home wordmark
+     while keeping the 20px header copy of it solid enough to read. */
+  font-optical-sizing: auto;
   position: relative;
   z-index: 0;
   isolation: isolate;
@@ -403,7 +411,8 @@ button {
   font-size: clamp(20px, 2vw, 30px);
   font-weight: 400;
   line-height: 1.18;
-  letter-spacing: 0.01em;
+  /* A Didone wants air around it; set tight it reads as a printing error. */
+  letter-spacing: 0.03em;
   text-decoration: none;
 }
 
@@ -442,6 +451,9 @@ button {
   padding: 0.2em 0 0.16em;
   overflow: hidden;
   font-size: clamp(42px, 7vw, 108px);
+  /* Far larger than the header copy, where the same tracking would read as
+     slack — at this size the thin strokes carry the character on their own. */
+  letter-spacing: 0.005em;
   transform: translate3d(var(--logo-x, 0), calc(-50% + var(--logo-y, 0)), 0);
   pointer-events: none;
 }
