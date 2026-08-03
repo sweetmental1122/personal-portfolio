@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond } from "next/font/google";
+import { Italiana } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { ThemeScript } from "@/components/ThemeScript";
@@ -11,21 +11,24 @@ import "../globals.css";
 /**
  * The wordmark font.
  *
- * Bodoni Moda was the first fix here — `--display-font` had opened with Didot
- * and Bodoni 72, which exist only on macOS, so everyone else fell through to
- * Georgia. Bodoni solved that but reads as engineered: rigid verticals, flat
- * serifs, the same rhythm every letter.
+ * Third try. Bodoni Moda fixed the original problem — the stack opened with
+ * Didot and Bodoni 72, macOS-only, so everyone else saw Georgia — but read as
+ * engineered. Cormorant Garamond added a hand to it, and still read as a book.
  *
- * Cormorant Garamond keeps the fine hairlines and adds the thing Bodoni does
- * not have — a hand behind it. Strokes swell and taper, terminals curve, and
- * the shapes carry over a gradient far better than Bodoni's straight edges.
- * Light 300 is what makes it look drawn rather than set.
+ * Italiana is a different intent altogether: a fashion-house display face,
+ * unusually wide, hairline-thin, with the extreme thick-to-thin of an
+ * engraved plate. It is the one that looks less like text and more like a
+ * mark, which is what a wordmark over a nebula wants.
+ *
+ * One weight only, and it is a delicate one. Everything set in it is sized
+ * and tracked deliberately in globals.css — this face collapses if treated
+ * as an ordinary serif.
  *
  * Self-hosted by next/font, so no third-party request and no layout shift.
  */
-const display = Cormorant_Garamond({
+const display = Italiana({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: "400",
   display: "swap",
   variable: "--font-display",
 });

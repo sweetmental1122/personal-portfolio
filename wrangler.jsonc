@@ -1,6 +1,10 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "personal-portfolio",
+  // Hostnames cannot contain an underscore — DNS labels allow letters,
+  // digits and hyphens only, and Cloudflare rejects a Worker name that
+  // breaks that rule. "dream_catcher" becomes "dream-catcher", which is
+  // what the workers.dev URL will read as.
+  "name": "dream-catcher",
   "main": ".open-next/worker.js",
 
   // Required by @opennextjs/cloudflare: the adapter runs Next on the Node.js

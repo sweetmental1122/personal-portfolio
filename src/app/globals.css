@@ -408,12 +408,13 @@ button {
   grid-row: 1 / -1;
   color: var(--ink);
   font-family: var(--display-font);
-  /* Cormorant has a small x-height and sets visually smaller than a Didone
-     at the same pixel size, so these run larger than the Bodoni values did. */
-  font-size: clamp(23px, 2.3vw, 35px);
-  font-weight: 500;
-  line-height: 1.18;
-  letter-spacing: 0.045em;
+  /* Italiana has one weight and runs wide, so it is tracked rather than
+     weighted — the air between letters is what makes it read as a mark
+     instead of a word. */
+  font-size: clamp(22px, 2.2vw, 33px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
   text-decoration: none;
 }
 
@@ -451,12 +452,11 @@ button {
   width: 100vw;
   padding: 0.2em 0 0.16em;
   overflow: hidden;
-  font-size: clamp(50px, 8.2vw, 128px);
-  /* Light at display size is the whole point of this face — the strokes
-     taper almost to nothing and the letters read as drawn rather than set.
-     It would be far too fragile at the 23px the header uses. */
-  font-weight: 300;
-  letter-spacing: 0.02em;
+  font-size: clamp(46px, 7.6vw, 120px);
+  /* Wider tracking than the header, not narrower. At this size the hairlines
+     nearly vanish and the letters need the space to stay separate — set
+     tight, Italiana turns into a grey band. */
+  letter-spacing: 0.14em;
   transform: translate3d(var(--logo-x, 0), calc(-50% + var(--logo-y, 0)), 0);
   pointer-events: none;
 }
@@ -1727,8 +1727,8 @@ button {
 
 .error-hero__code {
   margin: 0;
-  /* Latin, so it follows the same size bump as the wordmark. */
-  font: 300 clamp(150px, 30vw, 460px) / 0.68 var(--display-font);
+  font: 400 clamp(150px, 30vw, 460px) / 0.7 var(--display-font);
+  letter-spacing: 0.06em;
   opacity: 0.94;
 }
 
@@ -1947,7 +1947,8 @@ button {
   }
 
   .logo--marquee {
-    font-size: clamp(40px, 11.5vw, 74px);
+    font-size: clamp(34px, 9.5vw, 62px);
+    letter-spacing: 0.1em;
   }
 
   .works__scene {
