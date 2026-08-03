@@ -15,7 +15,9 @@ export const site: SiteConfig = {
   logo: { src: "/images/logo.jpg", width: 200, height: 200 },
   jobTitle: "Software Engineer / Full-Stack Developer",
   email: "zibojurotoj98@gmail.com",
-  url: "https://your-domain.com",
+  // The live Worker. Drives canonical URLs, hreflang, OGP and the sitemap.
+  // Swap this for a custom domain once one is attached in Cloudflare.
+  url: "https://dream-catcher.dream-catcher.workers.dev",
   ogImage: "/images/ogp.svg",
 
   /**
