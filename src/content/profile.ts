@@ -29,13 +29,13 @@ export const profile: Profile = {
 
   intro: {
     ja: [
-      "はじめまして、Chikara_Techです。2019年から、シンガポールと日本の受託開発の現場で、Webシステム・業務システム・モバイルアプリの開発に携わってきました。",
+      "はじめまして、Dream_Catcherです。2019年から、シンガポールと日本の受託開発の現場で、Webシステム・業務システム・モバイルアプリの開発に携わってきました。",
       "金融決済、医療、物流、EC、不動産、飲食チェーンの社内ツールまで、業界も規模も異なるプロジェクトを担当してきました。Java (Spring Boot)、Go、Python (FastAPI)、Node.js (NestJS) によるバックエンドを軸に、React / Vue.js (Nuxt.js) / React Native でのフロントエンド・モバイル開発まで一貫して対応しています。",
       "リリースの日は華やかですが、その後何年も使われるシステムにとって本当に大切なのは、誰が見ても理解できるコード、変更が発生しても壊れにくい設計、運用する方が困らない仕組みだと考えています。",
       "完全フルリモートでの業務委託も経験しており、Slackでの進捗の即時共有、Gitのブランチ運用の事前すり合わせ、API仕様書の早期共有など、認識のズレを減らす進め方を大切にしています。こうした部分が品質と納期を大きく左右すると考えています。",
     ],
     en: [
-      "I'm Chikara_Tech. Since 2019 I've built web systems, business systems and mobile apps at software agencies in Singapore and Japan.",
+      "I'm Dream_Catcher. Since 2019 I've built web systems, business systems and mobile apps at software agencies in Singapore and Japan.",
       "I've delivered across payments, healthcare, logistics, e-commerce, real estate and internal tooling for restaurant chains. My core is backend work in Java (Spring Boot), Go, Python (FastAPI) and Node.js (NestJS), extending through to front-end and mobile with React, Vue.js (Nuxt.js) and React Native.",
       "Launch day is the exciting part, but for a system that will run for years what actually matters is code anyone can read, a design that doesn't break when requirements move, and something the people operating it can live with.",
       "I've also worked fully remote on contract. Sharing progress in Slack as it happens, agreeing Git branching rules up front, publishing API specs early — closing gaps in understanding is what decides both quality and whether the deadline holds.",
