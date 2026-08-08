@@ -15,9 +15,9 @@ export const site: SiteConfig = {
   logo: { src: "/images/logo.jpg", width: 200, height: 200 },
   jobTitle: "Software Engineer / Full-Stack Developer",
   email: "zibojurotoj98@gmail.com",
-  // The live Worker. Drives canonical URLs, hreflang, OGP and the sitemap.
-  // Swap this for a custom domain once one is attached in Cloudflare.
-  url: "https://dream-catcher.dream-catcher.workers.dev",
+  // The live Netlify site. Drives canonical URLs, hreflang, OGP and the sitemap.
+  // Swap this for a custom domain once one is attached in Netlify.
+  url: "https://dream-catcher777.netlify.app",
   ogImage: "/images/ogp.svg",
 
   /**
@@ -30,7 +30,7 @@ export const site: SiteConfig = {
       key: "line",
       label: { ja: "LINEをご希望の方はこちら", en: "Prefer LINE? Scan here" },
       detail: "@dream_catcher",
-      url: "https://line.me/ti/p/v4MPz7xjat",
+      url: "https://line.me/ti/p/u4kZg7n89W",
       qr: "/images/contact/line-qr.svg",
       accent: "#06C755",
     },
