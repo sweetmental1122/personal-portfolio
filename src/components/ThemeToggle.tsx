@@ -1,36 +1,18 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { THEME_STORAGE_KEY } from "./ThemeScript";
+import { setTheme, subscribeTheme } from "./ThemeScript";
 
 /**
  * `<html data-theme>` is the source of truth — ThemeScript sets it before
- * first paint. Treating it as an external store keeps the button in sync
- * without a mount effect that would trigger a cascading render.
+ * first paint and restores it after a locale change. Treating it as an
+ * external store keeps the button in sync without a mount effect that
+ * would trigger a cascading render.
  */
-const listeners = new Set<() => void>();
-
-const subscribe = (onChange: () => void) => {
-  listeners.add(onChange);
-  return () => {
-    listeners.delete(onChange);
-  };
-};
-
 const getSnapshot = () => document.documentElement.dataset.theme === "dark";
 // The server can't know the reader's preference; ThemeScript corrects it
 // before paint and this store re-reads it on hydration.
 const getServerSnapshot = () => false;
-
-function setTheme(dark: boolean) {
-  document.documentElement.dataset.theme = dark ? "dark" : "light";
-  try {
-    localStorage.setItem(THEME_STORAGE_KEY, dark ? "dark" : "light");
-  } catch {
-    // Private browsing — the theme still applies for this session.
-  }
-  listeners.forEach((listener) => listener());
-}
 
 /**
  * Both icons are always in the DOM and cross-fade, which is what lets the
@@ -70,7 +52,7 @@ type Props = {
 };
 
 export function ThemeToggle({ toLightLabel, toDarkLabel }: Props) {
-  const isDark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const isDark = useSyncExternalStore(subscribeTheme, getSnapshot, getServerSnapshot);
 
   return (
     <button
