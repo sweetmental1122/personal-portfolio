@@ -8,7 +8,11 @@ const SCROLLER_SELECTOR =
 const ACTION_SELECTOR = 'a, button, input, textarea, select, video, [role="button"]';
 
 type Props = {
-  /** Pages whose main interaction is horizontal rotation rather than scrolling. */
+  /**
+   * Pages whose main interaction is horizontal rotation rather than
+   * scrolling. A region can also opt in on its own with `data-rotational`,
+   * which is how the works page shows ↔ over its ring but not over its grid.
+   */
   rotational?: boolean;
   clickLabel?: string;
 };
@@ -39,13 +43,14 @@ export function CustomCursor({ rotational = false, clickLabel = "click" }: Props
     let frame = 0;
     let activeScroller: HTMLElement = main;
     let hovered: Element | null = null;
+    let rotating = rotational;
 
     const isScrollable = () =>
-      rotational || activeScroller.scrollHeight > activeScroller.clientHeight + 2;
+      rotating || activeScroller.scrollHeight > activeScroller.clientHeight + 2;
 
     const scrollGlyph = () => {
       if (!isScrollable()) return "";
-      if (rotational) return "↔";
+      if (rotating) return "↔";
       const max = activeScroller.scrollHeight - activeScroller.clientHeight;
       if (activeScroller.scrollTop <= 2) return "↓";
       if (activeScroller.scrollTop >= max - 2) return "↑";
@@ -54,6 +59,7 @@ export function CustomCursor({ rotational = false, clickLabel = "click" }: Props
 
     const update = (target: Element | null) => {
       activeScroller = target?.closest<HTMLElement>(SCROLLER_SELECTOR) ?? main;
+      rotating = rotational || Boolean(target?.closest("[data-rotational]"));
       const onAction = Boolean(target?.closest(ACTION_SELECTOR));
       cursor.classList.toggle("is-action", onAction);
       cursor.classList.toggle("is-scroll", !onAction && isScrollable());

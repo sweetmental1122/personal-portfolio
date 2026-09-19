@@ -14,7 +14,7 @@ repository are placeholders: **replace them with your own before publishing.**
 | | |
 |---|---|
 | **Home** | Images arranged on a rotating 3D ring, driven by wheel / drag, with a pointer-parallax tilt and a full-width marquee wordmark drifting behind it. |
-| **Works** | Horizontal carousel ring with category filtering. Cards past ~80° fade out and leave the tab order. |
+| **Works** | Two views of the same filtered list, switched from a pill and remembered per browser: the horizontal carousel ring (cards past ~80° fade out and leave the tab order), and a grid of glass cards that fade up on arrival, tilt toward the pointer under a spotlight with a gradient ring on hover, and glide to their new slots on filter changes via the View Transitions API where available. |
 | **Project detail** | Sticky copy column beside an independently scrolling image column; collapses to a single column on mobile. |
 | **About** | Full-height portrait beside a scrolling column — bio, credentials, experience, skills grid, numbered process, CTA. Scroll-reveal via `IntersectionObserver`. |
 | **Contact** | Validated form → `/api/contact` with honeypot, rate limiting and optional Resend delivery. |
@@ -246,12 +246,14 @@ src/
     api/contact/         # form endpoint
     globals.css          # design tokens + every component style
     sitemap.ts robots.ts
-  components/            # Shell, header/footer, sphere, ring, cursor, ambient bg
+  components/            # Shell, header/footer, sphere, works gallery (ring + card grid), cursor, ambient bg
   content/               # ← all editable content lives here
   i18n/                  # locale config + dictionaries
   proxy.ts               # redirects un-prefixed paths to a locale
 scripts/
   generate-placeholders.mjs
+  generate-diagrams.mjs      # draws the SVG diagrams under works/
+  normalize-screenshots.mjs  # conforms every works/ JPG to one size
 ```
 
 ### Why the root layout lives under `[lang]`

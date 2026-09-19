@@ -29,7 +29,7 @@ type Props = {
  */
 export function Shell({ locale, page, children }: Props) {
   const dict = getDictionary(locale);
-  const rotational = page === "home" || page === "works";
+  const rotational = page === "home";
 
   return (
     <div className="shell" data-page={page}>

@@ -1,31 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { shuffledSlots } from "@/lib/shuffle";
-
-export type RingItem = {
-  slug: string;
-  href: string;
-  title: string;
-  categoryKey: string;
-  categoryLabel: string;
-  thumbnail: { src: string; width: number; height: number };
-};
+import type { WorkItem } from "./WorksGallery";
 
 type Props = {
-  items: RingItem[];
-  categories: { key: string; label: string }[];
-  labels: {
-    all: string;
-    filter: string;
-    scene: string;
-    empty: string;
-    hint: string;
-  };
+  /** Already filtered — the gallery owns the category state. */
+  items: WorkItem[];
+  label: string;
+  hint: string;
 };
 
-const ALL = "all";
 const normalizeAngle = (angle: number) => (((angle + 180) % 360) + 360) % 360 - 180;
 
 /**
@@ -33,30 +19,29 @@ const normalizeAngle = (angle: number) => (((angle + 180) % 360) + 360) % 360 - 
  * spin it; cards past ~80° from the front fade out and drop out of the
  * tab order so they can't be focused while invisible.
  */
-export function WorksRing({ items, categories, labels }: Props) {
-  const [active, setActive] = useState(ALL);
+export function WorksRing({ items, label, hint }: Props) {
   const ringRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
   const rotation = useRef({ target: 0, current: 0 });
   const frame = useRef(0);
 
-  const visible = useMemo(
-    () => (active === ALL ? items : items.filter((item) => item.categoryKey === active)),
-    [items, active],
-  );
-
-  const count = visible.length;
-
   // One pre-paint effect owns the whole animation: `render` and `schedule`
   // are mutually recursive, so keeping them local avoids a circular
   // useCallback pair. Running in a layout effect also means the cards are
   // positioned before the first paint instead of flashing stacked at the
   // centre.
+  //
+  // It re-runs on `items`, not on the count. Cards are keyed by slug, so a
+  // filter change mounts fresh elements with no transform on them — and
+  // three categories happen to hold five projects each, so keying on the
+  // count alone left those fresh cards piled up at the centre whenever you
+  // switched between two of them.
   useLayoutEffect(() => {
     const scene = ringRef.current?.parentElement;
     if (!scene) return;
 
+    const count = items.length;
     rotation.current = { target: 0, current: 0 };
 
     // Deal the cards into ring positions at random. Left in project order they
@@ -169,33 +154,15 @@ export function WorksRing({ items, categories, labels }: Props) {
       scene.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("resize", onResize);
     };
-  }, [count]);
-
-  const filters = [{ key: ALL, label: labels.all }, ...categories];
+  }, [items]);
 
   return (
-    <section className="works" aria-labelledby="works-heading">
-      <h1 className="sr-only" id="works-heading">
-        {labels.scene}
-      </h1>
-
-      <div className="works__filter" role="group" aria-label={labels.filter}>
-        {filters.map((filter) => (
-          <button
-            key={filter.key}
-            type="button"
-            className={filter.key === active ? "is-active" : undefined}
-            aria-pressed={filter.key === active}
-            onClick={() => setActive(filter.key)}
-          >
-            {filter.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="works__scene" aria-label={labels.scene} tabIndex={0}>
+    <>
+      {/* data-rotational: the custom cursor shows ↔ over the ring only, not
+          over the grid or the controls. */}
+      <div className="works__scene" aria-label={label} tabIndex={0} data-rotational="true">
         <div className="works__ring" ref={ringRef}>
-          {visible.map((item, index) => (
+          {items.map((item, index) => (
             <article
               className="works__card"
               key={item.slug}
@@ -226,9 +193,7 @@ export function WorksRing({ items, categories, labels }: Props) {
         </div>
       </div>
 
-      {visible.length === 0 && <p className="empty-message">{labels.empty}</p>}
-
-      <p className="works__hint">{labels.hint}</p>
-    </section>
+      <p className="works__hint">{hint}</p>
+    </>
   );
 }

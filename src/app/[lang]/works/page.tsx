@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Shell } from "@/components/Shell";
-import { WorksRing, type RingItem } from "@/components/WorksRing";
+import { WorksGallery, type WorkItem } from "@/components/WorksGallery";
 import { t } from "@/content/types";
 import { CATEGORIES, sortedProjects } from "@/content/works";
 import { isLocale, localePath } from "@/i18n/config";
@@ -32,18 +32,22 @@ export default async function WorksPage({ params }: Props) {
   }));
   const categoryLabels = new Map(categories.map((category) => [category.key, category.label]));
 
-  const items: RingItem[] = sortedProjects.map((project) => ({
+  const items: WorkItem[] = sortedProjects.map((project) => ({
     slug: project.slug,
     href: localePath(lang, `/works/${project.slug}`),
     title: t(project.title, lang),
+    summary: t(project.summary, lang),
     categoryKey: project.categoryKey,
     categoryLabel: categoryLabels.get(project.categoryKey) ?? "",
+    year: project.meta.year,
+    // Three chips is what fits on a card; the detail page lists them all.
+    stack: project.meta.stack?.slice(0, 3),
     thumbnail: project.thumbnail,
   }));
 
   return (
     <Shell locale={lang} page="works">
-      <WorksRing
+      <WorksGallery
         items={items}
         categories={categories}
         labels={{
@@ -52,6 +56,10 @@ export default async function WorksPage({ params }: Props) {
           scene: dict.works.title,
           empty: dict.works.empty,
           hint: dict.home.scrollHint,
+          view: dict.works.view,
+          viewRing: dict.works.viewRing,
+          viewCards: dict.works.viewCards,
+          open: dict.works.open,
         }}
       />
     </Shell>

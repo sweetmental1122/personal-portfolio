@@ -33,6 +33,10 @@ export type Dictionary = {
     all: string;
     filterLabel: string;
     empty: string;
+    view: string;
+    viewRing: string;
+    viewCards: string;
+    open: string;
     back: string;
     information: string;
     client: string;
@@ -106,6 +110,10 @@ const ja: Dictionary = {
     all: "すべて",
     filterLabel: "カテゴリーで絞り込む",
     empty: "このカテゴリーの実績はまだありません。",
+    view: "表示切替",
+    viewRing: "リング",
+    viewCards: "カード",
+    open: "詳しく見る",
     back: "一覧に戻る",
     information: "プロジェクト情報",
     client: "クライアント",
@@ -181,6 +189,10 @@ const en: Dictionary = {
     all: "All",
     filterLabel: "Filter by category",
     empty: "No projects in this category yet.",
+    view: "View",
+    viewRing: "Ring",
+    viewCards: "Cards",
+    open: "View project",
     back: "Back to works",
     information: "Information",
     client: "Client",
