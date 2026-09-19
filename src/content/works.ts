@@ -14,6 +14,19 @@ import type { Category, Project } from "./types";
  * ─────────────────────────────────────────────────────────────
  */
 
+/**
+ * Every works image — real capture or drawn diagram — ships at this one
+ * size. The ring sizes each card from the intrinsic ratio of its image, so a
+ * single odd file shows up as a taller or shorter card; keeping one size here
+ * is what keeps the ring even. `npm run screenshots` conforms the JPGs and
+ * `npm run diagrams` draws the SVGs to it — change all three together.
+ *
+ * 1900px wide because these are also the home sphere's artwork, and the
+ * sphere magnifies them, so the source needs headroom above its layout size
+ * on a high-DPI screen.
+ */
+export const SHOT_SIZE = { width: 1900, height: 908 } as const;
+
 export const CATEGORIES: Category[] = [
   {
     key: "system",
@@ -76,19 +89,17 @@ export const projects: Project[] = [
         "With the team fully remote, sharing progress in Slack as it happened stopped specification drift before it caused rework — the system was finished and launched on the planned date.",
       ],
     },
-    thumbnail: { src: "/images/works/project-management-system/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/project-management-system/thumb.svg", ...SHOT_SIZE },
     images: [
       {
         src: "/images/works/project-management-system/01.svg",
         alt: { ja: "カンバンボード画面", en: "Kanban board screen" },
-        width: 1600,
-        height: 1000,
+        ...SHOT_SIZE,
       },
       {
         src: "/images/works/project-management-system/02.svg",
         alt: { ja: "スケジュール確認画面", en: "Schedule view" },
-        width: 1600,
-        height: 1000,
+        ...SHOT_SIZE,
       },
     ],
     meta: {
@@ -123,13 +134,12 @@ export const projects: Project[] = [
         "Pre-processing — cropping, noise removal — is handled with OpenCV, and analysis runs asynchronously through a pipeline built on AWS Lambda.",
       ],
     },
-    thumbnail: { src: "/images/works/property-image-ai-annotation/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/property-image-ai-annotation/thumb.svg", ...SHOT_SIZE },
     images: [
       {
         src: "/images/works/property-image-ai-annotation/01.svg",
         alt: { ja: "画像解析パイプラインの構成", en: "Image analysis pipeline" },
-        width: 1600,
-        height: 1000,
+        ...SHOT_SIZE,
       },
     ],
     meta: {
@@ -161,13 +171,12 @@ export const projects: Project[] = [
         "So the front-end team could work in parallel rather than waiting, I wrote and shared a detailed API specification (Swagger) early, and co-led the integration testing between the two sides.",
       ],
     },
-    thumbnail: { src: "/images/works/fintech-payment-api/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/fintech-payment-api/thumb.svg", ...SHOT_SIZE },
     images: [
       {
         src: "/images/works/fintech-payment-api/01.svg",
         alt: { ja: "API仕様ドキュメント", en: "API specification" },
-        width: 1600,
-        height: 1000,
+        ...SHOT_SIZE,
       },
     ],
     meta: {
@@ -201,13 +210,12 @@ export const projects: Project[] = [
         "UI feedback from the PM/designer drove repeated rounds of adjustment to how the app handles on a phone.",
       ],
     },
-    thumbnail: { src: "/images/works/clinic-booking-app/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/clinic-booking-app/thumb.svg", ...SHOT_SIZE },
     images: [
       {
         src: "/images/works/clinic-booking-app/01.svg",
         alt: { ja: "予約・チェックイン画面", en: "Booking and check-in screens" },
-        width: 1600,
-        height: 1000,
+        ...SHOT_SIZE,
       },
     ],
     meta: {
@@ -239,13 +247,12 @@ export const projects: Project[] = [
         "I kept faithful to the designer's mocks while working through the API data shapes in detail with the existing backend engineer, so binding data to the screens stayed straightforward.",
       ],
     },
-    thumbnail: { src: "/images/works/apparel-ec-frontend/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/apparel-ec-frontend/thumb.svg", ...SHOT_SIZE },
     images: [
       {
         src: "/images/works/apparel-ec-frontend/01.svg",
         alt: { ja: "商品一覧・絞り込み画面", en: "Product listing and filters" },
-        width: 1600,
-        height: 1000,
+        ...SHOT_SIZE,
       },
     ],
     meta: {
@@ -277,13 +284,12 @@ export const projects: Project[] = [
         "To let QA write test scenarios without guesswork, I documented the error conditions and exception behaviour up front and shared it ahead of the test phase.",
       ],
     },
-    thumbnail: { src: "/images/works/logistics-status-api/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/logistics-status-api/thumb.svg", ...SHOT_SIZE },
     images: [
       {
         src: "/images/works/logistics-status-api/01.svg",
         alt: { ja: "データモデル構成", en: "Data model" },
-        width: 1600,
-        height: 1000,
+        ...SHOT_SIZE,
       },
     ],
     meta: {
@@ -315,13 +321,12 @@ export const projects: Project[] = [
         "Aligning code style with the other new joiners and going through pull-request review is where I learned how team development actually runs.",
       ],
     },
-    thumbnail: { src: "/images/works/restaurant-ordering-ui/thumb.svg", width: 1600, height: 1000 },
+    thumbnail: { src: "/images/works/restaurant-ordering-ui/thumb.svg", ...SHOT_SIZE },
     images: [
       {
         src: "/images/works/restaurant-ordering-ui/01.svg",
         alt: { ja: "発注入力フォーム", en: "Order entry form" },
-        width: 1600,
-        height: 1000,
+        ...SHOT_SIZE,
       },
     ],
     meta: {
@@ -342,15 +347,9 @@ export const projects: Project[] = [
  *  is a one-line edit per project whenever you have the details to hand.
  * ─────────────────────────────────────────────────────────────
  */
-/**
- * 1900px wide: these are the home sphere's artwork as well as the ring
- * thumbnails, and the sphere magnifies them, so the source needs headroom
- * above its layout size on a high-DPI screen.
- */
 const shot = (slug: string) => ({
   src: `/images/works/${slug}/thumb.jpg`,
-  width: 1900,
-  height: 908,
+  ...SHOT_SIZE,
 });
 
 projects.push(

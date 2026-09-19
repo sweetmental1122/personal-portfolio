@@ -118,6 +118,24 @@ Drop your files into `public/images/` and point the paths in `site.ts` / `works.
 `profile.ts` at them. Square or portrait crops read best on the home ring; landscape
 works best for project thumbnails.
 
+#### Project screenshots are all one size
+
+Every image under `public/images/works/` is **1900 × 908** — `SHOT_SIZE` in
+[src/content/works.ts](src/content/works.ts). The works ring sizes each card from
+its image, so a capture that is even a few pixels off shows up as a card of a
+slightly different shape. After dropping in new captures, run:
+
+```bash
+npm run screenshots            # resizes every JPG/PNG in works/ to 1900×908
+npm run screenshots -- --check # reports what is off-size, exits 1 if anything is
+```
+
+Files already at that size are skipped, so it is safe to run any time. The crop is
+taken from the top so a site's header and hero stay in frame; a capture whose
+ratio is more than 5 % off gets a warning naming it, since a visible band will be
+lost — re-capture at a 1900 px-wide viewport when you can. The SVG diagrams are
+drawn to the same canvas by `npm run diagrams`.
+
 The 3D ring and carousel use plain `<img>` on purpose — they sit inside a transform chain
 that is rewritten every frame, so `next/image`'s wrapper would only get in the way.
 Static images elsewhere are fine to migrate to `next/image` once you have real raster assets.

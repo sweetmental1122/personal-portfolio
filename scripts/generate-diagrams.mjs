@@ -17,8 +17,21 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "public", "images", "works");
 
+/**
+ * Every drawing function below composes on a 1600×1000 sheet — those are the
+ * coordinates its boxes and labels are placed in. What ships is the sheet
+ * scaled to the height of the 1900×908 canvas that the screenshots use (see
+ * SHOT_SIZE in src/content/works.ts) and centred on it, with the paper colour
+ * filling the margin either side. The works ring lays each card out from the
+ * intrinsic ratio of its image, so this is what keeps a diagram card the same
+ * shape as a screenshot card.
+ */
 const W = 1600;
 const H = 1000;
+const CANVAS_W = 1900;
+const CANVAS_H = 908;
+const SHEET_SCALE = CANVAS_H / H;
+const SHEET_X = (CANVAS_W - W * SHEET_SCALE) / 2;
 
 const INK = "#2f2941";
 const MUTED = "#8b84a3";
@@ -46,16 +59,18 @@ const bar = (x, y, w, h = 10, fill = LINE) =>
 const arrow = (x1, y1, x2, y2, color = MUTED) =>
   `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="2.5" marker-end="url(#tip)"/>`;
 
-const shell = (title, body) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(title)}">
+const shell = (title, body) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${CANVAS_W} ${CANVAS_H}" width="${CANVAS_W}" height="${CANVAS_H}" role="img" aria-label="${esc(title)}">
   <defs>
     <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M0 0 L10 5 L0 10 z" fill="${MUTED}"/>
     </marker>
   </defs>
-  <rect width="${W}" height="${H}" fill="${PAPER}"/>
-  ${text(64, 84, title, { size: 30, weight: 600 })}
-  <line x1="64" y1="112" x2="${W - 64}" y2="112" stroke="${LINE}" stroke-width="2"/>
-  ${body}
+  <rect width="${CANVAS_W}" height="${CANVAS_H}" fill="${PAPER}"/>
+  <g transform="translate(${SHEET_X.toFixed(2)} 0) scale(${SHEET_SCALE})">
+    ${text(64, 84, title, { size: 30, weight: 600 })}
+    <line x1="64" y1="112" x2="${W - 64}" y2="112" stroke="${LINE}" stroke-width="2"/>
+    ${body}
+  </g>
 </svg>
 `;
 

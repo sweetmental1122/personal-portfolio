@@ -856,12 +856,20 @@ button {
   text-decoration: none;
 }
 
+/*
+ * Every card takes the shape of SHOT_SIZE (src/content/works.ts) no matter
+ * what its file is. `npm run screenshots` conforms the files themselves;
+ * this is the guarantee for a capture that has not been through it yet.
+ * Cropped from the top, as on the sphere, so a site's header stays in frame.
+ */
 .works__card img {
   width: auto;
   max-width: 25vw;
   height: auto;
   max-height: 62vh;
-  object-fit: contain;
+  aspect-ratio: 1900 / 908;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .works__copy {

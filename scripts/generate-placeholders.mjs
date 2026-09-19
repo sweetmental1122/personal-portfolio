@@ -10,6 +10,10 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const PUBLIC = join(ROOT, "public", "images");
 
+/** Keep in step with SHOT_SIZE in src/content/works.ts. */
+const SHOT_W = 1900;
+const SHOT_H = 908;
+
 const PALETTES = [
   ["#ffaed2", "#bdaeff"],
   ["#bdaeff", "#97d7ff"],
@@ -78,9 +82,9 @@ await write("ogp.svg", svg(1200, 630, "PORTFOLIO", 1));
 
 for (const [index, [slug, extra]] of WORK_SLUGS.entries()) {
   const label = slug.replace(/-/g, " ").toUpperCase();
-  await write(`works/${slug}/thumb.svg`, svg(1600, 1000, label, index));
+  await write(`works/${slug}/thumb.svg`, svg(SHOT_W, SHOT_H, label, index));
   for (let n = 1; n <= extra; n += 1) {
-    await write(`works/${slug}/0${n}.svg`, svg(1600, 1000, `${label} ${n}`, index + n));
+    await write(`works/${slug}/0${n}.svg`, svg(SHOT_W, SHOT_H, `${label} ${n}`, index + n));
   }
 }
 
