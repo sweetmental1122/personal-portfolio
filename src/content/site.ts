@@ -29,7 +29,7 @@ export const site: SiteConfig = {
     {
       key: "line",
       label: { ja: "LINEをご希望の方はこちら", en: "Prefer LINE? Scan here" },
-      detail: "@dream_catcher",
+      detail: "Mir@cle",
       url: "https://line.me/ti/p/M35rfMMUaF",
       qr: "/images/contact/line-qr.svg",
       accent: "#06C755",
